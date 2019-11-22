@@ -495,7 +495,6 @@ config_show() {
 #   done
 #
 config_keys() {
-  key=$1
   regex="^(.*)\s*="
 
   config_init
@@ -507,7 +506,7 @@ config_keys() {
       keys+=("$key")
     fi
   done < "$CONFIG_FILE"
-  echo ${keys[@]}
+  echo "${keys[@]}"
 }
 
 
@@ -616,9 +615,9 @@ rush_list_command() {
         package_name="${BASH_REMATCH[1]}"
   
         if [[ -f $infofile ]]; then
-          printf "  %-26s `head -1 $infofile`\n" $(blue "$package_name")
+          printf "  %-26s $(head -1 "$infofile")\n" "$(blue "$package_name")"
         else
-          printf "  %-26s (no info)\n" $(blue "$package_name")
+          printf "  %-26s (no info)\n" "$(blue "$package_name")"
         fi
       fi
     done
@@ -629,10 +628,10 @@ rush_list_command() {
   repo=${args[repo]}
   
   if [[ $repo ]]; then
-    show_repo_list $repo
+    show_repo_list "$repo"
   else
     for k in $(config_keys); do
-      show_repo_list $k
+      show_repo_list "$k"
     done
   fi
 }
@@ -659,7 +658,7 @@ rush_pull_command() {
     pull_repo "$repo_path"
   else
     for k in $(config_keys); do
-      pull_repo $(config_get "$k")
+      pull_repo "$(config_get "$k")"
     done
   fi
 }

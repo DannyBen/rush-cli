@@ -1,0 +1,14 @@
+language: ruby
+
+rvm:
+  - 2.6
+
+# before_script: 
+# - gem install bundler
+# - export PATH=$PATH:$PWD
+
+script:
+- shellcheck rush
+# - cd test 
+# - bundle
+# - bundle exec cucumber

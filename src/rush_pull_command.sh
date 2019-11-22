@@ -17,7 +17,7 @@ if [[ $repo ]]; then
   pull_repo "$repo_path"
 else
   for k in $(config_keys); do
-    pull_repo $(config_get "$k")
+    pull_repo "$(config_get "$k")"
   done
 fi
 
