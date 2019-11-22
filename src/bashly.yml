@@ -1,0 +1,92 @@
+name: rush
+help: Personal package manager
+version: 0.1.0
+
+commands:
+- name: add
+  short: a
+  help: Add a local package repository to the configuration
+
+  args:
+  - name: repo
+    required: true
+    help: Repository name
+
+  - name: path
+    required: true
+    help: Path to the repository
+
+  examples:
+  - rush add default ~/rush-repos/default
+
+- name: clone
+  help: |-
+    Clone a GitHub package repository
+    This command will clone the repository and add it to the configuration
+
+  args:
+  - name: github_user
+    required: true
+    help: |-
+      Github user. This user is expected to have a repository named 'rush-repo'.
+      If you need to use a different name, use the 'user/repo' syntax.
+
+  - name: path
+    help: |-
+      Local path to clone the repository to
+      Default: ~/rush-repos/<github_user>/<github_repo>
+
+  flags:
+  - long: --ssh
+    short: -s
+    help: Clone using SSH instead of HTTPS
+
+  examples:
+  - rush clone bobby
+  - rush clone bobby/bobs-repo ./repos/bobby --ssh
+
+- name: remove
+  short: r
+  help: Remove a package repository to the configuration
+
+  args:
+  - name: repo
+    required: true
+    help: Repository name
+
+- name: config
+  short: c
+  help: Show the configuration file
+
+- name: get
+  short: g
+  help: Install a package
+
+  args:
+  - name: package
+    required: true
+    help: Package name
+  - name: repo
+    help: |-
+      Repository name
+      If not provided, a repository named 'default' is assumed
+
+  examples:
+  - rush get ruby
+  - rush get ruby centos
+
+- name: list
+  short: l
+  help: Shows packages in a repository or all repositories
+
+  args:
+  - name: repo
+    help: Repository name (leave empty for all)
+
+- name: pull
+  short: p
+  help: Perform git pull on one or all repositories
+
+  args:
+  - name: repo
+    help: Repository name
