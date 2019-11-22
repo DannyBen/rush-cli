@@ -47,7 +47,7 @@ commands:
 
 - name: remove
   short: r
-  help: Remove a package repository to the configuration
+  help: Remove a package repository from the configuration
 
   args:
   - name: repo

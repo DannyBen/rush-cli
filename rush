@@ -26,7 +26,7 @@ rush_usage() {
   echo -e "Commands:"
   echo "  add       Add a local package repository to the configuration"
   echo "  clone     Clone a GitHub package repository"
-  echo "  remove    Remove a package repository to the configuration"
+  echo "  remove    Remove a package repository from the configuration"
   echo "  config    Show the configuration file"
   echo "  get       Install a package"
   echo "  list      Shows packages in a repository or all repositories"
@@ -151,10 +151,10 @@ rush_clone_usage() {
 # :command.usage
 rush_remove_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush remove - Remove a package repository to the configuration"
+    echo -e "rush remove - Remove a package repository from the configuration"
     echo 
   else
-    echo -e "rush remove - Remove a package repository to the configuration"
+    echo -e "rush remove - Remove a package repository from the configuration"
     echo 
   fi
   echo -e "Usage:"

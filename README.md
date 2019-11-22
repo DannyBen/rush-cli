@@ -50,7 +50,7 @@ Usage:
 Commands:
   add       Add a local package repository to the configuration
   clone     Clone a GitHub package repository
-  remove    Remove a package repository to the configuration
+  remove    Remove a package repository from the configuration
   config    Show the configuration file
   get       Install a package
   list      Shows packages in a repository or all repositories
