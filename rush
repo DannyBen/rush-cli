@@ -29,6 +29,7 @@ rush_usage() {
   echo "  remove    Remove a package repository from the configuration"
   echo "  config    Show the configuration file"
   echo "  get       Install a package"
+  echo "  info      Show information about a package"
   echo "  list      Shows packages in a repository or all repositories"
   echo "  pull      Perform git pull on one or all repositories"
   echo "  default   Set a default repository"
@@ -258,6 +259,52 @@ rush_get_usage() {
     
     echo -e "  rush get ruby"
     echo -e "  rush get ruby centos"
+    echo
+
+  fi
+}
+
+
+# :command.usage
+rush_info_usage() {
+  if [[ -n $long_usage ]]; then
+    echo -e "rush info - Show information about a package"
+    echo 
+  else
+    echo -e "rush info - Show information about a package"
+    echo 
+  fi
+  echo -e "Usage:"
+  echo -e "  rush info PACKAGE [REPO] [options]"
+  echo -e "  rush info --help | -h"
+  echo
+
+
+  if [[ -n $long_usage ]]; then
+    echo -e "Options:"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    echo -e "    Show this help"
+    echo
+
+    # :command.usage_args
+    echo -e "Arguments:"
+    
+    # :argument.usage
+    echo "  PACKAGE"
+    echo -e "    Package name"
+    echo
+    
+    # :argument.usage
+    echo "  REPO"
+    echo -e "    Repository name\n    If not provided, a repository named 'default' is assumed"
+    echo
+
+    # :command.usage_examples
+    echo -e "Examples:"
+    
+    echo -e "  rush info ruby"
+    echo -e "  rush info ruby centos"
     echo
 
   fi
@@ -633,6 +680,26 @@ rush_get_command() {
 }
 
 # :command.function
+rush_info_command() {
+  # :src/info_command.sh
+  # Collect variables
+  repo=${args[repo]:-default}
+  package=${args[package]}
+  repo_path=$(config_get "$repo")
+  package_path=$repo_path/$package
+  infofile=$package_path/info
+  
+  # Verify we have everything we need
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  [[ -f $infofile ]] || abort "infofile not found: $infofile"
+  
+  # Show the info file
+  green "$repo:$package"
+  cat "$infofile"
+}
+
+# :command.function
 rush_list_command() {
   # :src/list_command.sh
   show_repo_list() {
@@ -768,6 +835,13 @@ parse_args() {
     action="get"
     shift
     get_parse_args "$@"
+    shift $#
+    ;;    
+  
+  info | i )
+    action="info"
+    shift
+    info_parse_args "$@"
     shift $#
     ;;    
   
@@ -1094,6 +1168,60 @@ get_parse_args() {
 
 
 # :command.parse_args_secondary
+info_parse_args() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version | -v ) 
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_info_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[package]=$1
+    shift
+  else
+    echo -e "missing required argument: PACKAGE\nusage: rush info PACKAGE [REPO] [options]"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_args_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      echo -e "invalid option: $key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_args_case
+      if [[ ! ${args[package]} ]]; then
+        args[package]=$1
+        shift
+      elif [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        echo -e "invalid argument: $key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+
+# :command.parse_args_secondary
 list_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
@@ -1285,6 +1413,14 @@ run() {
       rush_get_usage
     else
       rush_get_command
+    fi
+  
+  elif [[ $action == "info" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_info_usage
+    else
+      rush_info_command
     fi
   
   elif [[ $action == "list" ]]; then

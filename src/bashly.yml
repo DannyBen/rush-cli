@@ -80,6 +80,23 @@ commands:
   - rush get ruby
   - rush get ruby centos
 
+- name: info
+  short: i
+  help: Show information about a package
+
+  args:
+  - name: package
+    required: true
+    help: Package name
+  - name: repo
+    help: |-
+      Repository name
+      If not provided, a repository named 'default' is assumed
+
+  examples:
+  - rush info ruby
+  - rush info ruby centos
+
 - name: list
   short: l
   help: Shows packages in a repository or all repositories
