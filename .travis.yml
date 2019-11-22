@@ -3,4 +3,5 @@ language: generic
 script:
 - shellcheck --version
 - shellcheck rush
-- docker-compose --rm -it run ci
+- docker-compose build
+- docker-compose run ci
