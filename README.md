@@ -37,20 +37,24 @@ Usage
 --------------------------------------------------
 
 ```shell
-$ rush --help
+$ rush
 rush - Personal package manager
 
 Usage:
   rush [command] [options]
+  rush [command] --help | -h
+  rush --version
 
 Commands:
-  add      Add a local package repository to the configuration
-  clone    Clone a GitHub package repository
-  remove   Remove a package repository to the configuration
-  config   Show the configuration file
-  get      Install a package
-  list     Shows packages in a repository or all repositories
-  pull     Perform git pull on one or all repositories
+  add       Add a local package repository to the configuration
+  clone     Clone a GitHub package repository
+  remove    Remove a package repository to the configuration
+  config    Show the configuration file
+  get       Install a package
+  list      Shows packages in a repository or all repositories
+  pull      Perform git pull on one or all repositories
+  default   Set a default repository
+
 ```
 
 
