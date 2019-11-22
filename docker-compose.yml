@@ -10,7 +10,7 @@ services:
 
   test: &test
     <<: *default
-    command: ./test.sh
+    command: bats .
 
   ci:
     <<: *test
