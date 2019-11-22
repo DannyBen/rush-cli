@@ -8,6 +8,7 @@ rvm:
 # - export PATH=$PATH:$PWD
 
 script:
+- shellcheck --version
 - shellcheck rush
 # - cd test 
 # - bundle
