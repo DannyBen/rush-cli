@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+echo "What's the rush? (hello from $REPO)"
