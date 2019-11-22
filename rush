@@ -19,6 +19,8 @@ rush_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush [command] [options]"
+  echo -e "  rush [command] --help | -h"
+  echo -e "  rush --version"
   echo
   # :command.usage_commands
   echo -e "Commands:"
@@ -60,6 +62,7 @@ rush_add_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush add REPO PATH [options]"
+  echo -e "  rush add --help | -h"
   echo
 
 
@@ -68,9 +71,6 @@ rush_add_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
@@ -109,6 +109,7 @@ rush_clone_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush clone GITHUB_USER [PATH] [options]"
+  echo -e "  rush clone --help | -h"
   echo
 
 
@@ -117,9 +118,6 @@ rush_clone_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
     # :command.usage_flags
     # :flag.usage
@@ -161,6 +159,7 @@ rush_remove_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush remove REPO [options]"
+  echo -e "  rush remove --help | -h"
   echo
 
 
@@ -169,9 +168,6 @@ rush_remove_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
@@ -199,6 +195,7 @@ rush_config_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush config [options]"
+  echo -e "  rush config --help | -h"
   echo
 
 
@@ -207,9 +204,6 @@ rush_config_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
     # :command.usage_flags
     # :flag.usage
@@ -235,6 +229,7 @@ rush_get_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush get PACKAGE [REPO] [options]"
+  echo -e "  rush get --help | -h"
   echo
 
 
@@ -243,9 +238,6 @@ rush_get_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
@@ -283,6 +275,7 @@ rush_list_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush list [REPO] [options]"
+  echo -e "  rush list --help | -h"
   echo
 
 
@@ -291,9 +284,6 @@ rush_list_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
@@ -321,6 +311,7 @@ rush_pull_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush pull [REPO] [options]"
+  echo -e "  rush pull --help | -h"
   echo
 
 
@@ -329,9 +320,6 @@ rush_pull_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
@@ -359,6 +347,7 @@ rush_default_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush default REPO [options]"
+  echo -e "  rush default --help | -h"
   echo
 
 
@@ -367,9 +356,6 @@ rush_default_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     echo -e "    Show this help"
-    echo
-    echo "  --version"
-    echo -e "    Show version number"
     echo
 
     # :command.usage_args
