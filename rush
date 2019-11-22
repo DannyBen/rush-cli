@@ -30,7 +30,7 @@ rush_usage() {
   echo "  config    Show the configuration file"
   echo "  get       Install a package"
   echo "  info      Show information about a package"
-  echo "  list      Shows packages in a repository or all repositories"
+  echo "  list      Show packages in a repository or all repositories"
   echo "  pull      Perform git pull on one or all repositories"
   echo "  default   Set a default repository"
   echo
@@ -314,10 +314,10 @@ rush_info_usage() {
 # :command.usage
 rush_list_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush list - Shows packages in a repository or all repositories"
+    echo -e "rush list - Show packages in a repository or all repositories"
     echo 
   else
-    echo -e "rush list - Shows packages in a repository or all repositories"
+    echo -e "rush list - Show packages in a repository or all repositories"
     echo 
   fi
   echo -e "Usage:"

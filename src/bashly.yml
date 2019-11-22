@@ -99,7 +99,7 @@ commands:
 
 - name: list
   short: l
-  help: Shows packages in a repository or all repositories
+  help: Show packages in a repository or all repositories
 
   args:
   - name: repo
