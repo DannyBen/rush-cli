@@ -58,6 +58,11 @@ commands:
   short: c
   help: Show the configuration file
 
+  flags:
+  - long: --edit
+    short: -e
+    help: Open the config file for editing
+
 - name: get
   short: g
   help: Install a package
@@ -89,4 +94,12 @@ commands:
 
   args:
   - name: repo
+    help: Repository name
+
+- name: default
+  help: Set a default repository
+
+  args:
+  - name: repo
+    required: true
     help: Repository name

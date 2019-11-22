@@ -6,9 +6,9 @@ package_path=$repo_path/$package
 script=$package_path/main
 
 # Verify we have everything we need
-[[ $repo_path ]] || abort "Cannot find repo $repo"
-[[ -d $package_path ]] || abort "Cannot find package $repo/$package"
-[[ -f $script ]] || abort "Cannot find script $script"
+[[ $repo_path ]] || abort "repo not found: $repo"
+[[ -d $package_path ]] || abort "package not found: $repo/$package"
+[[ -f $script ]] || abort "script not found: $script"
 
 # Run the script
 export REPO="$repo"

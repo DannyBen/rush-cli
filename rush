@@ -22,13 +22,14 @@ rush_usage() {
   echo
   # :command.usage_commands
   echo -e "Commands:"
-  echo "  add      Add a local package repository to the configuration"
-  echo "  clone    Clone a GitHub package repository"
-  echo "  remove   Remove a package repository to the configuration"
-  echo "  config   Show the configuration file"
-  echo "  get      Install a package"
-  echo "  list     Shows packages in a repository or all repositories"
-  echo "  pull     Perform git pull on one or all repositories"
+  echo "  add       Add a local package repository to the configuration"
+  echo "  clone     Clone a GitHub package repository"
+  echo "  remove    Remove a package repository to the configuration"
+  echo "  config    Show the configuration file"
+  echo "  get       Install a package"
+  echo "  list      Shows packages in a repository or all repositories"
+  echo "  pull      Perform git pull on one or all repositories"
+  echo "  default   Set a default repository"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -210,7 +211,11 @@ rush_config_usage() {
     echo "  --version"
     echo -e "    Show version number"
     echo
-
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --edit, -e"
+    echo -e "    Open the config file for editing"
+    echo
 
 
 
@@ -316,6 +321,44 @@ rush_pull_usage() {
   fi
   echo -e "Usage:"
   echo -e "  rush pull [REPO] [options]"
+  echo
+
+
+  if [[ -n $long_usage ]]; then
+    echo -e "Options:"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    echo -e "    Show this help"
+    echo
+    echo "  --version"
+    echo -e "    Show version number"
+    echo
+
+    # :command.usage_args
+    echo -e "Arguments:"
+    
+    # :argument.usage
+    echo "  REPO"
+    echo -e "    Repository name"
+    echo
+
+
+
+  fi
+}
+
+
+# :command.usage
+rush_default_usage() {
+  if [[ -n $long_usage ]]; then
+    echo -e "rush default - Set a default repository"
+    echo 
+  else
+    echo -e "rush default - Set a default repository"
+    echo 
+  fi
+  echo -e "Usage:"
+  echo -e "  rush default REPO [options]"
   echo
 
 
@@ -514,7 +557,7 @@ config_keys() {
 # :command.command_functions
 # :command.function
 rush_add_command() {
-  # :src/rush_add_command.sh
+  # :src/add_command.sh
   repo=${args[repo]}
   path=${args[path]}
   
@@ -524,7 +567,7 @@ rush_add_command() {
 
 # :command.function
 rush_clone_command() {
-  # :src/rush_clone_command.sh
+  # :src/clone_command.sh
   # Collect variables
   path=${args[path]}
   repo_id=${args[github_user]}
@@ -562,7 +605,7 @@ rush_clone_command() {
 
 # :command.function
 rush_remove_command() {
-  # :src/rush_remove_command.sh
+  # :src/remove_command.sh
   repo=${args[repo]}
   config_del "$repo"
   config_show
@@ -570,14 +613,20 @@ rush_remove_command() {
 
 # :command.function
 rush_config_command() {
-  # :src/rush_config_command.sh
-  cyan "# $CONFIG_FILE"
-  config_show
+  # :src/config_command.sh
+  editor="${EDITOR:-vi}"
+  
+  if [[ "${args[--edit]}" ]]; then
+    "$editor" "$CONFIG_FILE"
+  else
+    cyan "# $CONFIG_FILE"
+    config_show
+  fi
 }
 
 # :command.function
 rush_get_command() {
-  # :src/rush_get_command.sh
+  # :src/get_command.sh
   # Collect variables
   repo=${args[repo]:-default}
   package=${args[package]}
@@ -586,9 +635,9 @@ rush_get_command() {
   script=$package_path/main
   
   # Verify we have everything we need
-  [[ $repo_path ]] || abort "Cannot find repo $repo"
-  [[ -d $package_path ]] || abort "Cannot find package $repo/$package"
-  [[ -f $script ]] || abort "Cannot find script $script"
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  [[ -f $script ]] || abort "script not found: $script"
   
   # Run the script
   export REPO="$repo"
@@ -599,7 +648,7 @@ rush_get_command() {
 
 # :command.function
 rush_list_command() {
-  # :src/rush_list_command.sh
+  # :src/list_command.sh
   show_repo_list() {
     repo="$1"
     repo_path=$(config_get "$repo")
@@ -638,7 +687,7 @@ rush_list_command() {
 
 # :command.function
 rush_pull_command() {
-  # :src/rush_pull_command.sh
+  # :src/pull_command.sh
   repo=${args[repo]}
   
   pull_repo() {
@@ -661,6 +710,20 @@ rush_pull_command() {
       pull_repo "$(config_get "$k")"
     done
   fi
+}
+
+# :command.function
+rush_default_command() {
+  # :src/default_command.sh
+  # Collect variables
+  repo=${args[repo]}
+  repo_path=$(config_get "$repo")
+  
+  # Verify we have everything we need
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  
+  config_set "default" "$repo_path"
+  config_show
 }
 
 
@@ -733,6 +796,13 @@ parse_args() {
     action="pull"
     shift
     pull_parse_args "$@"
+    shift $#
+    ;;    
+  
+  default )
+    action="default"
+    shift
+    default_parse_args "$@"
     shift $#
     ;;    
   
@@ -960,6 +1030,12 @@ config_parse_args() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --edit | -e )
+      args[--edit]=1
+      shift
+      ;;
+  
   
     -* )
       echo -e "invalid option: $key"
@@ -1119,6 +1195,57 @@ pull_parse_args() {
 }
 
 
+# :command.parse_args_secondary
+default_parse_args() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version | -v ) 
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_default_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[repo]=$1
+    shift
+  else
+    echo -e "missing required argument: REPO\nusage: rush default REPO [options]"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_args_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      echo -e "invalid option: $key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_args_case
+      if [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        echo -e "invalid argument: $key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+
 # :command.initialize
 initialize() {
   version="0.1.0"
@@ -1188,6 +1315,14 @@ run() {
       rush_pull_usage
     else
       rush_pull_command
+    fi
+  
+  elif [[ $action == "default" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_default_usage
+    else
+      rush_default_command
     fi
   
   elif [[ ${args[--version]} ]]; then
