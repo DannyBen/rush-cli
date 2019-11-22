@@ -6,7 +6,7 @@ show_repo_list() {
   
   green "$repo:"
 
-  for package in $repo_path/*/; do
+  for package in "$repo_path"/*/; do
     infofile="${package}info"
     regex="$repo_path/(.*)/"
     if [[ $package =~ $regex ]]; then
