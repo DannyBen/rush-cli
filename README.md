@@ -53,6 +53,7 @@ Commands:
   remove    Remove a package repository from the configuration
   config    Show the configuration file
   get       Install a package
+  info      Show information about a package
   list      Shows packages in a repository or all repositories
   pull      Perform git pull on one or all repositories
   default   Set a default repository
