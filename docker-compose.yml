@@ -6,4 +6,13 @@ services:
     image: dannyben/rush-cli
     volumes: 
     - ./test:/test
+    - ./sample-repo:/root/rush-repos/sample-repo
+
+  test: &test
+    <<: *default
+    command: ./test.sh
+
+  ci:
+    <<: *test
+    volumes: []
 

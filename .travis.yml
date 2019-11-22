@@ -1,15 +1,6 @@
-language: ruby
-
-rvm:
-  - 2.6
-
-# before_script: 
-# - gem install bundler
-# - export PATH=$PATH:$PWD
+language: generic
 
 script:
 - shellcheck --version
 - shellcheck rush
-# - cd test 
-# - bundle
-# - bundle exec cucumber
+- docker-compose --rm -it run ci
