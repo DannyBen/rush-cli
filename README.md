@@ -14,7 +14,7 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 Rush is a bash script that executes other bash scripts from compatible GitHub
 repositories or local folders.
 
-See [this minimal rush repo](repo), or a real life example
+See [this minimal sample rush repo](sample-repo), or a real life example
 repo at [DannyBen/rush-repo][1].
 
 Rush was designed to easily allow bootstrapping of new linux machines with 

@@ -1,0 +1,11 @@
+This is a simple example, just to test that rush is connecting
+to the repository properly, and receives the environment variables.
+
+This info file can be accessed by running
+
+  $ rush /hello/info
+
+or
+  
+  $ rush .hello
+
