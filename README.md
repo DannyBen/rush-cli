@@ -16,13 +16,13 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 Rush is a bash script that executes other bash scripts from compatible GitHub
 repositories or local folders.
 
-See [this minimal sample rush repo](sample-repo), or a real life example
-repo at [DannyBen/rush-repo][1].
+See [this minimal sample rush repo][sample], or a real life example
+repo at [DannyBen/rush-repo][dannyben-repo].
 
 Rush was designed to easily allow bootstrapping of new linux machines with 
 your desired configuration and installed packages.
 
-Rush was developed using the [Bashly Command Line Framework][2].
+Rush was developed using the [Bashly Command Line Framework][bashly].
 
 
 Install
@@ -64,8 +64,11 @@ Commands:
 Building your own Rush repository
 --------------------------------------------------
 
-You can fork [my rush repository][1], and edit it to your needs, or follow 
-these instructions to create one from scratch.
+Create your own repository, either manually or by using
+[this Github template][sample]. In any case, it is recommended you name your 
+repository **rush-repo**.
+
+To create a repository manyally, follow these steps:
 
 1. Create a new repository on GitHub, named `rush-repo`.
 2. Each folder you create in this repository is considered a package.
@@ -76,7 +79,10 @@ these instructions to create one from scratch.
    another script in the same repository).
 5. Note that your `main` script is executed in the same folder it lives in,
    so you can copy files from its directory to wherever they need to be.
+6. The `main` script can be written in any language, as long as it has a
+   shebang line, and is marked as executable (+x).
 
 
-[1]: https://github.com/dannyben/rush-repo
-[2]: https://github.com/dannyben/bashly
+[sample]: https://github.com/DannyBen/rush-repo-template
+[dannyben-repo]: https://github.com/dannyben/rush-repo
+[bashlt]: https://github.com/dannyben/bashly
