@@ -1,6 +1,8 @@
 Rush - Personal Package Manager
 ==================================================
 
+[![Build Status](https://travis-ci.com/DannyBen/rush-cli.svg?branch=master)](https://travis-ci.com/DannyBen/rush-cli)
+
 ```
 _______                       ______  
 ____  /  ___________  ___________  /_ 
