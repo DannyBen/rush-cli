@@ -85,4 +85,4 @@ To create a repository manyally, follow these steps:
 
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
-[bashlt]: https://github.com/dannyben/bashly
+[bashly]: https://github.com/dannyben/bashly
