@@ -11,6 +11,7 @@ show_repo_list() {
     regex="$repo_path/(.*)/"
     if [[ $package =~ $regex ]]; then
       package_name="${BASH_REMATCH[1]}"
+      [[ $package_name == _* ]] && continue;
 
       if [[ -f $infofile ]]; then
         printf "  %-26s $(head -1 "$infofile")\n" "$(blue "$package_name")"
