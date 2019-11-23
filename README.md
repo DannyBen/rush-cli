@@ -1,7 +1,7 @@
+<div align='center'>
+
 Rush - Personal Package Manager
 ==================================================
-
-[![Build Status](https://travis-ci.com/DannyBen/rush-cli.svg?branch=master)](https://travis-ci.com/DannyBen/rush-cli)
 
 ```
 _______                       ______  
@@ -12,15 +12,23 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 /_/      Personal Package Manager
 ```
 
+![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)
+[![Build Status](https://travis-ci.com/DannyBen/rush-cli.svg?branch=master)](https://travis-ci.com/DannyBen/rush-cli)
 
-Rush is a bash script that executes other bash scripts from compatible GitHub
-repositories or local folders.
+</div>
+
+---
+
+Rush is a bash script that executes other scripts (bash or other languages)
+from compatible GitHub repositories or local folders. It provides a simple
+command line interface for downloading, updating and nrunning these scripts.
 
 See [this minimal sample rush repo][sample], or a real life example
 repo at [DannyBen/rush-repo][dannyben-repo].
 
 Rush was designed to easily allow bootstrapping of new linux machines with 
-your desired configuration and installed packages.
+your desired configuration and installed packages and to "normalize" the way
+you install things.
 
 Rush was developed using the [Bashly Command Line Framework][bashly].
 
@@ -33,6 +41,33 @@ Install
 Feel free to inspect the [setup script](setup) before running, or simply
 install manually by placing the [rush](rush) script in `/usr/local/nom` or
 anywhere in your `PATH`.
+
+
+Quick Start
+--------------------------------------------------
+
+After installing, you can follow these steps to quickly see how it works:
+
+```shell
+# Clone a sample package repository
+$ rush clone dannyben/rush-repo-template --name sample
+
+# View the config file and verify it was added
+$ rush config
+
+# View list of packages
+$ rush list
+
+# Install (execute) a sample package
+# (All packages in the sample repository only print some messages)
+$ rush get hello sample
+
+# Optionally, make this repository the default
+$ rush default sample
+
+# And now you can omit the repository name when getting a package
+$ rush get hello
+```
 
 
 Usage
@@ -54,7 +89,7 @@ Commands:
   config    Show the configuration file
   get       Install a package
   info      Show information about a package
-  list      Shows packages in a repository or all repositories
+  list      Show packages in a repository or all repositories
   pull      Perform git pull on one or all repositories
   default   Set a default repository
 

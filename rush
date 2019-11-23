@@ -125,6 +125,11 @@ rush_clone_usage() {
     echo "  --ssh, -s"
     echo -e "    Clone using SSH instead of HTTPS"
     echo
+    
+    # :flag.usage
+    echo "  --name, -n NAME"
+    echo -e "    Name to use in the config file\n    Default: GitHub user"
+    echo
     # :command.usage_args
     echo -e "Arguments:"
     
@@ -143,6 +148,7 @@ rush_clone_usage() {
     
     echo -e "  rush clone bobby"
     echo -e "  rush clone bobby/bobs-repo ./repos/bobby --ssh"
+    echo -e "  rush clone bobby --name sample"
     echo
 
   fi
@@ -595,7 +601,7 @@ rush_add_command() {
   path=${args[path]}
   
   config_set "$repo" "$path"
-  config_show
+  echo "add $(green "$repo:$path")"
 }
 
 # :command.function
@@ -605,9 +611,8 @@ rush_clone_command() {
   path=${args[path]}
   repo_id=${args[github_user]}
   use_ssh=${args[--ssh]}
-  
-  # Get just the username to use as the repo key in the config
-  repo_name=${repo_id%%/*}
+  default_repo_name=${repo_id%%/*}
+  repo_name=${args[--name]:-$default_repo_name}
   
   # Adjust repo_id - defaults to $user/rush-repo
   [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
@@ -627,13 +632,11 @@ rush_clone_command() {
   
   set -e
   
-  # Create the target directory
-  mkdir -p "$path"
+  # Clone
   git clone "$repo_url" "$path"
   
   # Save config
   config_set "$repo_name" "$path"
-  config_show
 }
 
 # :command.function
@@ -641,15 +644,14 @@ rush_remove_command() {
   # :src/remove_command.sh
   repo=${args[repo]}
   config_del "$repo"
-  config_show
+  echo "remove $(green "$repo")"
 }
 
 # :command.function
 rush_config_command() {
   # :src/config_command.sh
-  editor="${EDITOR:-vi}"
-  
   if [[ "${args[--edit]}" ]]; then
+    editor="${EDITOR:-vi}"
     "$editor" "$CONFIG_FILE"
   else
     cyan "# $CONFIG_FILE"
@@ -696,7 +698,6 @@ rush_info_command() {
   [[ -f $infofile ]] || abort "infofile not found: $infofile"
   
   # Show the info file
-  green "$repo:$package"
   cat "$infofile"
 }
 
@@ -777,7 +778,7 @@ rush_default_command() {
   [[ $repo_path ]] || abort "repo not found: $repo"
   
   config_set "default" "$repo_path"
-  config_show
+  echo "default $(green "$repo")"
 }
 
 
@@ -785,7 +786,7 @@ rush_default_command() {
 parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -900,7 +901,7 @@ parse_args() {
 add_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -962,7 +963,7 @@ add_parse_args() {
 clone_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -991,6 +992,18 @@ clone_parse_args() {
     --ssh | -s )
       args[--ssh]=1
       shift
+      ;;
+  
+    # :flag.case
+    --name | -n )
+      if [[ $2 && $2 != -* ]]; then
+        args[--name]="$2"
+        shift
+        shift
+      else
+        echo -e "--name requires an argument: --name, -n NAME"
+        exit 1
+      fi
       ;;
   
   
@@ -1022,7 +1035,7 @@ clone_parse_args() {
 remove_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1073,7 +1086,7 @@ remove_parse_args() {
 config_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1118,7 +1131,7 @@ config_parse_args() {
 get_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1172,7 +1185,7 @@ get_parse_args() {
 info_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1226,7 +1239,7 @@ info_parse_args() {
 list_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1270,7 +1283,7 @@ list_parse_args() {
 pull_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1314,7 +1327,7 @@ pull_parse_args() {
 default_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version | -v ) 
+  --version )
     version_command
     exit 1
     ;;
@@ -1363,7 +1376,7 @@ default_parse_args() {
 
 # :command.initialize
 initialize() {
-  version="0.1.0"
+  version="0.2.0"
   long_usage=''
   set -e  
 

@@ -5,6 +5,7 @@ services:
     build: .
     image: dannyben/rush-cli
     volumes: 
+    - ./rush:/usr/local/bin/rush
     - ./test:/test
     - ./sample-repo:/root/rush-repos/sample-repo
 

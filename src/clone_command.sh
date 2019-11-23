@@ -2,9 +2,8 @@
 path=${args[path]}
 repo_id=${args[github_user]}
 use_ssh=${args[--ssh]}
-
-# Get just the username to use as the repo key in the config
-repo_name=${repo_id%%/*}
+default_repo_name=${repo_id%%/*}
+repo_name=${args[--name]:-$default_repo_name}
 
 # Adjust repo_id - defaults to $user/rush-repo
 [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
@@ -24,10 +23,8 @@ fi
 
 set -e
 
-# Create the target directory
-mkdir -p "$path"
+# Clone
 git clone "$repo_url" "$path"
 
 # Save config
 config_set "$repo_name" "$path"
-config_show

@@ -11,5 +11,4 @@ infofile=$package_path/info
 [[ -f $infofile ]] || abort "infofile not found: $infofile"
 
 # Show the info file
-green "$repo:$package"
 cat "$infofile"

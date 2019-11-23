@@ -15,9 +15,9 @@
 @test "rush remove REPO" {
   run rush add removeme /removeme
   [[ "$status" -eq 0 ]]
-  [[ "$output" =~ "removeme = /removeme" ]]
+  [[ "$output" =~ "removeme:/removeme" ]]
   
   run rush remove removeme
   [[ "$status" -eq 0 ]]
-  [[ ! "$output" =~ "removeme" ]]
+  [[ "$output" =~ remove.*removeme ]]
 }

@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.1.0
+version: 0.2.0
 
 commands:
 - name: add
@@ -41,9 +41,17 @@ commands:
     short: -s
     help: Clone using SSH instead of HTTPS
 
+  - long: --name
+    short: -n
+    arg: name
+    help: |-
+      Name to use in the config file
+      Default: GitHub user
+
   examples:
   - rush clone bobby
   - rush clone bobby/bobs-repo ./repos/bobby --ssh
+  - rush clone bobby --name sample
 
 - name: remove
   short: r
