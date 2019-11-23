@@ -17,5 +17,4 @@
   run rush clone dannyben
   [[ "$status" -eq 0 ]]
   [[ "$output" =~ "Cloning into" ]]
-  [[ "$output" =~ "dannyben = /root/rush-repos/dannyben/rush-repo" ]]
 }

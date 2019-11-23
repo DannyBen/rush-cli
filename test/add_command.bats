@@ -15,7 +15,7 @@
 @test "rush add REPO PATH" {
   run rush add sample ~/rush-repos/sample-repo
   [[ "$status" -eq 0 ]]
-  [[ "$output" =~ "sample = /root/rush-repos/sample-repo" ]]
+  [[ "$output" =~ "sample:/root/rush-repos/sample-repo" ]]
 }
 
 @test "rush add REPO PATH - creates folder" {
