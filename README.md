@@ -81,7 +81,7 @@ To create a repository manyally, follow these steps:
 5. Note that your `main` script is executed in the same folder it lives in,
    so you can copy files from its directory to wherever they need to be.
 6. The `main` script can be written in any language, as long as it has a
-   shebang line, and is marked as executable (+x).
+   shebang line.
 
 
 [sample]: https://github.com/DannyBen/rush-repo-template

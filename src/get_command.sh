@@ -10,8 +10,9 @@ script=$package_path/main
 [[ -d $package_path ]] || abort "package not found: $repo/$package"
 [[ -f $script ]] || abort "script not found: $script"
 
-# Run the script
+# Run the script (make it executable if it isnt first)
 export REPO="$repo"
 echo "run $(green "$repo:$package")"
+[[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
 ./main

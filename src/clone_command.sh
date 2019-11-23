@@ -7,7 +7,7 @@ use_ssh=${args[--ssh]}
 repo_name=${repo_id%%/*}
 
 # Adjust repo_id - defaults to $user/rush-repo
-[[ $repo_id = "*/*" ]] || repo_id="$repo_id/rush-repo"
+[[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
 
 # Set clone URL - ssh or https?
 if [[ $use_ssh ]]; then
