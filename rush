@@ -809,63 +809,63 @@ parse_args() {
   add | a )
     action="add"
     shift
-    add_parse_args "$@"
+    rush_add_parse_args "$@"
     shift $#
     ;;    
   
   clone )
     action="clone"
     shift
-    clone_parse_args "$@"
+    rush_clone_parse_args "$@"
     shift $#
     ;;    
   
   remove | r )
     action="remove"
     shift
-    remove_parse_args "$@"
+    rush_remove_parse_args "$@"
     shift $#
     ;;    
   
   config | c )
     action="config"
     shift
-    config_parse_args "$@"
+    rush_config_parse_args "$@"
     shift $#
     ;;    
   
   get | g )
     action="get"
     shift
-    get_parse_args "$@"
+    rush_get_parse_args "$@"
     shift $#
     ;;    
   
   info | i )
     action="info"
     shift
-    info_parse_args "$@"
+    rush_info_parse_args "$@"
     shift $#
     ;;    
   
   list | l )
     action="list"
     shift
-    list_parse_args "$@"
+    rush_list_parse_args "$@"
     shift $#
     ;;    
   
   pull | p )
     action="pull"
     shift
-    pull_parse_args "$@"
+    rush_pull_parse_args "$@"
     shift $#
     ;;    
   
   default )
     action="default"
     shift
-    default_parse_args "$@"
+    rush_default_parse_args "$@"
     shift $#
     ;;    
   
@@ -898,8 +898,8 @@ parse_args() {
 }
 
 
-# :command.parse_args_secondary
-add_parse_args() {
+# :command.parse_args
+rush_add_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -914,6 +914,8 @@ add_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="add"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[repo]=$1
@@ -960,8 +962,9 @@ add_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-clone_parse_args() {
+
+# :command.parse_args
+rush_clone_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -976,6 +979,8 @@ clone_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="clone"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[github_user]=$1
@@ -1032,8 +1037,9 @@ clone_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-remove_parse_args() {
+
+# :command.parse_args
+rush_remove_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1048,6 +1054,8 @@ remove_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="remove"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[repo]=$1
@@ -1083,8 +1091,9 @@ remove_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-config_parse_args() {
+
+# :command.parse_args
+rush_config_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1099,6 +1108,8 @@ config_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="config"
   # :command.required_args_filter
   # :command.required_flags_filter
   # :command.parse_args_while
@@ -1128,8 +1139,9 @@ config_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-get_parse_args() {
+
+# :command.parse_args
+rush_get_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1144,6 +1156,8 @@ get_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="get"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[package]=$1
@@ -1182,8 +1196,9 @@ get_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-info_parse_args() {
+
+# :command.parse_args
+rush_info_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1198,6 +1213,8 @@ info_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="info"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[package]=$1
@@ -1236,8 +1253,9 @@ info_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-list_parse_args() {
+
+# :command.parse_args
+rush_list_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1252,6 +1270,8 @@ list_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="list"
   # :command.required_args_filter
   # :command.required_flags_filter
   # :command.parse_args_while
@@ -1280,8 +1300,9 @@ list_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-pull_parse_args() {
+
+# :command.parse_args
+rush_pull_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1296,6 +1317,8 @@ pull_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="pull"
   # :command.required_args_filter
   # :command.required_flags_filter
   # :command.parse_args_while
@@ -1324,8 +1347,9 @@ pull_parse_args() {
 }
 
 
-# :command.parse_args_secondary
-default_parse_args() {
+
+# :command.parse_args
+rush_default_parse_args() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1340,6 +1364,8 @@ default_parse_args() {
     ;;
   
   esac
+  # :command.command_filter
+  action="default"
   # :command.required_args_filter
   if [[ $1 && $1 != -* ]]; then
     args[repo]=$1
@@ -1373,6 +1399,7 @@ default_parse_args() {
     esac
   done
 }
+
 
 
 # :command.initialize
