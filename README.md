@@ -21,7 +21,7 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 
 Rush is a bash script that executes other scripts (bash or other languages)
 from compatible GitHub repositories or local folders. It provides a simple
-command line interface for downloading, updating and nrunning these scripts.
+command line interface for downloading, updating and running these scripts.
 
 See [this minimal sample rush repo][sample], or a real life example
 repo at [DannyBen/rush-repo][dannyben-repo].
@@ -39,7 +39,7 @@ Install
     $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
 
 Feel free to inspect the [setup script](setup) before running, or simply
-install manually by placing the [rush](rush) script in `/usr/local/nom` or
+install manually by placing the [rush](rush) script in `/usr/local/bin` or
 anywhere in your `PATH`.
 
 
