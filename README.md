@@ -69,6 +69,11 @@ $ rush default sample
 $ rush get hello
 ```
 
+In case you prefer testing Rush in a clean, isolated docker environment, you
+can use [this docker image][docker-sandbox], which has Rush copied to its path:
+
+    $ docker run --rm -it dannyben/rush-sandbox
+
 
 Usage
 --------------------------------------------------
@@ -122,3 +127,5 @@ To create a repository manyally, follow these steps:
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
+[docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
+
