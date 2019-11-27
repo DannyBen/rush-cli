@@ -113,6 +113,11 @@ commands:
   - name: repo
     help: Repository name (leave empty for all)
 
+  flags:
+  - long: --deep
+    short: -d
+    help: Show nested packages as well
+
 - name: pull
   short: p
   help: Perform git pull on one or all repositories

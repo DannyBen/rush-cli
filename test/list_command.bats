@@ -11,3 +11,10 @@
   [[ "$status" -eq 0 ]]
   [[ "$output" =~ "Shows how to run another command" ]]
 }
+
+@test "rush list -d" {
+  run rush list -d
+  [[ "$status" -eq 0 ]]
+  [[ "$output" =~ "nested/hi" ]]
+  [[ "$output" =~ "Shows how to use nested folders" ]]
+}
