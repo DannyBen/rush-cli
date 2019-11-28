@@ -44,6 +44,14 @@ rush_usage() {
     echo -e "    Show version number"
     echo
 
+    # :command.usage_environment_variables
+    echo -e "Environment Variables:"
+    
+    # :environment_variable.usage
+    echo "  RUSH_CONFIG"
+    echo -e "    Location of the rush config file [default: ~/rush.ini]"
+    echo
+
   fi
 }
 
@@ -749,8 +757,8 @@ rush_default_command() {
   echo "default $(green "$repo")"
 }
 
-# :command.parse_args
-parse_args() {
+# :command.parse_requirements
+parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -765,6 +773,8 @@ parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action=$1
   
@@ -775,63 +785,63 @@ parse_args() {
   add | a )
     action="add"
     shift
-    rush_add_parse_args "$@"
+    rush_add_parse_requirements "$@"
     shift $#
     ;;    
   
   clone )
     action="clone"
     shift
-    rush_clone_parse_args "$@"
+    rush_clone_parse_requirements "$@"
     shift $#
     ;;    
   
   remove | r )
     action="remove"
     shift
-    rush_remove_parse_args "$@"
+    rush_remove_parse_requirements "$@"
     shift $#
     ;;    
   
   config | c )
     action="config"
     shift
-    rush_config_parse_args "$@"
+    rush_config_parse_requirements "$@"
     shift $#
     ;;    
   
   get | g )
     action="get"
     shift
-    rush_get_parse_args "$@"
+    rush_get_parse_requirements "$@"
     shift $#
     ;;    
   
   info | i )
     action="info"
     shift
-    rush_info_parse_args "$@"
+    rush_info_parse_requirements "$@"
     shift $#
     ;;    
   
   list | l )
     action="list"
     shift
-    rush_list_parse_args "$@"
+    rush_list_parse_requirements "$@"
     shift $#
     ;;    
   
   pull | p )
     action="pull"
     shift
-    rush_pull_parse_args "$@"
+    rush_pull_parse_requirements "$@"
     shift $#
     ;;    
   
   default )
     action="default"
     shift
-    rush_default_parse_args "$@"
+    rush_default_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -843,7 +853,7 @@ parse_args() {
   esac
   # :command.required_args_filter
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -854,7 +864,7 @@ parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       echo -e "invalid argument: $key"
       exit 1
       ;;
@@ -863,8 +873,8 @@ parse_args() {
   done
 }
 
-# :command.parse_args
-rush_add_parse_args() {
+# :command.parse_requirements
+rush_add_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -879,6 +889,8 @@ rush_add_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="add"
   # :command.required_args_filter
@@ -898,7 +910,7 @@ rush_add_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -909,7 +921,7 @@ rush_add_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[repo]} ]]; then
         args[repo]=$1
         shift
@@ -926,8 +938,8 @@ rush_add_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_clone_parse_args() {
+# :command.parse_requirements
+rush_clone_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -942,6 +954,8 @@ rush_clone_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="clone"
   # :command.required_args_filter
@@ -953,7 +967,7 @@ rush_clone_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -982,7 +996,7 @@ rush_clone_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[github_user]} ]]; then
         args[github_user]=$1
         shift
@@ -999,8 +1013,8 @@ rush_clone_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_remove_parse_args() {
+# :command.parse_requirements
+rush_remove_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1015,6 +1029,8 @@ rush_remove_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="remove"
   # :command.required_args_filter
@@ -1026,7 +1042,7 @@ rush_remove_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1037,7 +1053,7 @@ rush_remove_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[repo]} ]]; then
         args[repo]=$1
         shift
@@ -1051,8 +1067,8 @@ rush_remove_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_config_parse_args() {
+# :command.parse_requirements
+rush_config_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1067,11 +1083,13 @@ rush_config_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="config"
   # :command.required_args_filter
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1088,7 +1106,7 @@ rush_config_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       echo -e "invalid argument: $key"
       exit 1
       ;;
@@ -1097,8 +1115,8 @@ rush_config_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_get_parse_args() {
+# :command.parse_requirements
+rush_get_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1113,6 +1131,8 @@ rush_get_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="get"
   # :command.required_args_filter
@@ -1124,7 +1144,7 @@ rush_get_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1135,7 +1155,7 @@ rush_get_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[package]} ]]; then
         args[package]=$1
         shift
@@ -1152,8 +1172,8 @@ rush_get_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_info_parse_args() {
+# :command.parse_requirements
+rush_info_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1168,6 +1188,8 @@ rush_info_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="info"
   # :command.required_args_filter
@@ -1179,7 +1201,7 @@ rush_info_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1190,7 +1212,7 @@ rush_info_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[package]} ]]; then
         args[package]=$1
         shift
@@ -1207,8 +1229,8 @@ rush_info_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_list_parse_args() {
+# :command.parse_requirements
+rush_list_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1223,11 +1245,13 @@ rush_list_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="list"
   # :command.required_args_filter
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1244,7 +1268,7 @@ rush_list_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[repo]} ]]; then
         args[repo]=$1
         shift
@@ -1258,8 +1282,8 @@ rush_list_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_pull_parse_args() {
+# :command.parse_requirements
+rush_pull_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1274,11 +1298,13 @@ rush_pull_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="pull"
   # :command.required_args_filter
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1289,7 +1315,7 @@ rush_pull_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[repo]} ]]; then
         args[repo]=$1
         shift
@@ -1303,8 +1329,8 @@ rush_pull_parse_args() {
   done
 }
 
-# :command.parse_args
-rush_default_parse_args() {
+# :command.parse_requirements
+rush_default_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1319,6 +1345,8 @@ rush_default_parse_args() {
     ;;
   
   esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
   # :command.command_filter
   action="default"
   # :command.required_args_filter
@@ -1330,7 +1358,7 @@ rush_default_parse_args() {
     exit 1
   fi
   # :command.required_flags_filter
-  # :command.parse_args_while
+  # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -1341,7 +1369,7 @@ rush_default_parse_args() {
       ;;
   
     * )
-      # :command.parse_args_case
+      # :command.parse_requirements_case
       if [[ ! ${args[repo]} ]]; then
         args[repo]=$1
         shift
@@ -1368,7 +1396,7 @@ initialize() {
 # :command.run
 run() {
   declare -A args
-  parse_args "$@"
+  parse_requirements "$@"
 
   if [[ $action == "add" ]]; then
     if [[ ${args[--help]} ]]; then
