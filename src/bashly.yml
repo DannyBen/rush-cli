@@ -2,6 +2,10 @@ name: rush
 help: Personal package manager
 version: 0.2.2
 
+environment_variables:
+- name: rush_config
+  help: "Location of the rush config file [default: ~/rush.ini]"
+
 commands:
 - name: add
   short: a
