@@ -27,7 +27,7 @@ rush_usage() {
   echo "  clone     Clone a GitHub package repository"
   echo "  remove    Remove a package repository from the configuration"
   echo "  config    Show the configuration file"
-  echo "  get       Install a package"
+  echo "  get       Install a package (default)"
   echo "  info      Show information about a package"
   echo "  list      Show packages in a repository or all repositories"
   echo "  pull      Perform git pull on one or all repositories"
@@ -845,9 +845,15 @@ parse_requirements() {
     shift $#
     ;;    
   
-  * )
+  "" )
     rush_usage
     exit 1
+    ;;
+  
+  * )
+    action="get"
+    rush_get_parse_requirements "$@"
+    shift $#
     ;;
   
   esac

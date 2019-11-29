@@ -17,3 +17,9 @@
   [[ "$status" -eq 0 ]]
   [[ "$output" =~ "What's the rush? (hello from sample)" ]]
 }
+
+@test "rush PACKAGE REPO (default command is get)" {
+  run rush hello sample
+  [[ "$status" -eq 0 ]]
+  [[ "$output" =~ "What's the rush? (hello from sample)" ]]
+}

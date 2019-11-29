@@ -78,6 +78,7 @@ commands:
 - name: get
   short: g
   help: Install a package
+  default: true
 
   args:
   - name: package
