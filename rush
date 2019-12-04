@@ -328,6 +328,11 @@ rush_list_usage() {
     echo "  --deep, -d"
     echo -e "    Show nested packages as well"
     echo
+    
+    # :flag.usage
+    echo "  --search, -s TEXT"
+    echo -e "    Show only packages that have TEXT in their name"
+    echo
     # :command.usage_args
     echo -e "Arguments:"
     
@@ -682,7 +687,9 @@ rush_list_command() {
     local repo deep regex package glob glob_deep repo_path
   
     repo="$1"
-    deep="$2"
+    deep="${args[--deep]}"
+    search="${args[--search]}"
+  
     repo_path=$(config_get "$repo")
   
     [[ $repo_path ]] || abort "Cannot find repo $repo"
@@ -694,7 +701,12 @@ rush_list_command() {
     [[ $deep ]] && glob_deep=( "$repo_path"/**/*/info )
   
     for infofile in "${glob[@]}" "${glob_deep[@]}"; do
-      regex="$repo_path/(.*)/info"
+      if [[ $search ]]; then
+        regex="$repo_path/(.*${search}.*)/info"
+      else
+        regex="$repo_path/(.*)/info"
+      fi
+  
       if [[ $infofile =~ $regex ]]; then
         package="${BASH_REMATCH[1]}"
         printf "  %-26s $(head -1 "$infofile")\n" "$(blue "$package")"
@@ -705,13 +717,12 @@ rush_list_command() {
   }
   
   local repo=${args[repo]}
-  local deep=${args[--deep]}
   
   if [[ $repo ]]; then
-    show_repo_list "$repo" "$deep"
+    show_repo_list "$repo"
   else
     for k in $(config_keys); do
-      show_repo_list "$k" "$deep"
+      show_repo_list "$k"
     done
   fi
 }
@@ -1267,6 +1278,18 @@ rush_list_parse_requirements() {
       shift
       ;;
   
+    # :flag.case
+    --search | -s )
+      if [[ $2 && $2 != -* ]]; then
+        args[--search]="$2"
+        shift
+        shift
+      else
+        echo -e "--search requires an argument: --search, -s TEXT"
+        exit 1
+      fi
+      ;;
+  
   
     -* )
       echo -e "invalid option: $key"
@@ -1391,7 +1414,7 @@ rush_default_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.2.3"
+  version="0.2.4"
   long_usage=''
   set -e  
 

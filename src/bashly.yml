@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.2.3
+version: 0.2.4
 
 environment_variables:
 - name: rush_config
@@ -122,6 +122,10 @@ commands:
   - long: --deep
     short: -d
     help: Show nested packages as well
+  - long: --search
+    short: -s
+    arg: TEXT
+    help: Show only packages that have TEXT in their name
 
 - name: pull
   short: p

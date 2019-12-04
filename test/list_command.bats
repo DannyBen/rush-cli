@@ -18,3 +18,10 @@
   [[ "$output" =~ "nested/hi" ]]
   [[ "$output" =~ "Shows how to use nested folders" ]]
 }
+
+@test "rush list -d -s nested" {
+  run rush list -d -s nested
+  [[ "$status" -eq 0 ]]
+  [[ "$output" =~ "nested/hi" ]]
+  [[ ! "$output" =~ "hello" ]]
+}
