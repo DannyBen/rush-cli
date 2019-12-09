@@ -1,0 +1,27 @@
+rush list - Show packages in one or all repositories
+
+Usage:
+  rush list [REPO_OR_PACKAGE] [options]
+  rush list --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+  --search, -s TEXT
+    Show only packages that have TEXT in their name
+
+Arguments:
+  REPO_OR_PACKAGE
+    Repository name or package name.
+    - Leave blank to show all packages in all repositories.
+    - Provide a repository name to show only packages in this repository.
+    - Provide a package name (may be in the form of 'repo:package') to
+      show nested packages.
+
+Examples:
+  rush list
+  rush list personal:apps
+  rush list personal
+  rush list apps
+  rush list apps --search graphviz

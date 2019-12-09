@@ -1,0 +1,19 @@
+rush add - Add a local package repository to the configuration
+
+Usage:
+  rush add REPO PATH [options]
+  rush add --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  REPO
+    Repository name
+
+  PATH
+    Path to the repository
+
+Examples:
+  rush add default ~/rush-repos/default

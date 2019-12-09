@@ -1,0 +1,13 @@
+rush pull - Perform git pull on one or all repositories
+
+Usage:
+  rush pull [REPO] [options]
+  rush pull --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  REPO
+    Repository name

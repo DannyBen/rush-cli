@@ -1,0 +1,13 @@
+rush default - Set a default repository
+
+Usage:
+  rush default REPO [options]
+  rush default --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  REPO
+    Repository name

@@ -1,40 +1,61 @@
 show_repo_list() {
-  local repo deep regex package glob glob_deep repo_path
-
-  repo="$1"
-  deep="${args[--deep]}"
+  repo_or_package="$1"
   search="${args[--search]}"
+  repo="$1"
+
+  if [[ $repo_or_package =~ (.*):(.*) ]]; then
+    repo=${BASH_REMATCH[1]}
+    package=${BASH_REMATCH[2]}
+  fi
 
   repo_path=$(config_get "$repo")
 
-  [[ $repo_path ]] || abort "Cannot find repo $repo"
+  if [[ ! $repo_path ]]; then
+    package="$repo"
+    repo="default"
+    repo_path=$(config_get "$repo")
+  fi
 
   green "$repo:"
 
-  glob=( "$repo_path"/*/info )
+  if [[ $package ]]; then
+    glob=( "$repo_path"/"$package"/*/info )
+  else
+    glob=( "$repo_path"/*/info )
+  fi
 
-  [[ $deep ]] && glob_deep=( "$repo_path"/**/*/info )
-
-  for infofile in "${glob[@]}" "${glob_deep[@]}"; do
-    if [[ $search ]]; then
-      regex="$repo_path/(.*${search}.*)/info"
+  if [[ ${glob[0]} =~ \* ]]; then
+    infofile="$repo_path/$package/info"
+    if [[ -f "$infofile" ]]; then
+      info=$(head -1 "$infofile" 2> /dev/null)
+      printf "  %-26s $info\n" "$(blue "$package")"
     else
-      regex="$repo_path/(.*)/info"
+      red "  no matches"
     fi
+  
+  else
+    for infofile in "${glob[@]}"; do
+      if [[ $search ]]; then
+        regex="$repo_path/(.*${search}.*)/info"
+      else
+        regex="$repo_path/(.*)/info"
+      fi
 
-    if [[ $infofile =~ $regex ]]; then
-      package="${BASH_REMATCH[1]}"
-      printf "  %-26s $(head -1 "$infofile")\n" "$(blue "$package")"
-    fi
-  done
+      if [[ $infofile =~ $regex ]]; then
+        package_name="${BASH_REMATCH[1]}"
+        info=$(head -1 "$infofile" 2> /dev/null)
+        printf "  %-26s $info\n" "$(blue "$package_name")"
+      fi
+    done
+  fi
 
   echo
 }
 
-local repo=${args[repo]}
+repo_or_package=${args[repo_or_package]}
 
-if [[ $repo ]]; then
-  show_repo_list "$repo"
+if [[ $repo_or_package ]]; then
+  show_repo_list "$repo_or_package"
 else
   for k in $(config_keys); do
     show_repo_list "$k"

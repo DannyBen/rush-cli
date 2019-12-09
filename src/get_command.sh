@@ -1,6 +1,12 @@
 # Collect variables
-repo=${args[repo]:-default}
 package=${args[package]}
+repo="default"
+
+if [[ $package =~ (.*):(.*) ]]; then
+  repo=${BASH_REMATCH[1]}
+  package=${BASH_REMATCH[2]}
+fi
+
 repo_path=$(config_get "$repo")
 package_path=$repo_path/$package
 script=$package_path/main

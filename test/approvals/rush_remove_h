@@ -1,0 +1,13 @@
+rush remove - Remove a package repository from the configuration
+
+Usage:
+  rush remove REPO [options]
+  rush remove --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  REPO
+    Repository name
