@@ -29,7 +29,7 @@ rush_usage() {
   echo "  config    Show the configuration file"
   echo "  get       Install a package (default)"
   echo "  info      Show information about a package"
-  echo "  list      Show packages in a repository or all repositories"
+  echo "  list      Show packages in one or all repositories"
   echo "  pull      Perform git pull on one or all repositories"
   echo "  default   Set a default repository"
   echo
@@ -225,7 +225,7 @@ rush_get_usage() {
     echo 
   fi
   echo -e "Usage:"
-  echo -e "  rush get PACKAGE [REPO] [options]"
+  echo -e "  rush get PACKAGE [options]"
   echo -e "  rush get --help | -h"
   echo
 
@@ -241,19 +241,14 @@ rush_get_usage() {
     
     # :argument.usage
     echo "  PACKAGE"
-    echo -e "    Package name"
-    echo
-    
-    # :argument.usage
-    echo "  REPO"
-    echo -e "    Repository name\n    If not provided, a repository named 'default' is assumed"
+    echo -e "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'."
     echo
 
     # :command.usage_examples
     echo -e "Examples:"
     
     echo -e "  rush get ruby"
-    echo -e "  rush get ruby centos"
+    echo -e "  rush get centos:ruby"
     echo
 
   fi
@@ -269,7 +264,7 @@ rush_info_usage() {
     echo 
   fi
   echo -e "Usage:"
-  echo -e "  rush info PACKAGE [REPO] [options]"
+  echo -e "  rush info PACKAGE [options]"
   echo -e "  rush info --help | -h"
   echo
 
@@ -285,19 +280,14 @@ rush_info_usage() {
     
     # :argument.usage
     echo "  PACKAGE"
-    echo -e "    Package name"
-    echo
-    
-    # :argument.usage
-    echo "  REPO"
-    echo -e "    Repository name\n    If not provided, a repository named 'default' is assumed"
+    echo -e "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'."
     echo
 
     # :command.usage_examples
     echo -e "Examples:"
     
     echo -e "  rush info ruby"
-    echo -e "  rush info ruby centos"
+    echo -e "  rush info centos:ruby"
     echo
 
   fi
@@ -306,14 +296,14 @@ rush_info_usage() {
 # :command.usage
 rush_list_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush list - Show packages in a repository or all repositories"
+    echo -e "rush list - Show packages in one or all repositories"
     echo 
   else
-    echo -e "rush list - Show packages in a repository or all repositories"
+    echo -e "rush list - Show packages in one or all repositories"
     echo 
   fi
   echo -e "Usage:"
-  echo -e "  rush list [REPO] [options]"
+  echo -e "  rush list [REPO_OR_PACKAGE] [options]"
   echo -e "  rush list --help | -h"
   echo
 
@@ -325,11 +315,6 @@ rush_list_usage() {
     echo
     # :command.usage_flags
     # :flag.usage
-    echo "  --deep, -d"
-    echo -e "    Show nested packages as well"
-    echo
-    
-    # :flag.usage
     echo "  --search, -s TEXT"
     echo -e "    Show only packages that have TEXT in their name"
     echo
@@ -337,8 +322,18 @@ rush_list_usage() {
     echo -e "Arguments:"
     
     # :argument.usage
-    echo "  REPO"
-    echo -e "    Repository name (leave empty for all)"
+    echo "  REPO_OR_PACKAGE"
+    echo -e "    Repository name or package name.\n    - Leave blank to show all packages in all repositories.\n    - Provide a repository name to show only packages in this repository.\n    - Provide a package name (may be in the form of 'repo:package') to\n      show nested packages."
+    echo
+
+    # :command.usage_examples
+    echo -e "Examples:"
+    
+    echo -e "  rush list"
+    echo -e "  rush list personal:apps"
+    echo -e "  rush list personal"
+    echo -e "  rush list apps"
+    echo -e "  rush list apps --search graphviz"
     echo
 
   fi
@@ -642,8 +637,14 @@ rush_config_command() {
 rush_get_command() {
   # :src/get_command.sh
   # Collect variables
-  repo=${args[repo]:-default}
   package=${args[package]}
+  repo="default"
+  
+  if [[ $package =~ (.*):(.*) ]]; then
+    repo=${BASH_REMATCH[1]}
+    package=${BASH_REMATCH[2]}
+  fi
+  
   repo_path=$(config_get "$repo")
   package_path=$repo_path/$package
   script=$package_path/main
@@ -665,8 +666,14 @@ rush_get_command() {
 rush_info_command() {
   # :src/info_command.sh
   # Collect variables
-  repo=${args[repo]:-default}
   package=${args[package]}
+  repo="default"
+  
+  if [[ $package =~ (.*):(.*) ]]; then
+    repo=${BASH_REMATCH[1]}
+    package=${BASH_REMATCH[2]}
+  fi
+  
   repo_path=$(config_get "$repo")
   package_path=$repo_path/$package
   infofile=$package_path/info
@@ -684,42 +691,63 @@ rush_info_command() {
 rush_list_command() {
   # :src/list_command.sh
   show_repo_list() {
-    local repo deep regex package glob glob_deep repo_path
-  
-    repo="$1"
-    deep="${args[--deep]}"
+    repo_or_package="$1"
     search="${args[--search]}"
+    repo="$1"
+  
+    if [[ $repo_or_package =~ (.*):(.*) ]]; then
+      repo=${BASH_REMATCH[1]}
+      package=${BASH_REMATCH[2]}
+    fi
   
     repo_path=$(config_get "$repo")
   
-    [[ $repo_path ]] || abort "Cannot find repo $repo"
+    if [[ ! $repo_path ]]; then
+      package="$repo"
+      repo="default"
+      repo_path=$(config_get "$repo")
+    fi
   
     green "$repo:"
   
-    glob=( "$repo_path"/*/info )
+    if [[ $package ]]; then
+      glob=( "$repo_path"/"$package"/*/info )
+    else
+      glob=( "$repo_path"/*/info )
+    fi
   
-    [[ $deep ]] && glob_deep=( "$repo_path"/**/*/info )
-  
-    for infofile in "${glob[@]}" "${glob_deep[@]}"; do
-      if [[ $search ]]; then
-        regex="$repo_path/(.*${search}.*)/info"
+    if [[ ${glob[0]} =~ \* ]]; then
+      infofile="$repo_path/$package/info"
+      if [[ -f "$infofile" ]]; then
+        info=$(head -1 "$infofile" 2> /dev/null)
+        printf "  %-26s $info\n" "$(blue "$package")"
       else
-        regex="$repo_path/(.*)/info"
+        red "  no matches"
       fi
+    
+    else
+      for infofile in "${glob[@]}"; do
+        if [[ $search ]]; then
+          regex="$repo_path/(.*${search}.*)/info"
+        else
+          regex="$repo_path/(.*)/info"
+        fi
   
-      if [[ $infofile =~ $regex ]]; then
-        package="${BASH_REMATCH[1]}"
-        printf "  %-26s $(head -1 "$infofile")\n" "$(blue "$package")"
-      fi
-    done
+        if [[ $infofile =~ $regex ]]; then
+          package_name="${BASH_REMATCH[1]}"
+          info=$(head -1 "$infofile" 2> /dev/null)
+          printf "  %-26s $info\n" "$(blue "$package_name")"
+        fi
+      done
+    fi
   
     echo
   }
   
-  local repo=${args[repo]}
+  repo_or_package=${args[repo_or_package]}
   
-  if [[ $repo ]]; then
-    show_repo_list "$repo"
+  if [[ $repo_or_package ]]; then
+    show_repo_list "$repo_or_package"
   else
     for k in $(config_keys); do
       show_repo_list "$k"
@@ -1157,7 +1185,7 @@ rush_get_parse_requirements() {
     args[package]=$1
     shift
   else
-    echo -e "missing required argument: PACKAGE\nusage: rush get PACKAGE [REPO] [options]"
+    echo -e "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1175,9 +1203,6 @@ rush_get_parse_requirements() {
       # :command.parse_requirements_case
       if [[ ! ${args[package]} ]]; then
         args[package]=$1
-        shift
-      elif [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
         shift
       else
         echo -e "invalid argument: $key"
@@ -1214,7 +1239,7 @@ rush_info_parse_requirements() {
     args[package]=$1
     shift
   else
-    echo -e "missing required argument: PACKAGE\nusage: rush info PACKAGE [REPO] [options]"
+    echo -e "missing required argument: PACKAGE\nusage: rush info PACKAGE [options]"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1232,9 +1257,6 @@ rush_info_parse_requirements() {
       # :command.parse_requirements_case
       if [[ ! ${args[package]} ]]; then
         args[package]=$1
-        shift
-      elif [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
         shift
       else
         echo -e "invalid argument: $key"
@@ -1273,12 +1295,6 @@ rush_list_parse_requirements() {
     key="$1"
     case "$key" in
     # :flag.case
-    --deep | -d )
-      args[--deep]=1
-      shift
-      ;;
-  
-    # :flag.case
     --search | -s )
       if [[ $2 && $2 != -* ]]; then
         args[--search]="$2"
@@ -1298,8 +1314,8 @@ rush_list_parse_requirements() {
   
     * )
       # :command.parse_requirements_case
-      if [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
+      if [[ ! ${args[repo_or_package]} ]]; then
+        args[repo_or_package]=$1
         shift
       else
         echo -e "invalid argument: $key"

@@ -1,0 +1,28 @@
+rush - Personal package manager
+
+Usage:
+  rush [command] [options]
+  rush [command] --help | -h
+  rush --version
+
+Commands:
+  add       Add a local package repository to the configuration
+  clone     Clone a GitHub package repository
+  remove    Remove a package repository from the configuration
+  config    Show the configuration file
+  get       Install a package (default)
+  info      Show information about a package
+  list      Show packages in one or all repositories
+  pull      Perform git pull on one or all repositories
+  default   Set a default repository
+
+Options:
+  --help, -h
+    Show this help
+
+  --version
+    Show version number
+
+Environment Variables:
+  RUSH_CONFIG
+    Location of the rush config file [default: ~/rush.ini]

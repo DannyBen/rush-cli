@@ -11,7 +11,7 @@ services:
 
   test: &test
     <<: *default
-    command: bats .
+    command: bash test.sh
 
   ci:
     <<: *test
