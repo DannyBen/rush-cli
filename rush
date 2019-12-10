@@ -429,26 +429,26 @@ abort() {
 #
 # ---
 
-red() { printf "\e[31m$*\e[0m\n" ; }
-green() { printf "\e[32m$*\e[0m\n" ; }
-yellow() { printf "\e[33m$*\e[0m\n" ; }
-blue() { printf "\e[34m$*\e[0m\n" ; }
-magenta() { printf "\e[35m$*\e[0m\n" ; }
-cyan() { printf "\e[36m$*\e[0m\n" ; }
-bold() { printf "\e[1m$*\e[0m\n" ; }
-underlined() { printf "\e[4m$*\e[0m\n" ; }
-red_bold() { printf "\e[1;31m$*\e[0m\n" ; }
-green_bold() { printf "\e[1;32m$*\e[0m\n" ; }
-yellow_bold() { printf "\e[1;33m$*\e[0m\n" ; }
-blue_bold() { printf "\e[1;34m$*\e[0m\n" ; }
-magenta_bold() { printf "\e[1;35m$*\e[0m\n" ; }
-cyan_bold() { printf "\e[1;36m$*\e[0m\n" ; }
-red_underlined() { printf "\e[4;31m$*\e[0m\n" ; }
-green_underlined() { printf "\e[4;32m$*\e[0m\n" ; }
-yellow_underlined() { printf "\e[4;33m$*\e[0m\n" ; }
-blue_underlined() { printf "\e[4;34m$*\e[0m\n" ; }
-magenta_underlined() { printf "\e[4;35m$*\e[0m\n" ; }
-cyan_underlined() { printf "\e[4;36m$*\e[0m\n" ; }
+red() { printf "\e[31m%b\e[0m\n" "$*"; }
+green() { printf "\e[32m%b\e[0m\n" "$*"; }
+yellow() { printf "\e[33m%b\e[0m\n" "$*"; }
+blue() { printf "\e[34m%b\e[0m\n" "$*"; }
+magenta() { printf "\e[35m%b\e[0m\n" "$*"; }
+cyan() { printf "\e[36m%b\e[0m\n" "$*"; }
+bold() { printf "\e[1m%b\e[0m\n" "$*"; }
+underlined() { printf "\e[4m%b\e[0m\n" "$*"; }
+red_bold() { printf "\e[1;31m%b\e[0m\n" "$*"; }
+green_bold() { printf "\e[1;32m%b\e[0m\n" "$*"; }
+yellow_bold() { printf "\e[1;33m%b\e[0m\n" "$*"; }
+blue_bold() { printf "\e[1;34m%b\e[0m\n" "$*"; }
+magenta_bold() { printf "\e[1;35m%b\e[0m\n" "$*"; }
+cyan_bold() { printf "\e[1;36m%b\e[0m\n" "$*"; }
+red_underlined() { printf "\e[4;31m%b\e[0m\n" "$*"; }
+green_underlined() { printf "\e[4;32m%b\e[0m\n" "$*"; }
+yellow_underlined() { printf "\e[4;33m%b\e[0m\n" "$*"; }
+blue_underlined() { printf "\e[4;34m%b\e[0m\n" "$*"; }
+magenta_underlined() { printf "\e[4;35m%b\e[0m\n" "$*"; }
+cyan_underlined() { printf "\e[4;36m%b\e[0m\n" "$*"; }
 
 # :src/lib/config.sh
 # ---
@@ -516,7 +516,7 @@ config_set() {
     output="$output$key = $value\n"
   fi
 
-  printf "$output\n" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Delete a key from teh config.
@@ -536,7 +536,7 @@ config_del() {
     fi
   done < "$CONFIG_FILE"
 
-  printf "$output\n" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Show the config file
@@ -764,10 +764,10 @@ rush_pull_command() {
     repo_path="$1"
   
     if [[ -d "$repo_path/.git" ]]; then
-      printf "pull $(green "$repo_path")\n"
+      echo "pull $(green "$repo_path")"
       git -C "$repo_path" pull
     else
-      printf "skip $(blue "$repo_path") (not a git repo)\n"
+      echo "skip $(blue "$repo_path") (not a git repo)"
     fi
   }
   
@@ -904,13 +904,13 @@ parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
     * )
       # :command.parse_requirements_case
-      printf "invalid argument: $key\n"
+      printf "invalid argument: %s\n" "$key"
       exit 1
       ;;
   
@@ -961,7 +961,7 @@ rush_add_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -974,7 +974,7 @@ rush_add_parse_requirements() {
         args[path]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1036,7 +1036,7 @@ rush_clone_parse_requirements() {
   
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1049,7 +1049,7 @@ rush_clone_parse_requirements() {
         args[path]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1093,7 +1093,7 @@ rush_remove_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1103,7 +1103,7 @@ rush_remove_parse_requirements() {
         args[repo]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1146,13 +1146,13 @@ rush_config_parse_requirements() {
   
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
     * )
       # :command.parse_requirements_case
-      printf "invalid argument: $key\n"
+      printf "invalid argument: %s\n" "$key"
       exit 1
       ;;
   
@@ -1195,7 +1195,7 @@ rush_get_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1205,7 +1205,7 @@ rush_get_parse_requirements() {
         args[package]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1249,7 +1249,7 @@ rush_info_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1259,7 +1259,7 @@ rush_info_parse_requirements() {
         args[package]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1308,7 +1308,7 @@ rush_list_parse_requirements() {
   
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1318,7 +1318,7 @@ rush_list_parse_requirements() {
         args[repo_or_package]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1355,7 +1355,7 @@ rush_pull_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1365,7 +1365,7 @@ rush_pull_parse_requirements() {
         args[repo]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1409,7 +1409,7 @@ rush_default_parse_requirements() {
     case "$key" in
   
     -* )
-      printf "invalid option: $key\n"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1419,7 +1419,7 @@ rush_default_parse_requirements() {
         args[repo]=$1
         shift
       else
-        printf "invalid argument: $key\n"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;

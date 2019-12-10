@@ -63,7 +63,7 @@ config_set() {
     output="$output$key = $value\n"
   fi
 
-  printf "$output\n" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Delete a key from teh config.
@@ -83,7 +83,7 @@ config_del() {
     fi
   done < "$CONFIG_FILE"
 
-  printf "$output\n" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Show the config file

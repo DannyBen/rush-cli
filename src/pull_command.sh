@@ -4,10 +4,10 @@ pull_repo() {
   repo_path="$1"
 
   if [[ -d "$repo_path/.git" ]]; then
-    printf "pull $(green "$repo_path")\n"
+    echo "pull $(green "$repo_path")"
     git -C "$repo_path" pull
   else
-    printf "skip $(blue "$repo_path") (not a git repo)\n"
+    echo "skip $(blue "$repo_path") (not a git repo)"
   fi
 }
 
