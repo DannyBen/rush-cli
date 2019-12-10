@@ -10,8 +10,8 @@
 # ---
 
 # Create a new config file.
-# There is normally no need to use this fucntion, it is used by othe rfunctions
-# as needed.
+# There is normally no need to use this fucntion, it is used by other
+# functions as needed.
 config_init() {
   CONFIG_FILE=${CONFIG_FILE:=config.ini}
   [[ -f "$CONFIG_FILE" ]] || touch "$CONFIG_FILE"
@@ -63,7 +63,7 @@ config_set() {
     output="$output$key = $value\n"
   fi
 
-  echo -e "$output" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Delete a key from teh config.
@@ -83,7 +83,7 @@ config_del() {
     fi
   done < "$CONFIG_FILE"
 
-  echo -e "$output" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Show the config file

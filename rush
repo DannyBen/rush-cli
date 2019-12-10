@@ -10,19 +10,19 @@ version_command() {
 # :command.usage
 rush_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush - Personal package manager"
+    printf "rush - Personal package manager\n"
     echo 
   else
-    echo -e "rush - Personal package manager"
+    printf "rush - Personal package manager\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush [command] [options]"
-  echo -e "  rush [command] --help | -h"
-  echo -e "  rush --version"
+  printf "Usage:\n"
+  printf "  rush [command] [options]\n"
+  printf "  rush [command] --help | -h\n"
+  printf "  rush --version\n"
   echo
   # :command.usage_commands
-  echo -e "Commands:"
+  printf "Commands:\n"
   echo "  add       Add a local package repository to the configuration"
   echo "  clone     Clone a GitHub package repository"
   echo "  remove    Remove a package repository from the configuration"
@@ -35,21 +35,21 @@ rush_usage() {
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
     echo "  --version"
-    echo -e "    Show version number"
+    printf "    Show version number\n"
     echo
 
     # :command.usage_environment_variables
-    echo -e "Environment Variables:"
+    printf "Environment Variables:\n"
     
     # :environment_variable.usage
     echo "  RUSH_CONFIG"
-    echo -e "    Location of the rush config file [default: ~/rush.ini]"
+    printf "    Location of the rush config file [default: ~/rush.ini]\n"
     echo
 
   fi
@@ -58,41 +58,41 @@ rush_usage() {
 # :command.usage
 rush_add_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush add - Add a local package repository to the configuration"
+    printf "rush add - Add a local package repository to the configuration\n"
     echo 
   else
-    echo -e "rush add - Add a local package repository to the configuration"
+    printf "rush add - Add a local package repository to the configuration\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush add REPO PATH [options]"
-  echo -e "  rush add --help | -h"
+  printf "Usage:\n"
+  printf "  rush add REPO PATH [options]\n"
+  printf "  rush add --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  REPO"
-    echo -e "    Repository name"
+    printf "    Repository name\n"
     echo
     
     # :argument.usage
     echo "  PATH"
-    echo -e "    Path to the repository"
+    printf "    Path to the repository\n"
     echo
 
     # :command.usage_examples
-    echo -e "Examples:"
+    printf "Examples:\n"
     
-    echo -e "  rush add default ~/rush-repos/default"
+    printf "  rush add default ~/rush-repos/default\n"
     echo
 
   fi
@@ -101,54 +101,54 @@ rush_add_usage() {
 # :command.usage
 rush_clone_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush clone"
+    printf "rush clone\n"
     echo 
-    echo -e "  Clone a GitHub package repository\n  This command will clone the repository and add it to the configuration"
+    printf "  Clone a GitHub package repository\n  This command will clone the repository and add it to the configuration\n"
     echo 
   else
-    echo -e "rush clone - Clone a GitHub package repository"
+    printf "rush clone - Clone a GitHub package repository\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush clone GITHUB_USER [PATH] [options]"
-  echo -e "  rush clone --help | -h"
+  printf "Usage:\n"
+  printf "  rush clone GITHUB_USER [PATH] [options]\n"
+  printf "  rush clone --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
     # :command.usage_flags
     # :flag.usage
     echo "  --ssh, -s"
-    echo -e "    Clone using SSH instead of HTTPS"
+    printf "    Clone using SSH instead of HTTPS\n"
     echo
     
     # :flag.usage
     echo "  --name, -n NAME"
-    echo -e "    Name to use in the config file\n    Default: GitHub user"
+    printf "    Name to use in the config file\n    Default: GitHub user\n"
     echo
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  GITHUB_USER"
-    echo -e "    Github user. This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax."
+    printf "    Github user. This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax.\n"
     echo
     
     # :argument.usage
     echo "  PATH"
-    echo -e "    Local path to clone the repository to\n    Default: ~/rush-repos/<github_user>/<github_repo>"
+    printf "    Local path to clone the repository to\n    Default: ~/rush-repos/<github_user>/<github_repo>\n"
     echo
 
     # :command.usage_examples
-    echo -e "Examples:"
+    printf "Examples:\n"
     
-    echo -e "  rush clone bobby"
-    echo -e "  rush clone bobby/bobs-repo ./repos/bobby --ssh"
-    echo -e "  rush clone bobby --name sample"
+    printf "  rush clone bobby\n"
+    printf "  rush clone bobby/bobs-repo ./repos/bobby --ssh\n"
+    printf "  rush clone bobby --name sample\n"
     echo
 
   fi
@@ -157,30 +157,30 @@ rush_clone_usage() {
 # :command.usage
 rush_remove_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush remove - Remove a package repository from the configuration"
+    printf "rush remove - Remove a package repository from the configuration\n"
     echo 
   else
-    echo -e "rush remove - Remove a package repository from the configuration"
+    printf "rush remove - Remove a package repository from the configuration\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush remove REPO [options]"
-  echo -e "  rush remove --help | -h"
+  printf "Usage:\n"
+  printf "  rush remove REPO [options]\n"
+  printf "  rush remove --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  REPO"
-    echo -e "    Repository name"
+    printf "    Repository name\n"
     echo
 
   fi
@@ -189,27 +189,27 @@ rush_remove_usage() {
 # :command.usage
 rush_config_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush config - Show the configuration file"
+    printf "rush config - Show the configuration file\n"
     echo 
   else
-    echo -e "rush config - Show the configuration file"
+    printf "rush config - Show the configuration file\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush config [options]"
-  echo -e "  rush config --help | -h"
+  printf "Usage:\n"
+  printf "  rush config [options]\n"
+  printf "  rush config --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
     # :command.usage_flags
     # :flag.usage
     echo "  --edit, -e"
-    echo -e "    Open the config file for editing"
+    printf "    Open the config file for editing\n"
     echo
 
   fi
@@ -218,37 +218,37 @@ rush_config_usage() {
 # :command.usage
 rush_get_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush get - Install a package"
+    printf "rush get - Install a package\n"
     echo 
   else
-    echo -e "rush get - Install a package"
+    printf "rush get - Install a package\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush get PACKAGE [options]"
-  echo -e "  rush get --help | -h"
+  printf "Usage:\n"
+  printf "  rush get PACKAGE [options]\n"
+  printf "  rush get --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  PACKAGE"
-    echo -e "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'."
+    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :command.usage_examples
-    echo -e "Examples:"
+    printf "Examples:\n"
     
-    echo -e "  rush get ruby"
-    echo -e "  rush get centos:ruby"
+    printf "  rush get ruby\n"
+    printf "  rush get centos:ruby\n"
     echo
 
   fi
@@ -257,37 +257,37 @@ rush_get_usage() {
 # :command.usage
 rush_info_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush info - Show information about a package"
+    printf "rush info - Show information about a package\n"
     echo 
   else
-    echo -e "rush info - Show information about a package"
+    printf "rush info - Show information about a package\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush info PACKAGE [options]"
-  echo -e "  rush info --help | -h"
+  printf "Usage:\n"
+  printf "  rush info PACKAGE [options]\n"
+  printf "  rush info --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  PACKAGE"
-    echo -e "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'."
+    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :command.usage_examples
-    echo -e "Examples:"
+    printf "Examples:\n"
     
-    echo -e "  rush info ruby"
-    echo -e "  rush info centos:ruby"
+    printf "  rush info ruby\n"
+    printf "  rush info centos:ruby\n"
     echo
 
   fi
@@ -296,44 +296,44 @@ rush_info_usage() {
 # :command.usage
 rush_list_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush list - Show packages in one or all repositories"
+    printf "rush list - Show packages in one or all repositories\n"
     echo 
   else
-    echo -e "rush list - Show packages in one or all repositories"
+    printf "rush list - Show packages in one or all repositories\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush list [REPO_OR_PACKAGE] [options]"
-  echo -e "  rush list --help | -h"
+  printf "Usage:\n"
+  printf "  rush list [REPO_OR_PACKAGE] [options]\n"
+  printf "  rush list --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
     # :command.usage_flags
     # :flag.usage
     echo "  --search, -s TEXT"
-    echo -e "    Show only packages that have TEXT in their name"
+    printf "    Show only packages that have TEXT in their name\n"
     echo
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  REPO_OR_PACKAGE"
-    echo -e "    Repository name or package name.\n    - Leave blank to show all packages in all repositories.\n    - Provide a repository name to show only packages in this repository.\n    - Provide a package name (may be in the form of 'repo:package') to\n      show nested packages."
+    printf "    Repository name or package name.\n    - Leave blank to show all packages in all repositories.\n    - Provide a repository name to show only packages in this repository.\n    - Provide a package name (may be in the form of 'repo:package') to\n      show nested packages.\n"
     echo
 
     # :command.usage_examples
-    echo -e "Examples:"
+    printf "Examples:\n"
     
-    echo -e "  rush list"
-    echo -e "  rush list personal:apps"
-    echo -e "  rush list personal"
-    echo -e "  rush list apps"
-    echo -e "  rush list apps --search graphviz"
+    printf "  rush list\n"
+    printf "  rush list personal:apps\n"
+    printf "  rush list personal\n"
+    printf "  rush list apps\n"
+    printf "  rush list apps --search graphviz\n"
     echo
 
   fi
@@ -342,30 +342,30 @@ rush_list_usage() {
 # :command.usage
 rush_pull_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush pull - Perform git pull on one or all repositories"
+    printf "rush pull - Perform git pull on one or all repositories\n"
     echo 
   else
-    echo -e "rush pull - Perform git pull on one or all repositories"
+    printf "rush pull - Perform git pull on one or all repositories\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush pull [REPO] [options]"
-  echo -e "  rush pull --help | -h"
+  printf "Usage:\n"
+  printf "  rush pull [REPO] [options]\n"
+  printf "  rush pull --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  REPO"
-    echo -e "    Repository name"
+    printf "    Repository name\n"
     echo
 
   fi
@@ -374,30 +374,30 @@ rush_pull_usage() {
 # :command.usage
 rush_default_usage() {
   if [[ -n $long_usage ]]; then
-    echo -e "rush default - Set a default repository"
+    printf "rush default - Set a default repository\n"
     echo 
   else
-    echo -e "rush default - Set a default repository"
+    printf "rush default - Set a default repository\n"
     echo 
   fi
-  echo -e "Usage:"
-  echo -e "  rush default REPO [options]"
-  echo -e "  rush default --help | -h"
+  printf "Usage:\n"
+  printf "  rush default REPO [options]\n"
+  printf "  rush default --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
-    echo -e "Options:"
+    printf "Options:\n"
     # :command.usage_fixed_flags
     echo "  --help, -h"
-    echo -e "    Show this help"
+    printf "    Show this help\n"
     echo
 
     # :command.usage_args
-    echo -e "Arguments:"
+    printf "Arguments:\n"
     
     # :argument.usage
     echo "  REPO"
-    echo -e "    Repository name"
+    printf "    Repository name\n"
     echo
 
   fi
@@ -424,31 +424,31 @@ abort() {
 # Usage:
 # Use any of the functions below to color or format a portion of a string.
 # 
-#  echo "before $(red this is red) after"
-#  echo "before $(green_bold this is green_bold) after"
+#   echo "before $(red this is red) after"
+#   echo "before $(green_bold this is green_bold) after"
 #
 # ---
 
-red() { echo -e "\e[31m$*\e[0m" ; }
-green() { echo -e "\e[32m$*\e[0m" ; }
-yellow() { echo -e "\e[33m$*\e[0m" ; }
-blue() { echo -e "\e[34m$*\e[0m" ; }
-magenta() { echo -e "\e[35m$*\e[0m" ; }
-cyan() { echo -e "\e[36m$*\e[0m" ; }
-bold() { echo -e "\e[1m$*\e[0m" ; }
-underlined() { echo -e "\e[4m$*\e[0m" ; }
-red_bold() { echo -e "\e[1;31m$*\e[0m" ; }
-green_bold() { echo -e "\e[1;32m$*\e[0m" ; }
-yellow_bold() { echo -e "\e[1;33m$*\e[0m" ; }
-blue_bold() { echo -e "\e[1;34m$*\e[0m" ; }
-magenta_bold() { echo -e "\e[1;35m$*\e[0m" ; }
-cyan_bold() { echo -e "\e[1;36m$*\e[0m" ; }
-red_underlined() { echo -e "\e[4;31m$*\e[0m" ; }
-green_underlined() { echo -e "\e[4;32m$*\e[0m" ; }
-yellow_underlined() { echo -e "\e[4;33m$*\e[0m" ; }
-blue_underlined() { echo -e "\e[4;34m$*\e[0m" ; }
-magenta_underlined() { echo -e "\e[4;35m$*\e[0m" ; }
-cyan_underlined() { echo -e "\e[4;36m$*\e[0m" ; }
+red() { printf "\e[31m%b\e[0m\n" "$*"; }
+green() { printf "\e[32m%b\e[0m\n" "$*"; }
+yellow() { printf "\e[33m%b\e[0m\n" "$*"; }
+blue() { printf "\e[34m%b\e[0m\n" "$*"; }
+magenta() { printf "\e[35m%b\e[0m\n" "$*"; }
+cyan() { printf "\e[36m%b\e[0m\n" "$*"; }
+bold() { printf "\e[1m%b\e[0m\n" "$*"; }
+underlined() { printf "\e[4m%b\e[0m\n" "$*"; }
+red_bold() { printf "\e[1;31m%b\e[0m\n" "$*"; }
+green_bold() { printf "\e[1;32m%b\e[0m\n" "$*"; }
+yellow_bold() { printf "\e[1;33m%b\e[0m\n" "$*"; }
+blue_bold() { printf "\e[1;34m%b\e[0m\n" "$*"; }
+magenta_bold() { printf "\e[1;35m%b\e[0m\n" "$*"; }
+cyan_bold() { printf "\e[1;36m%b\e[0m\n" "$*"; }
+red_underlined() { printf "\e[4;31m%b\e[0m\n" "$*"; }
+green_underlined() { printf "\e[4;32m%b\e[0m\n" "$*"; }
+yellow_underlined() { printf "\e[4;33m%b\e[0m\n" "$*"; }
+blue_underlined() { printf "\e[4;34m%b\e[0m\n" "$*"; }
+magenta_underlined() { printf "\e[4;35m%b\e[0m\n" "$*"; }
+cyan_underlined() { printf "\e[4;36m%b\e[0m\n" "$*"; }
 
 # :src/lib/config.sh
 # ---
@@ -463,8 +463,8 @@ cyan_underlined() { echo -e "\e[4;36m$*\e[0m" ; }
 # ---
 
 # Create a new config file.
-# There is normally no need to use this fucntion, it is used by othe rfunctions
-# as needed.
+# There is normally no need to use this fucntion, it is used by other
+# functions as needed.
 config_init() {
   CONFIG_FILE=${CONFIG_FILE:=config.ini}
   [[ -f "$CONFIG_FILE" ]] || touch "$CONFIG_FILE"
@@ -516,7 +516,7 @@ config_set() {
     output="$output$key = $value\n"
   fi
 
-  echo -e "$output" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Delete a key from teh config.
@@ -536,7 +536,7 @@ config_del() {
     fi
   done < "$CONFIG_FILE"
 
-  echo -e "$output" > "$CONFIG_FILE"
+  printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
 # Show the config file
@@ -651,7 +651,7 @@ rush_get_command() {
   
   # Verify we have everything we need
   [[ $repo_path ]] || abort "repo not found: $repo"
-  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  [[ -d $package_path ]] || abort "package not found: $repo:$package"
   [[ -f $script ]] || abort "script not found: $script"
   
   # Run the script (make it executable if it isnt first)
@@ -764,10 +764,10 @@ rush_pull_command() {
     repo_path="$1"
   
     if [[ -d "$repo_path/.git" ]]; then
-      echo -e "pull $(green "$repo_path")"
+      echo "pull $(green "$repo_path")"
       git -C "$repo_path" pull
     else
-      echo -e "skip $(blue "$repo_path") (not a git repo)"
+      echo "skip $(blue "$repo_path") (not a git repo)"
     fi
   }
   
@@ -904,13 +904,13 @@ parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
     * )
       # :command.parse_requirements_case
-      echo -e "invalid argument: $key"
+      printf "invalid argument: %s\n" "$key"
       exit 1
       ;;
   
@@ -943,7 +943,7 @@ rush_add_parse_requirements() {
     args[repo]=$1
     shift
   else
-    echo -e "missing required argument: REPO\nusage: rush add REPO PATH [options]"
+    printf "missing required argument: REPO\nusage: rush add REPO PATH [options]\n"
     exit 1
   fi
   
@@ -951,7 +951,7 @@ rush_add_parse_requirements() {
     args[path]=$1
     shift
   else
-    echo -e "missing required argument: PATH\nusage: rush add REPO PATH [options]"
+    printf "missing required argument: PATH\nusage: rush add REPO PATH [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -961,7 +961,7 @@ rush_add_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -974,7 +974,7 @@ rush_add_parse_requirements() {
         args[path]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1008,7 +1008,7 @@ rush_clone_parse_requirements() {
     args[github_user]=$1
     shift
   else
-    echo -e "missing required argument: GITHUB_USER\nusage: rush clone GITHUB_USER [PATH] [options]"
+    printf "missing required argument: GITHUB_USER\nusage: rush clone GITHUB_USER [PATH] [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1029,14 +1029,14 @@ rush_clone_parse_requirements() {
         shift
         shift
       else
-        echo -e "--name requires an argument: --name, -n NAME"
+        printf "--name requires an argument: --name, -n NAME\n"
         exit 1
       fi
       ;;
   
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1049,7 +1049,7 @@ rush_clone_parse_requirements() {
         args[path]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1083,7 +1083,7 @@ rush_remove_parse_requirements() {
     args[repo]=$1
     shift
   else
-    echo -e "missing required argument: REPO\nusage: rush remove REPO [options]"
+    printf "missing required argument: REPO\nusage: rush remove REPO [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1093,7 +1093,7 @@ rush_remove_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1103,7 +1103,7 @@ rush_remove_parse_requirements() {
         args[repo]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1146,13 +1146,13 @@ rush_config_parse_requirements() {
   
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
     * )
       # :command.parse_requirements_case
-      echo -e "invalid argument: $key"
+      printf "invalid argument: %s\n" "$key"
       exit 1
       ;;
   
@@ -1185,7 +1185,7 @@ rush_get_parse_requirements() {
     args[package]=$1
     shift
   else
-    echo -e "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]"
+    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1195,7 +1195,7 @@ rush_get_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1205,7 +1205,7 @@ rush_get_parse_requirements() {
         args[package]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1239,7 +1239,7 @@ rush_info_parse_requirements() {
     args[package]=$1
     shift
   else
-    echo -e "missing required argument: PACKAGE\nusage: rush info PACKAGE [options]"
+    printf "missing required argument: PACKAGE\nusage: rush info PACKAGE [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1249,7 +1249,7 @@ rush_info_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1259,7 +1259,7 @@ rush_info_parse_requirements() {
         args[package]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1301,14 +1301,14 @@ rush_list_parse_requirements() {
         shift
         shift
       else
-        echo -e "--search requires an argument: --search, -s TEXT"
+        printf "--search requires an argument: --search, -s TEXT\n"
         exit 1
       fi
       ;;
   
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1318,7 +1318,7 @@ rush_list_parse_requirements() {
         args[repo_or_package]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1355,7 +1355,7 @@ rush_pull_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1365,7 +1365,7 @@ rush_pull_parse_requirements() {
         args[repo]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;
@@ -1399,7 +1399,7 @@ rush_default_parse_requirements() {
     args[repo]=$1
     shift
   else
-    echo -e "missing required argument: REPO\nusage: rush default REPO [options]"
+    printf "missing required argument: REPO\nusage: rush default REPO [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1409,7 +1409,7 @@ rush_default_parse_requirements() {
     case "$key" in
   
     -* )
-      echo -e "invalid option: $key"
+      printf "invalid option: %s\n" "$key"
       exit 1
       ;;
   
@@ -1419,7 +1419,7 @@ rush_default_parse_requirements() {
         args[repo]=$1
         shift
       else
-        echo -e "invalid argument: $key"
+        printf "invalid argument: %s\n" "$key"
         exit 1
       fi
       ;;

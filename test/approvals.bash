@@ -24,11 +24,12 @@
 #   approve "ls -la" "ls"
 #
 approve() {
-  local expected
-  local cmd=$1
-  local actual=$(eval $cmd 2>&1)
-  local approval=$(printf "$cmd" | tr -s -c [:alnum:] _)
-  local approval_file="approvals/${2:-"$approval"}"
+  local expected approval approval_file actual cmd
+  
+  cmd=$1
+  actual=$(eval "$cmd" 2>&1)  
+  approval=$(printf "%b" "$cmd" | tr -s -c "[:alnum:]" _)
+  approval_file="approvals/${2:-"$approval"}"
 
   [[ -d "approvals" ]] || mkdir approvals
 
@@ -36,17 +37,17 @@ approve() {
     expected=$(cat "$approval_file")
   else
     echo "--- [$(blue "$cmd")] ---"
-    echo -e "$actual"
+    printf "%b\n" "$actual"
     echo "--- [$(blue "$cmd")] ---"
     expected="$actual"
     user_approval "$cmd" "$actual" "$approval_file"
   fi
 
-  if [[ "$(echo -e "$actual")" = "$(echo -e "$expected")" ]]; then
+  if [[ "$(printf "%b" "$actual")" = "$(printf "%b" "$expected")" ]]; then
     green "\rPASS $cmd"
   else
     echo "--- [$(blue "$cmd")] ---"
-    diff --unified --color=always <(echo -e "$expected") <(echo -e "$actual" )  | tail -n +4
+    diff --unified --color=always <(printf "%b" "$expected\n") <(printf "%b" "$actual\n" )  | tail -n +4
     echo "--- [$(blue "$cmd")] ---"
     user_approval "$cmd" "$actual" "$approval_file"
   fi
@@ -63,10 +64,10 @@ user_approval() {
   fi
 
   echo 
-  echo -e "[A]pprove? "
-  read -n 1 response
+  printf "[A]pprove? \n"
+  read -r -n 1 response
   if [[ $response =~ [Aa] ]]; then
-    echo -e "$actual" > "$approval_file"
+    printf "%b\n" "$actual" > "$approval_file"
     green "\rPASS $cmd"
   else
     red "\rFAIL $cmd"
@@ -74,6 +75,6 @@ user_approval() {
   fi
 }
 
-red() { echo -e "\e[31m$*\e[0m" ; }
-green() { echo -e "\e[32m$*\e[0m" ; }
-blue() { echo -e "\e[34m$*\e[0m" ; }
+red() { printf "\e[31m%b\e[0m\n" "$*"; }
+green() { printf "\e[32m%b\e[0m\n" "$*"; }
+blue() { printf "\e[34m%b\e[0m\n" "$*"; }
