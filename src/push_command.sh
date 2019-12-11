@@ -1,12 +1,13 @@
 repo=${args[repo]}
+message=${args[--message]:-"automatic commit"}
 
-pull_repo() {
+push_repo() {
   local repo_path="$1"
   local repo="$2"
 
   if [[ -d "$repo_path/.git" ]]; then
-    echo "pull $(green "$repo")"
-    git -C "$repo_path" pull
+    echo "push $(green "$repo")"
+    git -C "$repo_path" add . --all && git -C "$repo_path" commit -am "$message" && git -C "$repo_path" push
   else
     echo "skip $(blue "$repo") (not a git repo)"
   fi
@@ -15,10 +16,10 @@ pull_repo() {
 if [[ $repo ]]; then
   repo_path=$(config_get "$repo")
   [[ $repo_path ]] || abort "no such repo: $repo"
-  pull_repo "$repo_path" "$repo"
+  push_repo "$repo_path" "$repo"
 else
   for k in $(config_keys); do
-    pull_repo "$(config_get "$k")" "$k"
+    push_repo "$(config_get "$k")" "$k"
   done
 fi
 
