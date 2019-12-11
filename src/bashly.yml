@@ -126,7 +126,7 @@ commands:
   flags:
   - long: --search
     short: -s
-    arg: TEXT
+    arg: text
     help: Show only packages that have TEXT in their name
 
   examples:
@@ -143,6 +143,21 @@ commands:
   args:
   - name: repo
     help: Repository name
+
+- name: push
+  help: Perform git push on one or all repositories
+
+  args:
+  - name: repo
+    help: Repository name
+
+  flags:
+  - long: --message
+    short: -m
+    arg: TEXT
+    help: |-
+      Commit message
+      Default: automatic commit
 
 - name: default
   help: Set a default repository

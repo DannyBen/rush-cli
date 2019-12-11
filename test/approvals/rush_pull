@@ -1,4 +1,4 @@
-skip [34m/root/rush-repos/sample-repo[0m (not a git repo)
-pull [32m/root/rush-repos/dannyben/rush-repo[0m
+skip [34msample[0m (not a git repo)
+pull [32mdannyben[0m
 Already up to date.
-skip [34m/root/rush-repos/sample-repo[0m (not a git repo)
+skip [34mdefault[0m (not a git repo)

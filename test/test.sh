@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 source approvals.bash
 
+# before
+git config --global user.email "approval@tester.com"
+git config --global user.name "Approval Tester"
+
 # usage
 approve "rush"
 approve "rush --help"
@@ -42,6 +46,10 @@ approve "rush info sample:hello"
 # pull
 approve "rush pull"
 approve "rush pull -h"
+
+# push
+approve "rush push"
+approve "rush push -h"
 
 # remove
 approve "rush remove"

@@ -31,6 +31,7 @@ rush_usage() {
   echo "  info      Show information about a package"
   echo "  list      Show packages in one or all repositories"
   echo "  pull      Perform git pull on one or all repositories"
+  echo "  push      Perform git push on one or all repositories"
   echo "  default   Set a default repository"
   echo
 
@@ -360,6 +361,42 @@ rush_pull_usage() {
     printf "    Show this help\n"
     echo
 
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  REPO"
+    printf "    Repository name\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_push_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush push - Perform git push on one or all repositories\n"
+    echo 
+  else
+    printf "rush push - Perform git push on one or all repositories\n"
+    echo 
+  fi
+  printf "Usage:\n"
+  printf "  rush push [REPO] [options]\n"
+  printf "  rush push --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --message, -m TEXT"
+    printf "    Commit message\n    Default: automatic commit\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -761,23 +798,53 @@ rush_pull_command() {
   repo=${args[repo]}
   
   pull_repo() {
-    repo_path="$1"
+    local repo_path="$1"
+    local repo="$2"
   
     if [[ -d "$repo_path/.git" ]]; then
-      echo "pull $(green "$repo_path")"
+      echo "pull $(green "$repo")"
       git -C "$repo_path" pull
     else
-      echo "skip $(blue "$repo_path") (not a git repo)"
+      echo "skip $(blue "$repo") (not a git repo)"
     fi
   }
   
   if [[ $repo ]]; then
     repo_path=$(config_get "$repo")
     [[ $repo_path ]] || abort "no such repo: $repo"
-    pull_repo "$repo_path"
+    pull_repo "$repo_path" "$repo"
   else
     for k in $(config_keys); do
-      pull_repo "$(config_get "$k")"
+      pull_repo "$(config_get "$k")" "$k"
+    done
+  fi
+}
+
+# :command.function
+rush_push_command() {
+  # :src/push_command.sh
+  repo=${args[repo]}
+  message=${args[--message]:-"automatic commit"}
+  
+  push_repo() {
+    local repo_path="$1"
+    local repo="$2"
+  
+    if [[ -d "$repo_path/.git" ]]; then
+      echo "push $(green "$repo")"
+      git -C "$repo_path" add . --all && git -C "$repo_path" commit -am "$message" && git -C "$repo_path" push
+    else
+      echo "skip $(blue "$repo") (not a git repo)"
+    fi
+  }
+  
+  if [[ $repo ]]; then
+    repo_path=$(config_get "$repo")
+    [[ $repo_path ]] || abort "no such repo: $repo"
+    push_repo "$repo_path" "$repo"
+  else
+    for k in $(config_keys); do
+      push_repo "$(config_get "$k")" "$k"
     done
   fi
 }
@@ -874,6 +941,13 @@ parse_requirements() {
     action="pull"
     shift
     rush_pull_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  push )
+    action="push"
+    shift
+    rush_push_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1375,6 +1449,65 @@ rush_pull_parse_requirements() {
 }
 
 # :command.parse_requirements
+rush_push_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_push_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="push"
+  # :command.required_args_filter
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+    # :flag.case
+    --message | -m )
+      if [[ $2 && $2 != -* ]]; then
+        args[--message]="$2"
+        shift
+        shift
+      else
+        printf "--message requires an argument: --message, -m TEXT\n"
+        exit 1
+      fi
+      ;;
+  
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+# :command.parse_requirements
 rush_default_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
@@ -1505,6 +1638,14 @@ run() {
       rush_pull_usage
     else
       rush_pull_command
+    fi
+  
+  elif [[ $action == "push" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_push_usage
+    else
+      rush_push_command
     fi
   
   elif [[ $action == "default" ]]; then
