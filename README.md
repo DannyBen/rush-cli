@@ -92,10 +92,11 @@ Commands:
   clone     Clone a GitHub package repository
   remove    Remove a package repository from the configuration
   config    Show the configuration file
-  get       Install a package
+  get       Install a package (default)
   info      Show information about a package
-  list      Show packages in a repository or all repositories
+  list      Show packages in one or all repositories
   pull      Perform git pull on one or all repositories
+  push      Perform git push on one or all repositories
   default   Set a default repository
 
 ```
