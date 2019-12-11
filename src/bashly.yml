@@ -126,7 +126,7 @@ commands:
   flags:
   - long: --search
     short: -s
-    arg: TEXT
+    arg: text
     help: Show only packages that have TEXT in their name
 
   examples:
