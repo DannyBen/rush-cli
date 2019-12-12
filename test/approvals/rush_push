@@ -1,6 +1,7 @@
-skip [34msample[0m (not a git repo)
 push [32mdannyben[0m
 On branch master
 Your branch is up to date with 'origin/master'.
 
 nothing to commit, working tree clean
+skip [34mdefault[0m (not a git repo)
+skip [34msample[0m (not a git repo)
