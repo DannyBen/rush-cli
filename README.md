@@ -60,7 +60,7 @@ $ rush list
 
 # Install (execute) a sample package
 # (All packages in the sample repository only print some messages)
-$ rush get hello sample
+$ rush get sample:hello 
 
 # Optionally, make this repository the default
 $ rush default sample
