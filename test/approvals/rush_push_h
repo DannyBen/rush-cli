@@ -1,4 +1,4 @@
-rush push - Perform git push on one or all repositories
+rush push - Git push one or all repositories
 
 Usage:
   rush push [REPO] [options]

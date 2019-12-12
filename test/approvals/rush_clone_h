@@ -1,7 +1,8 @@
 rush clone
 
   Clone a GitHub package repository
-  This command will clone the repository and add it to the configuration
+  This command clones the repository and registers it in the
+  configuration file.
 
 Usage:
   rush clone GITHUB_USER [PATH] [options]
@@ -20,7 +21,8 @@ Options:
 
 Arguments:
   GITHUB_USER
-    Github user. This user is expected to have a repository named 'rush-repo'.
+    Github user
+    This user is expected to have a repository named 'rush-repo'.
     If you need to use a different name, use the 'user/repo' syntax.
 
   PATH

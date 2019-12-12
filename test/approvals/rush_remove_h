@@ -1,4 +1,7 @@
-rush remove - Remove a package repository from the configuration
+rush remove
+
+  Unregister a local repository
+  This command removes the specified path to the configuration file.
 
 Usage:
   rush remove REPO [options]

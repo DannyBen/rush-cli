@@ -93,6 +93,7 @@ Commands:
   remove    Remove a package repository from the configuration
   config    Show the configuration file
   get       Install a package (default)
+  undo      Uninstall a package
   info      Show information about a package
   list      Show packages in one or all repositories
   pull      Perform git pull on one or all repositories
@@ -110,23 +111,28 @@ Create your own repository, either manually or by using
 [this Github template][sample]. In any case, it is recommended you name your 
 repository **rush-repo**.
 
-To create a repository manyally, follow these steps:
+To create a repository manually, follow these steps:
 
 1. Create a new repository on GitHub, named `rush-repo`.
 2. Each folder you create in this repository is considered a package.
-3. Each package needs to have an executable script named `main`, and
-   optionally a plain text file called `info`.
-4. In the `main` script, you have the environment variable `$REPO` available
-   to you, in case you need it (for example, if you want your script to run 
-   another script in the same repository).
-5. Note that your `main` script is executed in the same folder it lives in,
-   so you can copy files from its directory to wherever they need to be.
-6. The `main` script can be written in any language, as long as it has a
-   shebang line.
+3. Each package needs to have these files:
+   - An executable script named `main` - this will be executed when running
+     `rush get yourpackage`.
+   - A plain text file called `info` (optional) - this will be shown when
+     running `rush info yourpackage`.
+   - An executable script named `undo` (optional) - this will be executed 
+     when running `rush undo yourpackage`.
+4. In the `main` and `undo` scripts, you have the environment variable
+   `$REPO` available to you, in case you need it (for example, if you want
+   your script to run another script in the same repository).
+5. Note that the `main` and `undo` scripts are executed in the same folder it
+   lives in, so you can copy files from its directory to wherever they
+   need to be.
+6. The `main` and `undo` scripts can be written in any language, as long as
+   they have a shebang line.
 
 
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
-

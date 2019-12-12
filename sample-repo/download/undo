@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+rm $OLDPWD/somefile
+echo "Removed 'somefile' from the current directory"
