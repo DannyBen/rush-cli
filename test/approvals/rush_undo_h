@@ -1,11 +1,11 @@
-rush info
+rush undo
 
-  Show information about a package
-  This command shows the info file from the package directory.
+  Uninstall a package
+  This command runs the undo script in the package directory.
 
 Usage:
-  rush info PACKAGE [options]
-  rush info --help | -h
+  rush undo PACKAGE [options]
+  rush undo --help | -h
 
 Options:
   --help, -h
@@ -19,5 +19,5 @@ Arguments:
     'repo:package'.
 
 Examples:
-  rush info ruby
-  rush info centos:ruby
+  rush undo ruby
+  rush undo centos:ruby

@@ -1,4 +1,7 @@
-rush add - Add a local package repository to the configuration
+rush add
+
+  Register a local repository
+  This command adds the specified path to the configuration file.
 
 Usage:
   rush add REPO PATH [options]

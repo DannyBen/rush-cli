@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
-cp somefile ./downloaded
-echo "Saved 'downloaded' in the current directory"
+cp somefile $OLDPWD/somefile
+echo "Saved 'somefile' in the current directory"

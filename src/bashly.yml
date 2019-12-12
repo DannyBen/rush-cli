@@ -4,12 +4,16 @@ version: 0.3.2
 
 environment_variables:
 - name: rush_config
-  help: "Location of the rush config file [default: ~/rush.ini]"
+  help: |-
+    Location of the rush config file
+    Default: ~/rush.ini
 
 commands:
 - name: add
   short: a
-  help: Add a local package repository to the configuration
+  help: |-
+    Register a local repository
+    This command adds the specified path to the configuration file.
 
   args:
   - name: repo
@@ -26,13 +30,15 @@ commands:
 - name: clone
   help: |-
     Clone a GitHub package repository
-    This command will clone the repository and add it to the configuration
+    This command clones the repository and registers it in the
+    configuration file.
 
   args:
   - name: github_user
     required: true
     help: |-
-      Github user. This user is expected to have a repository named 'rush-repo'.
+      Github user
+      This user is expected to have a repository named 'rush-repo'.
       If you need to use a different name, use the 'user/repo' syntax.
 
   - name: path
@@ -59,7 +65,9 @@ commands:
 
 - name: remove
   short: r
-  help: Remove a package repository from the configuration
+  help: |-
+    Unregister a local repository
+    This command removes the specified path to the configuration file.
 
   args:
   - name: repo
@@ -73,18 +81,21 @@ commands:
   flags:
   - long: --edit
     short: -e
-    help: Open the config file for editing
+    help: Open the configuration file for editing
 
 - name: get
   short: g
-  help: Install a package
+  help: |-
+    Install a package
+    This command runs the main script in the package directory.
+
   default: true
 
   args:
   - name: package
     required: true
     help: |-
-      Package name.
+      Package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
@@ -93,15 +104,36 @@ commands:
   - rush get ruby
   - rush get centos:ruby 
 
-- name: info
-  short: i
-  help: Show information about a package
+- name: undo
+  short: u
+  help: |-
+    Uninstall a package
+    This command runs the undo script in the package directory.
 
   args:
   - name: package
     required: true
     help: |-
-      Package name.
+      Package name
+      This can either be the package name without the repository name (in
+      this case, the default repository will be used) or in the form of
+      'repo:package'.
+
+  examples:
+  - rush undo ruby
+  - rush undo centos:ruby 
+
+- name: info
+  short: i
+  help: |-
+    Show information about a package
+    This command shows the info file from the package directory.
+
+  args:
+  - name: package
+    required: true
+    help: |-
+      Package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
@@ -117,7 +149,7 @@ commands:
   args:
   - name: repo_or_package
     help: |-
-      Repository name or package name.
+      Repository name or package name
       - Leave blank to show all packages in all repositories.
       - Provide a repository name to show only packages in this repository.
       - Provide a package name (may be in the form of 'repo:package') to
@@ -138,14 +170,14 @@ commands:
 
 - name: pull
   short: p
-  help: Perform git pull on one or all repositories
+  help: Git pull one or all repositories
 
   args:
   - name: repo
     help: Repository name
 
 - name: push
-  help: Perform git push on one or all repositories
+  help: Git push one or all repositories
 
   args:
   - name: repo
@@ -160,9 +192,15 @@ commands:
       Default: automatic commit
 
 - name: default
-  help: Set a default repository
+  help: |-
+    Set a default repository
+    This command adds (or updates) a repository named 'default' to the
+    configuration file, and copies the path from the provided repo.
 
   args:
   - name: repo
     required: true
     help: Repository name
+
+  examples:
+  - rush default sample

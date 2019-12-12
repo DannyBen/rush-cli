@@ -1,4 +1,7 @@
-rush get - Install a package
+rush get
+
+  Install a package
+  This command runs the main script in the package directory.
 
 Usage:
   rush get PACKAGE [options]
@@ -10,7 +13,7 @@ Options:
 
 Arguments:
   PACKAGE
-    Package name.
+    Package name
     This can either be the package name without the repository name (in
     this case, the default repository will be used) or in the form of
     'repo:package'.

@@ -34,8 +34,15 @@ approve "rush default sample"
 approve "rush get"
 approve "rush get -h"
 approve "rush get hello"
+approve "rush get download"
 approve "rush get sample:hello"
 approve "rush hello"
+
+# undo
+approve "rush undo"
+approve "rush undo -h"
+approve "rush undo download"
+approve "rush undo sample:download"
 
 # info
 approve "rush info"

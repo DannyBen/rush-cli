@@ -1,4 +1,4 @@
-rush pull - Perform git pull on one or all repositories
+rush pull - Git pull one or all repositories
 
 Usage:
   rush pull [REPO] [options]
