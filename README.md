@@ -126,8 +126,8 @@ To create a repository manually, follow these steps:
    `$REPO` available to you, in case you need it (for example, if you want
    your script to run another script in the same repository).
 5. Note that the `main` and `undo` scripts are executed in the same folder it
-   lives in, so you can copy files from its directory to wherever they
-   need to be.
+   lives in, so you can copy files from the package's directory to wherever
+   they need to be.
 6. The `main` and `undo` scripts can be written in any language, as long as
    they have a shebang line.
 
