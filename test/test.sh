@@ -31,6 +31,7 @@ approve "rush default -h"
 approve "rush default sample"
 
 # get
+approve "rush add sample ~/rush-repos/sample-repo"
 approve "rush get"
 approve "rush get -h"
 approve "rush get hello"

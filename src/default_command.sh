@@ -6,4 +6,5 @@ repo_path=$(config_get "$repo")
 [[ $repo_path ]] || abort "repo not found: $repo"
 
 config_set "default" "$repo_path"
+config_del "$repo"
 echo "default $(green "$repo")"

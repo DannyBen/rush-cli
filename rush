@@ -910,6 +910,7 @@ rush_pull_command() {
 # :command.function
 rush_push_command() {
   # :src/push_command.sh
+  set +e
   repo=${args[repo]}
   message=${args[--message]:-"automatic commit"}
   
@@ -947,6 +948,7 @@ rush_default_command() {
   [[ $repo_path ]] || abort "repo not found: $repo"
   
   config_set "default" "$repo_path"
+  config_del "$repo"
   echo "default $(green "$repo")"
 }
 

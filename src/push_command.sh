@@ -1,3 +1,4 @@
+set +e
 repo=${args[repo]}
 message=${args[--message]:-"automatic commit"}
 
