@@ -8,8 +8,8 @@ Options:
   --help, -h
     Show this help
 
-  --search, -s TEXT
-    Show only packages that have TEXT in their name
+  --simple, -s
+    Show only package names
 
 Arguments:
   REPO_OR_PACKAGE
@@ -24,4 +24,4 @@ Examples:
   rush list personal:apps
   rush list personal
   rush list apps
-  rush list apps --search graphviz
+  rush list apps --simple

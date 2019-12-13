@@ -1,7 +1,22 @@
-show_repo_list() {
+list_display_item() {
+  package="$1"
+  infofile="$2"
+  repo="$3"
+  simple=${args[--simple]}
+
+  [[ "$repo" != "default" ]] && package="$repo:$package"
+  if [[ $simple ]]; then
+    printf "%s\n" "$package"
+  else
+    info=$(head -1 "$infofile" 2> /dev/null)
+    printf "%s\n%s\n\n" "$(green "$package")" "$info"
+  fi
+}
+
+list_show_repo() {
   repo_or_package="$1"
   search="${args[--search]}"
-  repo="$1"
+  repo="$repo_or_package"
 
   if [[ $repo_or_package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
@@ -16,8 +31,6 @@ show_repo_list() {
     repo_path=$(config_get "$repo")
   fi
 
-  green "$repo:"
-
   if [[ $package ]]; then
     glob=( "$repo_path"/"$package"/*/info )
   else
@@ -27,10 +40,9 @@ show_repo_list() {
   if [[ ${glob[0]} =~ \* ]]; then
     infofile="$repo_path/$package/info"
     if [[ -f "$infofile" ]]; then
-      info=$(head -1 "$infofile" 2> /dev/null)
-      printf "  %-26s $info\n" "$(blue "$package")"
+      list_display_item "$package" "$infofile" "$repo"
     else
-      red "  no matches"
+      red "no matches"
     fi
   
   else
@@ -43,21 +55,18 @@ show_repo_list() {
 
       if [[ $infofile =~ $regex ]]; then
         package_name="${BASH_REMATCH[1]}"
-        info=$(head -1 "$infofile" 2> /dev/null)
-        printf "  %-26s $info\n" "$(blue "$package_name")"
+        list_display_item "$package_name" "$infofile" "$repo"
       fi
     done
   fi
-
-  echo
 }
 
 repo_or_package=${args[repo_or_package]}
 
 if [[ $repo_or_package ]]; then
-  show_repo_list "$repo_or_package"
+  list_show_repo "$repo_or_package"
 else
   for k in $(config_keys); do
-    show_repo_list "$k"
+    list_show_repo "$k"
   done
 fi

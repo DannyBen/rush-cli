@@ -67,8 +67,16 @@ approve "rush remove dannyben"
 # list
 approve "rush list -h"
 approve "rush list"
+approve "rush list --simple"
 approve "rush list hello"
 approve "rush list sample"
 approve "rush list nested"
 approve "rush list sample:nested"
 approve "rush list no-such-package"
+
+# search
+approve "rush search"
+approve "rush search -h"
+approve "rush search running"
+apk del grep >/dev/null 2>&1
+approve "rush search busybox-error"
