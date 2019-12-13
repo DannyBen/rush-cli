@@ -16,6 +16,7 @@ search_repo() {
   # Search info files matching search text
   grep --color=always --initial-tab --recursive --ignore-case --include "info" \
     "$text" "$repo_path" | \
+    sort | \
     sed "s#${repo_path}/#${prefix}#g" | sed 's#/info##'
 
   echo

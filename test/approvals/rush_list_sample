@@ -8,4 +8,4 @@ Shows how a script can copy files from its own folder
 This is a simple example.
 
 [32msample:nested[0m
-Nested packages (show with 'rush list --deep')
+Nested packages (show with 'rush list nested')
