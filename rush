@@ -31,6 +31,7 @@ rush_usage() {
   echo "  undo      Uninstall a package"
   echo "  info      Show information about a package"
   echo "  list      Show packages in one or all repositories"
+  echo "  search    Search in package names and info files"
   echo "  pull      Git pull one or all repositories"
   echo "  push      Git push one or all repositories"
   echo "  default   Set a default repository"
@@ -366,8 +367,8 @@ rush_list_usage() {
     echo
     # :command.usage_flags
     # :flag.usage
-    echo "  --search, -s TEXT"
-    printf "    Show only packages that have TEXT in their name\n"
+    echo "  --simple, -s"
+    printf "    Show only package names\n"
     echo
     # :command.usage_args
     printf "Arguments:\n"
@@ -384,7 +385,39 @@ rush_list_usage() {
     printf "  rush list personal:apps\n"
     printf "  rush list personal\n"
     printf "  rush list apps\n"
-    printf "  rush list apps --search graphviz\n"
+    printf "  rush list apps --simple\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_search_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush search - Search in package names and info files\n"
+    echo 
+  else
+    printf "rush search - Search in package names and info files\n"
+    echo 
+  fi
+  printf "Usage:\n"
+  printf "  rush search TEXT [options]\n"
+  printf "  rush search --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  TEXT"
+    printf "    Text to search for\n"
     echo
 
   fi
@@ -662,6 +695,11 @@ config_keys() {
   echo "${keys[@]}"
 }
 
+# :src/lib/is_busybox_grep.sh
+is_busybox_grep() {
+  grep --version 2>&1 /dev/null | grep -i busybox > /dev/null 2>&1
+}
+
 # :command.command_functions
 # :command.function
 rush_add_command() {
@@ -814,10 +852,25 @@ rush_info_command() {
 # :command.function
 rush_list_command() {
   # :src/list_command.sh
-  show_repo_list() {
+  list_display_item() {
+    package="$1"
+    infofile="$2"
+    repo="$3"
+    simple=${args[--simple]}
+  
+    [[ "$repo" != "default" ]] && package="$repo:$package"
+    if [[ $simple ]]; then
+      printf "%s\n" "$package"
+    else
+      info=$(head -1 "$infofile" 2> /dev/null)
+      printf "%s\n%s\n\n" "$(green "$package")" "$info"
+    fi
+  }
+  
+  list_show_repo() {
     repo_or_package="$1"
     search="${args[--search]}"
-    repo="$1"
+    repo="$repo_or_package"
   
     if [[ $repo_or_package =~ (.*):(.*) ]]; then
       repo=${BASH_REMATCH[1]}
@@ -832,8 +885,6 @@ rush_list_command() {
       repo_path=$(config_get "$repo")
     fi
   
-    green "$repo:"
-  
     if [[ $package ]]; then
       glob=( "$repo_path"/"$package"/*/info )
     else
@@ -843,10 +894,9 @@ rush_list_command() {
     if [[ ${glob[0]} =~ \* ]]; then
       infofile="$repo_path/$package/info"
       if [[ -f "$infofile" ]]; then
-        info=$(head -1 "$infofile" 2> /dev/null)
-        printf "  %-26s $info\n" "$(blue "$package")"
+        list_display_item "$package" "$infofile" "$repo"
       else
-        red "  no matches"
+        red "no matches"
       fi
     
     else
@@ -859,24 +909,58 @@ rush_list_command() {
   
         if [[ $infofile =~ $regex ]]; then
           package_name="${BASH_REMATCH[1]}"
-          info=$(head -1 "$infofile" 2> /dev/null)
-          printf "  %-26s $info\n" "$(blue "$package_name")"
+          list_display_item "$package_name" "$infofile" "$repo"
         fi
       done
     fi
-  
-    echo
   }
   
   repo_or_package=${args[repo_or_package]}
   
   if [[ $repo_or_package ]]; then
-    show_repo_list "$repo_or_package"
+    list_show_repo "$repo_or_package"
   else
     for k in $(config_keys); do
-      show_repo_list "$k"
+      list_show_repo "$k"
     done
   fi
+}
+
+# :command.function
+rush_search_command() {
+  # :src/search_command.sh
+  search_repo() {
+    repo="$1"
+    text="$2"
+    set +e
+  
+    repo_path=$(config_get "$repo")
+  
+    # Add "repo:" to the result unless it is the default
+    prefix=''
+    [[ "$repo" != "default" ]] && prefix="$repo:"
+  
+    # Search directories matching search text
+    find "$repo_path" -type d | grep --color=always "$text" | \
+      sed "s#${repo_path}/#${prefix}#g" | sed 's#/info##'
+  
+    # Search info files matching search text
+    grep --color=always --initial-tab --recursive --ignore-case --include "info" \
+      "$text" "$repo_path" | \
+      sed "s#${repo_path}/#${prefix}#g" | sed 's#/info##'
+  
+    echo
+  }
+  
+  if is_busybox_grep; then
+    abort "Cannot run with BusyBox grep.\nPlease install GNU grep:\napk add --no-cache grep"
+  fi
+  
+  text=${args[text]}
+  
+  for k in $(config_keys); do
+    search_repo "$k" "$text"
+  done
 }
 
 # :command.function
@@ -1030,6 +1114,13 @@ parse_requirements() {
     action="list"
     shift
     rush_list_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  search | s )
+    action="search"
+    shift
+    rush_search_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1519,15 +1610,9 @@ rush_list_parse_requirements() {
     key="$1"
     case "$key" in
     # :flag.case
-    --search | -s )
-      if [[ $2 && $2 != -* ]]; then
-        args[--search]="$2"
-        shift
-        shift
-      else
-        printf "--search requires an argument: --search, -s TEXT\n"
-        exit 1
-      fi
+    --simple | -s )
+      args[--simple]=1
+      shift
       ;;
   
   
@@ -1540,6 +1625,60 @@ rush_list_parse_requirements() {
       # :command.parse_requirements_case
       if [[ ! ${args[repo_or_package]} ]]; then
         args[repo_or_package]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+# :command.parse_requirements
+rush_search_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_search_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="search"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[text]=$1
+    shift
+  else
+    printf "missing required argument: TEXT\nusage: rush search TEXT [options]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[text]} ]]; then
+        args[text]=$1
         shift
       else
         printf "invalid argument: %s\n" "$key"
@@ -1788,6 +1927,14 @@ run() {
       rush_list_usage
     else
       rush_list_command
+    fi
+  
+  elif [[ $action == "search" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_search_usage
+    else
+      rush_search_command
     fi
   
   elif [[ $action == "pull" ]]; then

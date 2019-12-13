@@ -156,17 +156,25 @@ commands:
         show nested packages.
 
   flags:
-  - long: --search
+  - long: --simple
     short: -s
-    arg: text
-    help: Show only packages that have TEXT in their name
+    help: Show only package names
 
   examples:
   - rush list
   - rush list personal:apps
   - rush list personal
   - rush list apps
-  - rush list apps --search graphviz
+  - rush list apps --simple
+
+- name: search
+  short: s
+  help: Search in package names and info files
+
+  args:
+  - name: text
+    help: Text to search for
+    required: true
 
 - name: pull
   short: p

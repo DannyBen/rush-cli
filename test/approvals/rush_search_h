@@ -1,0 +1,13 @@
+rush search - Search in package names and info files
+
+Usage:
+  rush search TEXT [options]
+  rush search --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  TEXT
+    Text to search for

@@ -118,8 +118,8 @@ To create a repository manually, follow these steps:
 3. Each package needs to have these files:
    - An executable script named `main` - this will be executed when running
      `rush get yourpackage`.
-   - A plain text file called `info` (optional) - this will be shown when
-     running `rush info yourpackage`.
+   - A plain text file called `info` - this will be shown when running
+     `rush info yourpackage`.
    - An executable script named `undo` (optional) - this will be executed 
      when running `rush undo yourpackage`.
 4. In the `main` and `undo` scripts, you have the environment variable

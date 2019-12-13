@@ -1,0 +1,13 @@
+[01;31m[Knested[m[K
+[01;31m[Knested[m[K/hi
+[35m[Knested/hi[m[K[36m[K:[m[K	Shows how to use [01;31m[Knested[m[K folders
+[35m[Knested/hi[m[K[36m[K:[m[K	  $ rush info [01;31m[Knested[m[K/hi
+[35m[Knested/hi[m[K[36m[K:[m[K	  $ rush get [01;31m[Knested[m[K/hi
+[35m[Knested[m[K[36m[K:[m[K	[01;31m[KNested[m[K packages (show with 'rush list --deep')
+
+sample:[01;31m[Knested[m[K
+sample:[01;31m[Knested[m[K/hi
+[35m[Ksample:nested/hi[m[K[36m[K:[m[K	Shows how to use [01;31m[Knested[m[K folders
+[35m[Ksample:nested/hi[m[K[36m[K:[m[K	  $ rush info [01;31m[Knested[m[K/hi
+[35m[Ksample:nested/hi[m[K[36m[K:[m[K	  $ rush get [01;31m[Knested[m[K/hi
+[35m[Ksample:nested[m[K[36m[K:[m[K	[01;31m[KNested[m[K packages (show with 'rush list --deep')

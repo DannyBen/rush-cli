@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk --no-cache add bash git diffutils
+RUN apk --no-cache add bash git diffutils grep
 
 ENV PS1 "\n\n>> rush \W \$ "
 

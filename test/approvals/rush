@@ -14,6 +14,7 @@ Commands:
   undo      Uninstall a package
   info      Show information about a package
   list      Show packages in one or all repositories
+  search    Search in package names and info files
   pull      Git pull one or all repositories
   push      Git push one or all repositories
   default   Set a default repository
