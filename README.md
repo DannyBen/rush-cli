@@ -88,16 +88,17 @@ Usage:
   rush --version
 
 Commands:
-  add       Add a local package repository to the configuration
+  add       Register a local repository
   clone     Clone a GitHub package repository
-  remove    Remove a package repository from the configuration
+  remove    Unregister a local repository
   config    Show the configuration file
   get       Install a package (default)
   undo      Uninstall a package
   info      Show information about a package
   list      Show packages in one or all repositories
-  pull      Perform git pull on one or all repositories
-  push      Perform git push on one or all repositories
+  search    Search in package names and info files
+  pull      Git pull one or all repositories
+  push      Git push one or all repositories
   default   Set a default repository
 
 ```
@@ -136,3 +137,4 @@ To create a repository manually, follow these steps:
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
+
