@@ -58,7 +58,7 @@ user_approval() {
   local actual="$2"
   local approval_file="$3"
 
-  if [[ $CI ]]; then
+  if [[ -v CI ]]; then
     red "\rFAIL $cmd"
     exit 1
   fi
