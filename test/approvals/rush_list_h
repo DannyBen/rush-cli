@@ -1,5 +1,7 @@
 rush list - Show packages in one or all repositories
 
+Shortcut: l
+
 Usage:
   rush list [REPO_OR_PACKAGE] [options]
   rush list --help | -h

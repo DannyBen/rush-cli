@@ -16,6 +16,7 @@ rush_usage() {
     printf "rush - Personal package manager\n"
     echo 
   fi
+
   printf "Usage:\n"
   printf "  rush [command] [options]\n"
   printf "  rush [command] --help | -h\n"
@@ -69,6 +70,10 @@ rush_add_usage() {
     printf "rush add - Register a local repository\n"
     echo 
   fi
+
+  printf "Shortcut: a\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush add REPO PATH [options]\n"
   printf "  rush add --help | -h\n"
@@ -114,6 +119,7 @@ rush_clone_usage() {
     printf "rush clone - Clone a GitHub package repository\n"
     echo 
   fi
+
   printf "Usage:\n"
   printf "  rush clone GITHUB_USER [PATH] [options]\n"
   printf "  rush clone --help | -h\n"
@@ -170,6 +176,10 @@ rush_remove_usage() {
     printf "rush remove - Unregister a local repository\n"
     echo 
   fi
+
+  printf "Shortcut: r\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush remove REPO [options]\n"
   printf "  rush remove --help | -h\n"
@@ -202,6 +212,10 @@ rush_config_usage() {
     printf "rush config - Show the configuration file\n"
     echo 
   fi
+
+  printf "Shortcut: c\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush config [options]\n"
   printf "  rush config --help | -h\n"
@@ -233,6 +247,10 @@ rush_get_usage() {
     printf "rush get - Install a package\n"
     echo 
   fi
+
+  printf "Shortcut: g\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush get PACKAGE [options]\n"
   printf "  rush get --help | -h\n"
@@ -274,6 +292,10 @@ rush_undo_usage() {
     printf "rush undo - Uninstall a package\n"
     echo 
   fi
+
+  printf "Shortcut: u\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush undo PACKAGE [options]\n"
   printf "  rush undo --help | -h\n"
@@ -315,6 +337,10 @@ rush_info_usage() {
     printf "rush info - Show information about a package\n"
     echo 
   fi
+
+  printf "Shortcut: i\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush info PACKAGE [options]\n"
   printf "  rush info --help | -h\n"
@@ -354,6 +380,10 @@ rush_list_usage() {
     printf "rush list - Show packages in one or all repositories\n"
     echo 
   fi
+
+  printf "Shortcut: l\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush list [REPO_OR_PACKAGE] [options]\n"
   printf "  rush list --help | -h\n"
@@ -400,6 +430,10 @@ rush_search_usage() {
     printf "rush search - Search in package names and info files\n"
     echo 
   fi
+
+  printf "Shortcut: s\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush search TEXT [options]\n"
   printf "  rush search --help | -h\n"
@@ -432,6 +466,10 @@ rush_pull_usage() {
     printf "rush pull - Git pull one or all repositories\n"
     echo 
   fi
+
+  printf "Shortcut: p\n"
+  echo
+
   printf "Usage:\n"
   printf "  rush pull [REPO] [options]\n"
   printf "  rush pull --help | -h\n"
@@ -464,6 +502,7 @@ rush_push_usage() {
     printf "rush push - Git push one or all repositories\n"
     echo 
   fi
+
   printf "Usage:\n"
   printf "  rush push [REPO] [options]\n"
   printf "  rush push --help | -h\n"
@@ -502,6 +541,7 @@ rush_default_usage() {
     printf "rush default - Set a default repository\n"
     echo 
   fi
+
   printf "Usage:\n"
   printf "  rush default REPO [options]\n"
   printf "  rush default --help | -h\n"

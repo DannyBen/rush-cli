@@ -3,6 +3,8 @@ rush get
   Install a package
   This command runs the main script in the package directory.
 
+Shortcut: g
+
 Usage:
   rush get PACKAGE [options]
   rush get --help | -h
