@@ -3,6 +3,8 @@ rush undo
   Uninstall a package
   This command runs the undo script in the package directory.
 
+Shortcut: u
+
 Usage:
   rush undo PACKAGE [options]
   rush undo --help | -h

@@ -1,5 +1,7 @@
 rush search - Search in package names and info files
 
+Shortcut: s
+
 Usage:
   rush search TEXT [options]
   rush search --help | -h

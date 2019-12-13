@@ -1,5 +1,7 @@
 rush config - Show the configuration file
 
+Shortcut: c
+
 Usage:
   rush config [options]
   rush config --help | -h
