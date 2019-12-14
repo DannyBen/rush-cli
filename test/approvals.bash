@@ -1,7 +1,9 @@
-# Interactive approval testing for Bash.
-# Author: Danny Ben Shitrit (https://github.com/dannyben)
+# approvals.bash v0.2.1
 #
-# This utility will compare the output of a command with an expected output
+# Interactive approval testing for Bash.
+# https://github.com/DannyBen/approvals.bash
+#
+# This script will compare the output of a command with an expected output
 # stored in the approvals folder.
 # 
 # - When the approval file does not exist, the actual output will be shown to
@@ -20,8 +22,8 @@
 #   approve <command> [<approval file name>]
 #
 # Exapmple
-#   approve "ls -la"
-#   approve "ls -la" "ls"
+#   approve "ls -s"
+#   approve "ls -s" "ls_size"
 #
 approve() {
   local expected approval approval_file actual cmd
@@ -36,19 +38,20 @@ approve() {
   if [[ -f "$approval_file" ]]; then
     expected=$(cat "$approval_file")
   else
-    echo "--- [$(blue "$cmd")] ---"
+    echo "--- [$(blue "new: $cmd")] ---"
     printf "%b\n" "$actual"
-    echo "--- [$(blue "$cmd")] ---"
+    echo "--- [$(blue "new: $cmd")] ---"
     expected="$actual"
     user_approval "$cmd" "$actual" "$approval_file"
+    return
   fi
 
   if [[ "$(printf "%b" "$actual")" = "$(printf "%b" "$expected")" ]]; then
     green "\rPASS $cmd"
   else
-    echo "--- [$(blue "$cmd")] ---"
-    diff --unified --color=always <(printf "%b" "$expected\n") <(printf "%b" "$actual\n" )  | tail -n +4
-    echo "--- [$(blue "$cmd")] ---"
+    echo "--- [$(blue "diff: $cmd")] ---"
+    $diff_cmd <(printf "%b" "$expected\n") <(printf "%b" "$actual\n" )  | tail -n +4
+    echo "--- [$(blue "diff: $cmd")] ---"
     user_approval "$cmd" "$actual" "$approval_file"
   fi
 }
@@ -78,3 +81,9 @@ user_approval() {
 red() { printf "\e[31m%b\e[0m\n" "$*"; }
 green() { printf "\e[32m%b\e[0m\n" "$*"; }
 blue() { printf "\e[34m%b\e[0m\n" "$*"; }
+
+if diff --help | grep -- --color > /dev/null 2>&1; then
+  diff_cmd="diff --unified --color"
+else
+  diff_cmd="diff --unified"
+fi

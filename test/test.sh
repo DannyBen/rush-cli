@@ -50,6 +50,8 @@ approve "rush info"
 approve "rush info -h"
 approve "rush info hello"
 approve "rush info sample:hello"
+approve "rush info hello --extended"
+approve "rush info download -x"
 
 # pull
 approve "rush pull"

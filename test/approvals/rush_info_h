@@ -13,6 +13,9 @@ Options:
   --help, -h
     Show this help
 
+  --extended, -x
+    Show source code for the main and undo scripts
+
 Arguments:
   PACKAGE
     Package name
