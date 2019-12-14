@@ -138,6 +138,11 @@ commands:
       this case, the default repository will be used) or in the form of
       'repo:package'.
 
+  flags:
+  - long: --extended
+    short: -x
+    help: Show source code for the main and undo scripts
+
   examples:
   - rush info ruby
   - rush info centos:ruby

@@ -1,0 +1,13 @@
+[32minfo:[0m
+This is a simple example.
+
+It just tests that rush is connecting to the repository properly, and
+receives the environment variables.
+
+This info file can be accessed by running
+
+  $ rush info hello
+
+[32mmain:[0m
+#!/usr/bin/env bash
+echo "What's the rush? (hello from $REPO)"
