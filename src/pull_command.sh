@@ -6,7 +6,7 @@ pull_repo() {
 
   if [[ -d "$repo_path/.git" ]]; then
     echo "pull $(green "$repo")"
-    git -C "$repo_path" pull
+    ( cd "$repo_path" && git pull )
   else
     echo "skip $(blue "$repo") (not a git repo)"
   fi

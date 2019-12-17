@@ -8,7 +8,7 @@ push_repo() {
 
   if [[ -d "$repo_path/.git" ]]; then
     echo "push $(green "$repo")"
-    git -C "$repo_path" add . --all && git -C "$repo_path" commit -am "$message" && git -C "$repo_path" push
+    ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
   else
     echo "skip $(blue "$repo") (not a git repo)"
   fi
