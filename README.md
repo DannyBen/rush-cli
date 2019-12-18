@@ -12,7 +12,7 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 /_/      Personal Package Manager
 ```
 
-![Version](https://img.shields.io/badge/version-0.3.7-blue.svg)
+![Version](https://img.shields.io/badge/version-0.3.8-blue.svg)
 [![Build Status](https://travis-ci.com/DannyBen/rush-cli.svg?branch=master)](https://travis-ci.com/DannyBen/rush-cli)
 
 </div>
@@ -123,9 +123,10 @@ To create a repository manually, follow these steps:
      `rush info yourpackage`.
    - An executable script named `undo` (optional) - this will be executed 
      when running `rush undo yourpackage`.
-4. In the `main` and `undo` scripts, you have the environment variable
-   `$REPO` available to you, in case you need it (for example, if you want
-   your script to run another script in the same repository).
+4. In the `main` and `undo` scripts, you have the environment variables
+   `$REPO` and `$REPO_PATH` available to you, in case you need it (for
+   example, if you want your script to run another script in the same
+   repository).
 5. Note that the `main` and `undo` scripts are executed in the same folder it
    lives in, so you can copy files from the package's directory to wherever
    they need to be.
