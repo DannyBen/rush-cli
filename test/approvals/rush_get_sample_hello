@@ -1,2 +1,4 @@
 run [32msample:hello[0m
-What's the rush? (hello from sample)
+What's the rush?
+REPO:      sample
+REPO_PATH: /root/rush-repos/sample-repo

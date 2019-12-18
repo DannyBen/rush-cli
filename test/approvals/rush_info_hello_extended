@@ -10,4 +10,6 @@ This info file can be accessed by running
 
 [32mmain:[0m
 #!/usr/bin/env bash
-echo "What's the rush? (hello from $REPO)"
+echo "What's the rush?"
+echo "REPO:      $REPO"
+echo "REPO_PATH: $REPO_PATH"
