@@ -87,19 +87,25 @@ Usage:
   rush [command] --help | -h
   rush --version
 
-Commands:
+Repository Commands:
   add       Register a local repository
-  clone     Clone a GitHub package repository
   remove    Unregister a local repository
+
+Git Commands:
+  clone     Clone a GitHub package repository
+  pull      Git pull one or all repositories
+  push      Git push one or all repositories
+
+Config Commands:
   config    Show the configuration file
+  default   Set a default repository
+
+Package Commands:
   get       Install a package (default)
   undo      Uninstall a package
   info      Show information about a package
   list      Show packages in one or all repositories
   search    Search in package names and info files
-  pull      Git pull one or all repositories
-  push      Git push one or all repositories
-  default   Set a default repository
 
 ```
 

@@ -23,19 +23,22 @@ rush_usage() {
   printf "  rush --version\n"
   echo
   # :command.usage_commands
-  printf "Commands:\n"
+  printf "Repository Commands:\n"
   echo "  add       Register a local repository"
-  echo "  clone     Clone a GitHub package repository"
   echo "  remove    Unregister a local repository"
+  printf "\nGit Commands:\n"
+  echo "  clone     Clone a GitHub package repository"
+  echo "  pull      Git pull one or all repositories"
+  echo "  push      Git push one or all repositories"
+  printf "\nConfig Commands:\n"
   echo "  config    Show the configuration file"
+  echo "  default   Set a default repository"
+  printf "\nPackage Commands:\n"
   echo "  get       Install a package (default)"
   echo "  undo      Uninstall a package"
   echo "  info      Show information about a package"
   echo "  list      Show packages in one or all repositories"
   echo "  search    Search in package names and info files"
-  echo "  pull      Git pull one or all repositories"
-  echo "  push      Git push one or all repositories"
-  echo "  default   Set a default repository"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -109,6 +112,44 @@ rush_add_usage() {
 }
 
 # :command.usage
+rush_remove_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush remove\n"
+    echo 
+    printf "  Unregister a local repository\n  This command removes the specified path to the configuration file.\n"
+    echo 
+  else
+    printf "rush remove - Unregister a local repository\n"
+    echo 
+  fi
+
+  printf "Shortcut: r\n"
+  echo
+
+  printf "Usage:\n"
+  printf "  rush remove REPO [options]\n"
+  printf "  rush remove --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  REPO"
+    printf "    Repository name\n"
+    echo
+
+  fi
+}
+
+# :command.usage
 rush_clone_usage() {
   if [[ -n $long_usage ]]; then
     printf "rush clone\n"
@@ -166,23 +207,21 @@ rush_clone_usage() {
 }
 
 # :command.usage
-rush_remove_usage() {
+rush_pull_usage() {
   if [[ -n $long_usage ]]; then
-    printf "rush remove\n"
-    echo 
-    printf "  Unregister a local repository\n  This command removes the specified path to the configuration file.\n"
+    printf "rush pull - Git pull one or all repositories\n"
     echo 
   else
-    printf "rush remove - Unregister a local repository\n"
+    printf "rush pull - Git pull one or all repositories\n"
     echo 
   fi
 
-  printf "Shortcut: r\n"
+  printf "Shortcut: p\n"
   echo
 
   printf "Usage:\n"
-  printf "  rush remove REPO [options]\n"
-  printf "  rush remove --help | -h\n"
+  printf "  rush pull [REPO] [options]\n"
+  printf "  rush pull --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -192,6 +231,43 @@ rush_remove_usage() {
     printf "    Show this help\n"
     echo
 
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  REPO"
+    printf "    Repository name\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_push_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush push - Git push one or all repositories\n"
+    echo 
+  else
+    printf "rush push - Git push one or all repositories\n"
+    echo 
+  fi
+
+  printf "Usage:\n"
+  printf "  rush push [REPO] [options]\n"
+  printf "  rush push --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --message, -m TEXT"
+    printf "    Commit message\n    Default: automatic commit\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -231,6 +307,47 @@ rush_config_usage() {
     # :flag.usage
     echo "  --edit, -e"
     printf "    Open the configuration file for editing\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_default_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush default\n"
+    echo 
+    printf "  Set a default repository\n  This command adds (or updates) a repository named 'default' to the\n  configuration file, and copies the path from the provided repo.\n"
+    echo 
+  else
+    printf "rush default - Set a default repository\n"
+    echo 
+  fi
+
+  printf "Usage:\n"
+  printf "  rush default REPO [options]\n"
+  printf "  rush default --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  REPO"
+    printf "    Repository name\n"
+    echo
+
+    # :command.usage_examples
+    printf "Examples:\n"
+    
+    printf "  rush default sample\n"
     echo
 
   fi
@@ -461,120 +578,6 @@ rush_search_usage() {
   fi
 }
 
-# :command.usage
-rush_pull_usage() {
-  if [[ -n $long_usage ]]; then
-    printf "rush pull - Git pull one or all repositories\n"
-    echo 
-  else
-    printf "rush pull - Git pull one or all repositories\n"
-    echo 
-  fi
-
-  printf "Shortcut: p\n"
-  echo
-
-  printf "Usage:\n"
-  printf "  rush pull [REPO] [options]\n"
-  printf "  rush pull --help | -h\n"
-  echo
-
-  if [[ -n $long_usage ]]; then
-    printf "Options:\n"
-    # :command.usage_fixed_flags
-    echo "  --help, -h"
-    printf "    Show this help\n"
-    echo
-
-    # :command.usage_args
-    printf "Arguments:\n"
-    
-    # :argument.usage
-    echo "  REPO"
-    printf "    Repository name\n"
-    echo
-
-  fi
-}
-
-# :command.usage
-rush_push_usage() {
-  if [[ -n $long_usage ]]; then
-    printf "rush push - Git push one or all repositories\n"
-    echo 
-  else
-    printf "rush push - Git push one or all repositories\n"
-    echo 
-  fi
-
-  printf "Usage:\n"
-  printf "  rush push [REPO] [options]\n"
-  printf "  rush push --help | -h\n"
-  echo
-
-  if [[ -n $long_usage ]]; then
-    printf "Options:\n"
-    # :command.usage_fixed_flags
-    echo "  --help, -h"
-    printf "    Show this help\n"
-    echo
-    # :command.usage_flags
-    # :flag.usage
-    echo "  --message, -m TEXT"
-    printf "    Commit message\n    Default: automatic commit\n"
-    echo
-    # :command.usage_args
-    printf "Arguments:\n"
-    
-    # :argument.usage
-    echo "  REPO"
-    printf "    Repository name\n"
-    echo
-
-  fi
-}
-
-# :command.usage
-rush_default_usage() {
-  if [[ -n $long_usage ]]; then
-    printf "rush default\n"
-    echo 
-    printf "  Set a default repository\n  This command adds (or updates) a repository named 'default' to the\n  configuration file, and copies the path from the provided repo.\n"
-    echo 
-  else
-    printf "rush default - Set a default repository\n"
-    echo 
-  fi
-
-  printf "Usage:\n"
-  printf "  rush default REPO [options]\n"
-  printf "  rush default --help | -h\n"
-  echo
-
-  if [[ -n $long_usage ]]; then
-    printf "Options:\n"
-    # :command.usage_fixed_flags
-    echo "  --help, -h"
-    printf "    Show this help\n"
-    echo
-
-    # :command.usage_args
-    printf "Arguments:\n"
-    
-    # :argument.usage
-    echo "  REPO"
-    printf "    Repository name\n"
-    echo
-
-    # :command.usage_examples
-    printf "Examples:\n"
-    
-    printf "  rush default sample\n"
-    echo
-
-  fi
-}
-
 # :command.inspect_args
 inspect_args() {
   echo args:
@@ -756,6 +759,14 @@ rush_add_command() {
 }
 
 # :command.function
+rush_remove_command() {
+  # :src/remove_command.sh
+  repo=${args[repo]}
+  config_del "$repo"
+  echo "remove $(green "$repo")"
+}
+
+# :command.function
 rush_clone_command() {
   # :src/clone_command.sh
   # Collect variables
@@ -791,11 +802,61 @@ rush_clone_command() {
 }
 
 # :command.function
-rush_remove_command() {
-  # :src/remove_command.sh
+rush_pull_command() {
+  # :src/pull_command.sh
   repo=${args[repo]}
-  config_del "$repo"
-  echo "remove $(green "$repo")"
+  
+  pull_repo() {
+    local repo_path="$1"
+    local repo="$2"
+  
+    if [[ -d "$repo_path/.git" ]]; then
+      echo "pull $(green "$repo")"
+      ( cd "$repo_path" && git pull )
+    else
+      echo "skip $(blue "$repo") (not a git repo)"
+    fi
+  }
+  
+  if [[ $repo ]]; then
+    repo_path=$(config_get "$repo")
+    [[ $repo_path ]] || abort "no such repo: $repo"
+    pull_repo "$repo_path" "$repo"
+  else
+    for k in $(config_keys); do
+      pull_repo "$(config_get "$k")" "$k"
+    done
+  fi
+}
+
+# :command.function
+rush_push_command() {
+  # :src/push_command.sh
+  set +e
+  repo=${args[repo]}
+  message=${args[--message]:-"automatic commit"}
+  
+  push_repo() {
+    local repo_path="$1"
+    local repo="$2"
+  
+    if [[ -d "$repo_path/.git" ]]; then
+      echo "push $(green "$repo")"
+      ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
+    else
+      echo "skip $(blue "$repo") (not a git repo)"
+    fi
+  }
+  
+  if [[ $repo ]]; then
+    repo_path=$(config_get "$repo")
+    [[ $repo_path ]] || abort "no such repo: $repo"
+    push_repo "$repo_path" "$repo"
+  else
+    for k in $(config_keys); do
+      push_repo "$(config_get "$k")" "$k"
+    done
+  fi
 }
 
 # :command.function
@@ -808,6 +869,21 @@ rush_config_command() {
     cyan "# $CONFIG_FILE"
     config_show
   fi
+}
+
+# :command.function
+rush_default_command() {
+  # :src/default_command.sh
+  # Collect variables
+  repo=${args[repo]}
+  repo_path=$(config_get "$repo")
+  
+  # Verify we have everything we need
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  
+  config_set "default" "$repo_path"
+  config_del "$repo"
+  echo "default $(green "$repo")"
 }
 
 # :command.function
@@ -1032,79 +1108,6 @@ rush_search_command() {
   done
 }
 
-# :command.function
-rush_pull_command() {
-  # :src/pull_command.sh
-  repo=${args[repo]}
-  
-  pull_repo() {
-    local repo_path="$1"
-    local repo="$2"
-  
-    if [[ -d "$repo_path/.git" ]]; then
-      echo "pull $(green "$repo")"
-      ( cd "$repo_path" && git pull )
-    else
-      echo "skip $(blue "$repo") (not a git repo)"
-    fi
-  }
-  
-  if [[ $repo ]]; then
-    repo_path=$(config_get "$repo")
-    [[ $repo_path ]] || abort "no such repo: $repo"
-    pull_repo "$repo_path" "$repo"
-  else
-    for k in $(config_keys); do
-      pull_repo "$(config_get "$k")" "$k"
-    done
-  fi
-}
-
-# :command.function
-rush_push_command() {
-  # :src/push_command.sh
-  set +e
-  repo=${args[repo]}
-  message=${args[--message]:-"automatic commit"}
-  
-  push_repo() {
-    local repo_path="$1"
-    local repo="$2"
-  
-    if [[ -d "$repo_path/.git" ]]; then
-      echo "push $(green "$repo")"
-      ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
-    else
-      echo "skip $(blue "$repo") (not a git repo)"
-    fi
-  }
-  
-  if [[ $repo ]]; then
-    repo_path=$(config_get "$repo")
-    [[ $repo_path ]] || abort "no such repo: $repo"
-    push_repo "$repo_path" "$repo"
-  else
-    for k in $(config_keys); do
-      push_repo "$(config_get "$k")" "$k"
-    done
-  fi
-}
-
-# :command.function
-rush_default_command() {
-  # :src/default_command.sh
-  # Collect variables
-  repo=${args[repo]}
-  repo_path=$(config_get "$repo")
-  
-  # Verify we have everything we need
-  [[ $repo_path ]] || abort "repo not found: $repo"
-  
-  config_set "default" "$repo_path"
-  config_del "$repo"
-  echo "default $(green "$repo")"
-}
-
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flag_filter
@@ -1137,13 +1140,6 @@ parse_requirements() {
     shift $#
     ;;    
   
-  clone )
-    action="clone"
-    shift
-    rush_clone_parse_requirements "$@"
-    shift $#
-    ;;    
-  
   remove | r )
     action="remove"
     shift
@@ -1151,10 +1147,38 @@ parse_requirements() {
     shift $#
     ;;    
   
+  clone )
+    action="clone"
+    shift
+    rush_clone_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  pull | p )
+    action="pull"
+    shift
+    rush_pull_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  push )
+    action="push"
+    shift
+    rush_push_parse_requirements "$@"
+    shift $#
+    ;;    
+  
   config | c )
     action="config"
     shift
     rush_config_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  default )
+    action="default"
+    shift
+    rush_default_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1190,27 +1214,6 @@ parse_requirements() {
     action="search"
     shift
     rush_search_parse_requirements "$@"
-    shift $#
-    ;;    
-  
-  pull | p )
-    action="pull"
-    shift
-    rush_pull_parse_requirements "$@"
-    shift $#
-    ;;    
-  
-  push )
-    action="push"
-    shift
-    rush_push_parse_requirements "$@"
-    shift $#
-    ;;    
-  
-  default )
-    action="default"
-    shift
-    rush_default_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1314,6 +1317,60 @@ rush_add_parse_requirements() {
 }
 
 # :command.parse_requirements
+rush_remove_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_remove_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="remove"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[repo]=$1
+    shift
+  else
+    printf "missing required argument: REPO\nusage: rush remove REPO [options]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+# :command.parse_requirements
 rush_clone_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
@@ -1389,7 +1446,7 @@ rush_clone_parse_requirements() {
 }
 
 # :command.parse_requirements
-rush_remove_parse_requirements() {
+rush_pull_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
   --version )
@@ -1399,7 +1456,7 @@ rush_remove_parse_requirements() {
   
   --help | -h ) 
     long_usage=yes
-    rush_remove_usage
+    rush_pull_usage
     exit 1
     ;;
   
@@ -1407,20 +1464,72 @@ rush_remove_parse_requirements() {
   # :command.environment_variables_filter
   # :command.dependencies_filter
   # :command.command_filter
-  action="remove"
+  action="pull"
   # :command.required_args_filter
-  if [[ $1 && $1 != -* ]]; then
-    args[repo]=$1
-    shift
-  else
-    printf "missing required argument: REPO\nusage: rush remove REPO [options]\n"
-    exit 1
-  fi
   # :command.required_flags_filter
   # :command.parse_requirements_while
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
+# :command.parse_requirements
+rush_push_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_push_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="push"
+  # :command.required_args_filter
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+    # :flag.case
+    --message | -m )
+      if [[ $2 && $2 != -* ]]; then
+        args[--message]="$2"
+        shift
+        shift
+      else
+        printf "--message requires an argument: --message, -m TEXT\n"
+        exit 1
+      fi
+      ;;
+  
   
     -* )
       printf "invalid option: %s\n" "$key"
@@ -1484,6 +1593,60 @@ rush_config_parse_requirements() {
       # :command.parse_requirements_case
       printf "invalid argument: %s\n" "$key"
       exit 1
+      ;;
+  
+    esac
+  done
+}
+
+# :command.parse_requirements
+rush_default_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_default_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="default"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[repo]=$1
+    shift
+  else
+    printf "missing required argument: REPO\nusage: rush default REPO [options]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[repo]} ]]; then
+        args[repo]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
       ;;
   
     esac
@@ -1765,166 +1928,6 @@ rush_search_parse_requirements() {
   done
 }
 
-# :command.parse_requirements
-rush_pull_parse_requirements() {
-  # :command.fixed_flag_filter
-  case "$1" in
-  --version )
-    version_command
-    exit 1
-    ;;
-  
-  --help | -h ) 
-    long_usage=yes
-    rush_pull_usage
-    exit 1
-    ;;
-  
-  esac
-  # :command.environment_variables_filter
-  # :command.dependencies_filter
-  # :command.command_filter
-  action="pull"
-  # :command.required_args_filter
-  # :command.required_flags_filter
-  # :command.parse_requirements_while
-  while [[ $# -gt 0 ]]; do
-    key="$1"
-    case "$key" in
-  
-    -* )
-      printf "invalid option: %s\n" "$key"
-      exit 1
-      ;;
-  
-    * )
-      # :command.parse_requirements_case
-      if [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
-        shift
-      else
-        printf "invalid argument: %s\n" "$key"
-        exit 1
-      fi
-      ;;
-  
-    esac
-  done
-}
-
-# :command.parse_requirements
-rush_push_parse_requirements() {
-  # :command.fixed_flag_filter
-  case "$1" in
-  --version )
-    version_command
-    exit 1
-    ;;
-  
-  --help | -h ) 
-    long_usage=yes
-    rush_push_usage
-    exit 1
-    ;;
-  
-  esac
-  # :command.environment_variables_filter
-  # :command.dependencies_filter
-  # :command.command_filter
-  action="push"
-  # :command.required_args_filter
-  # :command.required_flags_filter
-  # :command.parse_requirements_while
-  while [[ $# -gt 0 ]]; do
-    key="$1"
-    case "$key" in
-    # :flag.case
-    --message | -m )
-      if [[ $2 && $2 != -* ]]; then
-        args[--message]="$2"
-        shift
-        shift
-      else
-        printf "--message requires an argument: --message, -m TEXT\n"
-        exit 1
-      fi
-      ;;
-  
-  
-    -* )
-      printf "invalid option: %s\n" "$key"
-      exit 1
-      ;;
-  
-    * )
-      # :command.parse_requirements_case
-      if [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
-        shift
-      else
-        printf "invalid argument: %s\n" "$key"
-        exit 1
-      fi
-      ;;
-  
-    esac
-  done
-}
-
-# :command.parse_requirements
-rush_default_parse_requirements() {
-  # :command.fixed_flag_filter
-  case "$1" in
-  --version )
-    version_command
-    exit 1
-    ;;
-  
-  --help | -h ) 
-    long_usage=yes
-    rush_default_usage
-    exit 1
-    ;;
-  
-  esac
-  # :command.environment_variables_filter
-  # :command.dependencies_filter
-  # :command.command_filter
-  action="default"
-  # :command.required_args_filter
-  if [[ $1 && $1 != -* ]]; then
-    args[repo]=$1
-    shift
-  else
-    printf "missing required argument: REPO\nusage: rush default REPO [options]\n"
-    exit 1
-  fi
-  # :command.required_flags_filter
-  # :command.parse_requirements_while
-  while [[ $# -gt 0 ]]; do
-    key="$1"
-    case "$key" in
-  
-    -* )
-      printf "invalid option: %s\n" "$key"
-      exit 1
-      ;;
-  
-    * )
-      # :command.parse_requirements_case
-      if [[ ! ${args[repo]} ]]; then
-        args[repo]=$1
-        shift
-      else
-        printf "invalid argument: %s\n" "$key"
-        exit 1
-      fi
-      ;;
-  
-    esac
-  done
-}
-
 # :command.initialize
 initialize() {
   version="0.3.8"
@@ -1948,14 +1951,6 @@ run() {
       rush_add_command
     fi
   
-  elif [[ $action == "clone" ]]; then
-    if [[ ${args[--help]} ]]; then
-      long_usage=yes
-      rush_clone_usage
-    else
-      rush_clone_command
-    fi
-  
   elif [[ $action == "remove" ]]; then
     if [[ ${args[--help]} ]]; then
       long_usage=yes
@@ -1964,12 +1959,44 @@ run() {
       rush_remove_command
     fi
   
+  elif [[ $action == "clone" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_clone_usage
+    else
+      rush_clone_command
+    fi
+  
+  elif [[ $action == "pull" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_pull_usage
+    else
+      rush_pull_command
+    fi
+  
+  elif [[ $action == "push" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_push_usage
+    else
+      rush_push_command
+    fi
+  
   elif [[ $action == "config" ]]; then
     if [[ ${args[--help]} ]]; then
       long_usage=yes
       rush_config_usage
     else
       rush_config_command
+    fi
+  
+  elif [[ $action == "default" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_default_usage
+    else
+      rush_default_command
     fi
   
   elif [[ $action == "get" ]]; then
@@ -2010,30 +2037,6 @@ run() {
       rush_search_usage
     else
       rush_search_command
-    fi
-  
-  elif [[ $action == "pull" ]]; then
-    if [[ ${args[--help]} ]]; then
-      long_usage=yes
-      rush_pull_usage
-    else
-      rush_pull_command
-    fi
-  
-  elif [[ $action == "push" ]]; then
-    if [[ ${args[--help]} ]]; then
-      long_usage=yes
-      rush_push_usage
-    else
-      rush_push_command
-    fi
-  
-  elif [[ $action == "default" ]]; then
-    if [[ ${args[--help]} ]]; then
-      long_usage=yes
-      rush_default_usage
-    else
-      rush_default_command
     fi
   
   elif [[ ${args[--version]} ]]; then
