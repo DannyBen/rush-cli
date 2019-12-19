@@ -1930,7 +1930,7 @@ rush_search_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.3.8"
+  version="0.3.9"
   long_usage=''
   set -e  
 
