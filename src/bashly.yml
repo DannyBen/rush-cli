@@ -11,6 +11,7 @@ environment_variables:
 commands:
 - name: add
   short: a
+  group: Repository
   help: |-
     Register a local repository
     This command adds the specified path to the configuration file.
@@ -27,7 +28,19 @@ commands:
   examples:
   - rush add default ~/rush-repos/default
 
+- name: remove
+  short: r
+  help: |-
+    Unregister a local repository
+    This command removes the specified path to the configuration file.
+
+  args:
+  - name: repo
+    required: true
+    help: Repository name
+
 - name: clone
+  group: Git
   help: |-
     Clone a GitHub package repository
     This command clones the repository and registers it in the
@@ -63,19 +76,32 @@ commands:
   - rush clone bobby/bobs-repo ./repos/bobby --ssh
   - rush clone bobby --name sample
 
-- name: remove
-  short: r
-  help: |-
-    Unregister a local repository
-    This command removes the specified path to the configuration file.
+- name: pull
+  short: p
+  help: Git pull one or all repositories
 
   args:
   - name: repo
-    required: true
     help: Repository name
+
+- name: push
+  help: Git push one or all repositories
+
+  args:
+  - name: repo
+    help: Repository name
+
+  flags:
+  - long: --message
+    short: -m
+    arg: TEXT
+    help: |-
+      Commit message
+      Default: automatic commit
 
 - name: config
   short: c
+  group: Config
   help: Show the configuration file
 
   flags:
@@ -83,8 +109,23 @@ commands:
     short: -e
     help: Open the configuration file for editing
 
+- name: default
+  help: |-
+    Set a default repository
+    This command adds (or updates) a repository named 'default' to the
+    configuration file, and copies the path from the provided repo.
+
+  args:
+  - name: repo
+    required: true
+    help: Repository name
+
+  examples:
+  - rush default sample
+
 - name: get
   short: g
+  group: Package
   help: |-
     Install a package
     This command runs the main script in the package directory.
@@ -181,39 +222,3 @@ commands:
     help: Text to search for
     required: true
 
-- name: pull
-  short: p
-  help: Git pull one or all repositories
-
-  args:
-  - name: repo
-    help: Repository name
-
-- name: push
-  help: Git push one or all repositories
-
-  args:
-  - name: repo
-    help: Repository name
-
-  flags:
-  - long: --message
-    short: -m
-    arg: TEXT
-    help: |-
-      Commit message
-      Default: automatic commit
-
-- name: default
-  help: |-
-    Set a default repository
-    This command adds (or updates) a repository named 'default' to the
-    configuration file, and copies the path from the provided repo.
-
-  args:
-  - name: repo
-    required: true
-    help: Repository name
-
-  examples:
-  - rush default sample
