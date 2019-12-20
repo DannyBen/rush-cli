@@ -80,6 +80,7 @@ Usage
 
 ```shell
 $ rush
+
 rush - Personal package manager
 
 Usage:
@@ -106,6 +107,7 @@ Package Commands:
   info      Show information about a package
   list      Show packages in one or all repositories
   search    Search in package names and info files
+  edit      Edit package files
 
 ```
 
