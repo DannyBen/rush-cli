@@ -82,3 +82,10 @@ approve "rush search -h"
 approve "rush search running"
 apk del grep >/dev/null 2>&1
 approve "rush search busybox-error"
+
+# edit
+export EDITOR=cat
+approve "rush edit"
+approve "rush edit -h"
+approve "rush edit hello"
+approve "rush edit hello info"

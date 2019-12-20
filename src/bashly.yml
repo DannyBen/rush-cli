@@ -135,7 +135,7 @@ commands:
   args:
   - name: package
     required: true
-    help: |-
+    help: &package_help |-
       Package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
@@ -154,11 +154,7 @@ commands:
   args:
   - name: package
     required: true
-    help: |-
-      Package name
-      This can either be the package name without the repository name (in
-      this case, the default repository will be used) or in the form of
-      'repo:package'.
+    help: *package_help
 
   examples:
   - rush undo ruby
@@ -173,11 +169,7 @@ commands:
   args:
   - name: package
     required: true
-    help: |-
-      Package name
-      This can either be the package name without the repository name (in
-      this case, the default repository will be used) or in the form of
-      'repo:package'.
+    help: *package_help
 
   flags:
   - long: --extended
@@ -221,4 +213,18 @@ commands:
   - name: text
     help: Text to search for
     required: true
+
+- name: edit
+  short: e
+  help: Edit package files
+
+  args:
+  - name: package
+    required: true
+    help: *package_help
+
+  - name: file
+    help: |-
+      File to edit
+      Default: main
 
