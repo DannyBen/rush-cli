@@ -39,6 +39,7 @@ rush_usage() {
   echo "  info      Show information about a package"
   echo "  list      Show packages in one or all repositories"
   echo "  search    Search in package names and info files"
+  echo "  edit      Edit package files"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -578,6 +579,47 @@ rush_search_usage() {
   fi
 }
 
+# :command.usage
+rush_edit_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush edit - Edit package files\n"
+    echo 
+  else
+    printf "rush edit - Edit package files\n"
+    echo 
+  fi
+
+  printf "Shortcut: e\n"
+  echo
+
+  printf "Usage:\n"
+  printf "  rush edit PACKAGE [FILE] [options]\n"
+  printf "  rush edit --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  PACKAGE"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    echo
+    
+    # :argument.usage
+    echo "  FILE"
+    printf "    File to edit\n    Default: main\n"
+    echo
+
+  fi
+}
+
 # :command.inspect_args
 inspect_args() {
   echo args:
@@ -1108,6 +1150,33 @@ rush_search_command() {
   done
 }
 
+# :command.function
+rush_edit_command() {
+  # :src/edit_command.sh
+  # Collect variables
+  package=${args[package]}
+  file=${args[file]:-main}
+  repo="default"
+  edit=${EDITOR:-vi}
+  
+  if [[ $package =~ (.*):(.*) ]]; then
+    repo=${BASH_REMATCH[1]}
+    package=${BASH_REMATCH[2]}
+  fi
+  
+  repo_path=$(config_get "$repo")
+  package_path="$repo_path/$package"
+  file_path="$package_path/$file"
+  
+  # Verify we have everything we need
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  [[ -d $package_path ]] || abort "package not found: $repo:$package"
+  [[ -f $file_path ]] || abort "file not found: $file_path"
+  
+  # Edit the file
+  "$edit" "$file_path"
+}
+
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flag_filter
@@ -1214,6 +1283,13 @@ parse_requirements() {
     action="search"
     shift
     rush_search_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  edit | e )
+    action="edit"
+    shift
+    rush_edit_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1928,6 +2004,63 @@ rush_search_parse_requirements() {
   done
 }
 
+# :command.parse_requirements
+rush_edit_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version )
+    version_command
+    exit 1
+    ;;
+  
+  --help | -h ) 
+    long_usage=yes
+    rush_edit_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="edit"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[package]=$1
+    shift
+  else
+    printf "missing required argument: PACKAGE\nusage: rush edit PACKAGE [FILE] [options]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[package]} ]]; then
+        args[package]=$1
+        shift
+      elif [[ ! ${args[file]} ]]; then
+        args[file]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+}
+
 # :command.initialize
 initialize() {
   version="0.3.9"
@@ -2037,6 +2170,14 @@ run() {
       rush_search_usage
     else
       rush_search_command
+    fi
+  
+  elif [[ $action == "edit" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_edit_usage
+    else
+      rush_edit_command
     fi
   
   elif [[ ${args[--version]} ]]; then
