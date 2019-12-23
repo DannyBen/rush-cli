@@ -20,7 +20,7 @@ rush_usage() {
   printf "Usage:\n"
   printf "  rush [command] [options]\n"
   printf "  rush [command] --help | -h\n"
-  printf "  rush --version\n"
+  printf "  rush --version | -v\n"
   echo
   # :command.usage_commands
   printf "Repository Commands:\n"
@@ -48,7 +48,7 @@ rush_usage() {
     echo "  --help, -h"
     printf "    Show this help\n"
     echo
-    echo "  --version"
+    echo "  --version, -v"
     printf "    Show version number\n"
     echo
 
@@ -1181,12 +1181,12 @@ rush_edit_command() {
 parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_usage
     exit 1
@@ -1331,12 +1331,12 @@ parse_requirements() {
 rush_add_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_add_usage
     exit 1
@@ -1396,12 +1396,12 @@ rush_add_parse_requirements() {
 rush_remove_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_remove_usage
     exit 1
@@ -1450,12 +1450,12 @@ rush_remove_parse_requirements() {
 rush_clone_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_clone_usage
     exit 1
@@ -1492,7 +1492,7 @@ rush_clone_parse_requirements() {
         shift
         shift
       else
-        printf "--name requires an argument: --name, -n NAME\n"
+        printf "%s\n" "--name requires an argument: --name, -n NAME"
         exit 1
       fi
       ;;
@@ -1525,12 +1525,12 @@ rush_clone_parse_requirements() {
 rush_pull_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_pull_usage
     exit 1
@@ -1572,12 +1572,12 @@ rush_pull_parse_requirements() {
 rush_push_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_push_usage
     exit 1
@@ -1601,7 +1601,7 @@ rush_push_parse_requirements() {
         shift
         shift
       else
-        printf "--message requires an argument: --message, -m TEXT\n"
+        printf "%s\n" "--message requires an argument: --message, -m TEXT"
         exit 1
       fi
       ;;
@@ -1631,12 +1631,12 @@ rush_push_parse_requirements() {
 rush_config_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_config_usage
     exit 1
@@ -1679,12 +1679,12 @@ rush_config_parse_requirements() {
 rush_default_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_default_usage
     exit 1
@@ -1733,12 +1733,12 @@ rush_default_parse_requirements() {
 rush_get_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_get_usage
     exit 1
@@ -1787,12 +1787,12 @@ rush_get_parse_requirements() {
 rush_undo_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_undo_usage
     exit 1
@@ -1841,12 +1841,12 @@ rush_undo_parse_requirements() {
 rush_info_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_info_usage
     exit 1
@@ -1901,12 +1901,12 @@ rush_info_parse_requirements() {
 rush_list_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_list_usage
     exit 1
@@ -1954,12 +1954,12 @@ rush_list_parse_requirements() {
 rush_search_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_search_usage
     exit 1
@@ -2008,12 +2008,12 @@ rush_search_parse_requirements() {
 rush_edit_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
-  --version )
+  --version | -v )
     version_command
     exit 1
     ;;
   
-  --help | -h ) 
+  --help | -h )
     long_usage=yes
     rush_edit_usage
     exit 1

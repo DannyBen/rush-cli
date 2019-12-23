@@ -3,7 +3,7 @@ rush - Personal package manager
 Usage:
   rush [command] [options]
   rush [command] --help | -h
-  rush --version
+  rush --version | -v
 
 Repository Commands:
   add       Register a local repository
@@ -30,7 +30,7 @@ Options:
   --help, -h
     Show this help
 
-  --version
+  --version, -v
     Show version number
 
 Environment Variables:
