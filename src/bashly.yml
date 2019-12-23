@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 
+version: 0.3.10
 
 environment_variables:
 - name: rush_config
