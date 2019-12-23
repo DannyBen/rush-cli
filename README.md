@@ -12,7 +12,7 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 /_/      Personal Package Manager
 ```
 
-![Version](https://img.shields.io/badge/version-0.3.10-blue.svg)
+![Version](https://img.shields.io/badge/version-0.3.11-blue.svg)
 [![Build Status](https://travis-ci.com/DannyBen/rush-cli.svg?branch=master)](https://travis-ci.com/DannyBen/rush-cli)
 
 </div>
