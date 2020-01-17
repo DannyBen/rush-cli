@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Note: this script is intended to be executed inside a clean Alpine docker
+
 source approvals.bash
 
 # before
