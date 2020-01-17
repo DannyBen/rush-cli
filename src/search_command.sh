@@ -10,7 +10,7 @@ search_repo() {
   [[ "$repo" != "default" ]] && prefix="$repo:"
 
   # Search directories matching search text
-  find "$repo_path" -type d | grep --color=always "$text" | \
+  find "$repo_path" -type d -not -path '*/\.*' | grep --color=always "$text" | \
     sed "s#${repo_path}/#${prefix}#g" | sed 's#/info##'
 
   # Search info files matching search text
