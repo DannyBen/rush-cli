@@ -19,7 +19,7 @@ script=$package_path/undo
 # Run the script (make it executable if it isnt first)
 export REPO="$repo"
 export REPO_PATH="$repo_path"
-echo "run $(green "$repo:$package")"
+echo "undo $(green "$repo:$package")"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
 ./undo

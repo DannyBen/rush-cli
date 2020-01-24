@@ -1,2 +1,2 @@
-run [32mdefault:download[0m
+undo [32mdefault:download[0m
 Removed 'somefile' from the current directory
