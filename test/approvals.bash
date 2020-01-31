@@ -1,4 +1,4 @@
-# approvals.bash v0.2.1
+# approvals.bash v0.2.3
 #
 # Interactive approval testing for Bash.
 # https://github.com/DannyBen/approvals.bash
@@ -14,8 +14,9 @@
 #   test will pass.
 # - When a new/updated approval is rejected, we will exit immediately with
 #   exit code 1
-# - When running in a CI environment (CI variable exists), we will run in non
-#   interactive mode (so tests will fail automatically if they do not match).
+# - When running in a CI environment (CI variable exists), or on GitHub
+#   Actions (GITHUB_ACTIONS variable exists), we will run in non interactive
+#   mode (so tests will fail automatically if they do not match).
 #
 # Usage
 #   source approvals.bash
@@ -61,7 +62,7 @@ user_approval() {
   local actual="$2"
   local approval_file="$3"
 
-  if [[ -v CI ]]; then
+  if [[ -v CI || -v GITHUB_ACTIONS ]]; then
     red "\rFAIL $cmd"
     exit 1
   fi
@@ -83,7 +84,7 @@ green() { printf "\e[32m%b\e[0m\n" "$*"; }
 blue() { printf "\e[34m%b\e[0m\n" "$*"; }
 
 if diff --help | grep -- --color > /dev/null 2>&1; then
-  diff_cmd="diff --unified --color"
+  diff_cmd="diff --unified --color=always"
 else
   diff_cmd="diff --unified"
 fi

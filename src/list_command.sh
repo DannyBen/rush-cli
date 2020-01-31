@@ -37,7 +37,7 @@ list_show_repo() {
     glob=( "$repo_path"/*/info )
   fi
 
-  if [[ ${glob[0]} =~ \* ]]; then
+  if [[ ${glob[0]} =~ .*\*.* ]]; then
     infofile="$repo_path/$package/info"
     if [[ -f "$infofile" ]]; then
       list_display_item "$package" "$infofile" "$repo"
