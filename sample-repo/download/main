@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
-cp somefile $OLDPWD/somefile
+cp somefile $USER_CWD/somefile
 echo "Saved 'somefile' in the current directory"

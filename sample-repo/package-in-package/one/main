@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-echo "What's the rush?"
+echo "In one/main"
+echo "PWD:       $PWD"
 echo "REPO:      $REPO"
 echo "REPO_PATH: $REPO_PATH"
 echo "USER_CWD:  $USER_CWD"
+
+rush $REPO:package-in-package/two
