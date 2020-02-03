@@ -4,11 +4,11 @@ Shows how a script can copy files from its own folder
 [32mmain:[0m
 #!/usr/bin/env bash
 set -e
-cp somefile $OLDPWD/somefile
+cp somefile $USER_CWD/somefile
 echo "Saved 'somefile' in the current directory"
 
 [32mundo:[0m
 #!/usr/bin/env bash
 set -e
-rm $OLDPWD/somefile
+rm $USER_CWD/somefile
 echo "Removed 'somefile' from the current directory"

@@ -2,3 +2,4 @@ run [32msample:hello[0m
 What's the rush?
 REPO:      sample
 REPO_PATH: /root/rush-repos/sample-repo
+USER_CWD:  /test

@@ -1,0 +1,12 @@
+run [32mdefault:package-in-package/one[0m
+In one/main
+PWD:       /root/rush-repos/sample-repo/package-in-package/one
+REPO:      default
+REPO_PATH: /root/rush-repos/sample-repo
+USER_CWD:  /test
+run [32mdefault:package-in-package/two[0m
+In two/main
+PWD:       /root/rush-repos/sample-repo/package-in-package/two
+REPO:      default
+REPO_PATH: /root/rush-repos/sample-repo
+USER_CWD:  /test
