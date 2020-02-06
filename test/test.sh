@@ -92,3 +92,5 @@ describe "edit"
   approve "rush edit -h"
   approve "rush edit hello"
   approve "rush edit hello info"
+
+green "All OK"

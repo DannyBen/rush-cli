@@ -1185,7 +1185,7 @@ parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1335,7 +1335,7 @@ rush_add_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1400,7 +1400,7 @@ rush_remove_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1454,7 +1454,7 @@ rush_clone_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1529,7 +1529,7 @@ rush_pull_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1576,7 +1576,7 @@ rush_push_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1635,7 +1635,7 @@ rush_config_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1683,7 +1683,7 @@ rush_default_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1737,7 +1737,7 @@ rush_get_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1791,7 +1791,7 @@ rush_undo_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1845,7 +1845,7 @@ rush_info_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1905,7 +1905,7 @@ rush_list_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -1958,7 +1958,7 @@ rush_search_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )
@@ -2012,7 +2012,7 @@ rush_edit_parse_requirements() {
   case "$1" in
   --version | -v )
     version_command
-    exit 1
+    exit
     ;;
   
   --help | -h )

@@ -1,30 +1,21 @@
 #!/usr/bin/env bash
-echo "This operation will download the rush bash script to /usr/local/bin/rush."
-printf "Continue? [yN] "
-read answer
+echo "Downloading to /usr/local/bin/rush"
 
-if [[ $answer =~ [Yy] ]]; then
-  echo ""
-  echo "Downloading from github.com/DannyBen/rush-cli..."
+curl_command="curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > /usr/local/bin/rush"
 
-  CURL_COMMAND="curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > /usr/local/bin/rush"
-
-  if [[ $EUID -ne 0 ]]; then
-    # not root, need sudo
-    sudo bash -c "$CURL_COMMAND"
-    sudo chmod a+x /usr/local/bin/rush
-  else
-    # root
-    bash -c "$CURL_COMMAND"
-    chmod a+x /usr/local/bin/rush
-  fi
-
-  if type rush > /dev/null; then
-    echo "Done. Type 'rush --help' for more info."
-  else
-    echo "Failed downloading."
-    exit 1
-  fi
+if [[ $EUID -ne 0 ]]; then
+  # not root, need sudo
+  sudo bash -c "$curl_command"
+  sudo chmod a+x /usr/local/bin/rush
 else
-  echo "Aborting"
+  # root
+  bash -c "$curl_command"
+  chmod a+x /usr/local/bin/rush
+fi
+
+if type rush > /dev/null; then
+  echo "Done. Type 'rush --help' for more info."
+else
+  echo "Failed downloading."
+  exit 1
 fi
