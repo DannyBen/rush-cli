@@ -143,8 +143,40 @@ To create a repository manually, follow these steps:
    they have a shebang line.
 
 
+
+Using with GitHub Actions
+--------------------------------------------------
+
+Rush can be very useful for running remote shell scripts as part of your
+GitHub Actions workflow. This sample configuration shows how to install rush
+and connect to your rush repository from a GitHub Actions workflow.
+
+```yaml
+# .github/workflows/main.yml
+name: Test
+on: [push]
+
+jobs:
+  main:
+    name: Rush demo
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install rush
+      run: bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
+
+    # Replace with your own repository
+    - name: Connect to rush repository
+      run: rush clone dannyben/rush-repo-template --name default
+
+    - name: Run a sample script from the repo
+      run: rush get hello
+```
+
+
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
+
 
