@@ -19,6 +19,9 @@ Options:
     Name to use in the config file
     Default: GitHub user
 
+  --full, -f
+    Perform a full clone, instead of the default shallow clone
+
 Arguments:
   GITHUB_USER
     Github user

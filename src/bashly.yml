@@ -71,6 +71,10 @@ commands:
       Name to use in the config file
       Default: GitHub user
 
+  - long: --full
+    short: -f
+    help: Perform a full clone, instead of the default shallow clone
+
   examples:
   - rush clone bobby
   - rush clone bobby/bobs-repo ./repos/bobby --ssh
