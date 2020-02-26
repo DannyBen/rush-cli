@@ -11,7 +11,7 @@ services:
 
   test: &test
     <<: *default
-    command: bash test.sh
+    command: bash approve
 
   ci:
     <<: *test

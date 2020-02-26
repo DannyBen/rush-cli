@@ -21,7 +21,15 @@ describe "clone"
   rm -rf /root/rush-repos/dannyben
   approve "rush clone"
   approve "rush clone -h"
+  
   approve "rush clone dannyben"
+  count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
+  [[ $count == 1 ]] || fail "Expected shallow clone, got $count commits"
+
+  rm -rf /root/rush-repos/dannyben
+  approve "rush clone dannyben --full"
+  count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
+  [[ $count == 10 ]] || fail "Expected full clone, got $count commits"
 
 describe "config"
   approve "rush config"

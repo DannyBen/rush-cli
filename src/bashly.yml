@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.3.15
+version: 0.4.0
 
 environment_variables:
 - name: rush_config
@@ -70,6 +70,10 @@ commands:
     help: |-
       Name to use in the config file
       Default: GitHub user
+
+  - long: --full
+    short: -f
+    help: Perform a full clone, instead of the default shallow clone
 
   examples:
   - rush clone bobby

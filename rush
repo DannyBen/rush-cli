@@ -183,6 +183,11 @@ rush_clone_usage() {
     echo "  --name, -n NAME"
     printf "    Name to use in the config file\n    Default: GitHub user\n"
     echo
+    
+    # :flag.usage
+    echo "  --full, -f"
+    printf "    Perform a full clone, instead of the default shallow clone\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -815,6 +820,7 @@ rush_clone_command() {
   path=${args[path]}
   repo_id=${args[github_user]}
   use_ssh=${args[--ssh]}
+  full=${args[--full]}
   default_repo_name=${repo_id%%/*}
   repo_name=${args[--name]:-$default_repo_name}
   
@@ -837,7 +843,11 @@ rush_clone_command() {
   set -e
   
   # Clone
-  git clone "$repo_url" "$path"
+  if [[ $full ]]; then
+    git clone "$repo_url" "$path"
+  else
+    git clone --depth 1 "$repo_url" "$path"
+  fi
   
   # Save config
   config_set "$repo_name" "$path"
@@ -1327,6 +1337,7 @@ parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1392,6 +1403,7 @@ rush_add_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1446,6 +1458,7 @@ rush_remove_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1499,6 +1512,12 @@ rush_clone_parse_requirements() {
       fi
       ;;
   
+    # :flag.case
+    --full | -f )
+      args[--full]=1
+      shift
+      ;;
+  
   
     -* )
       printf "invalid option: %s\n" "$key"
@@ -1521,6 +1540,7 @@ rush_clone_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1568,6 +1588,7 @@ rush_pull_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1627,6 +1648,7 @@ rush_push_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1675,6 +1697,7 @@ rush_config_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1729,6 +1752,7 @@ rush_default_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1783,6 +1807,7 @@ rush_get_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1837,6 +1862,7 @@ rush_undo_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1897,6 +1923,7 @@ rush_info_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -1950,6 +1977,7 @@ rush_list_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -2004,6 +2032,7 @@ rush_search_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.parse_requirements
@@ -2061,11 +2090,12 @@ rush_edit_parse_requirements() {
   
     esac
   done
+  # :command.default_assignments
 }
 
 # :command.initialize
 initialize() {
-  version="0.3.15"
+  version="0.4.0"
   long_usage=''
   set -e  
 

@@ -2,6 +2,7 @@
 path=${args[path]}
 repo_id=${args[github_user]}
 use_ssh=${args[--ssh]}
+full=${args[--full]}
 default_repo_name=${repo_id%%/*}
 repo_name=${args[--name]:-$default_repo_name}
 
@@ -24,7 +25,11 @@ fi
 set -e
 
 # Clone
-git clone "$repo_url" "$path"
+if [[ $full ]]; then
+  git clone "$repo_url" "$path"
+else
+  git clone --depth 1 "$repo_url" "$path"
+fi
 
 # Save config
 config_set "$repo_name" "$path"
