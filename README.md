@@ -33,7 +33,7 @@ you install things.
 Rush was developed using the [Bashly Command Line Framework][bashly].
 
 
-Install
+Installation
 --------------------------------------------------
 
     $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
@@ -41,6 +41,9 @@ Install
 Feel free to inspect the [setup script](setup) before running, or simply
 install manually by placing the [rush](rush) script in `/usr/local/bin` or
 anywhere in your `PATH`.
+
+Note that rush requires bash 4.0 or higher
+(`brew install bash` for mac users).
 
 
 Quick Start
