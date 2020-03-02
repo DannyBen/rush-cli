@@ -81,7 +81,7 @@ can use [this docker image][docker-sandbox], which has Rush copied to its path:
 Usage
 --------------------------------------------------
 
-```shell
+```
 $ rush --help
 
 rush - Personal package manager
