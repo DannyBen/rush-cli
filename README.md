@@ -82,14 +82,14 @@ Usage
 --------------------------------------------------
 
 ```shell
-$ rush
+$ rush --help
 
 rush - Personal package manager
 
 Usage:
-  rush [command] [options]
+  rush [command]
   rush [command] --help | -h
-  rush --version
+  rush --version | -v
 
 Repository Commands:
   add       Register a local repository
@@ -112,6 +112,17 @@ Package Commands:
   search    Search in package names and info files
   edit      Edit package files
 
+Options:
+  --help, -h
+    Show this help
+
+  --version, -v
+    Show version number
+
+Environment Variables:
+  RUSH_CONFIG
+    Location of the rush config file
+    Default: ~/rush.ini
 ```
 
 
@@ -181,5 +192,4 @@ jobs:
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
-
 
