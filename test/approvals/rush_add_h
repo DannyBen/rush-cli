@@ -6,7 +6,7 @@ rush add
 Shortcut: a
 
 Usage:
-  rush add REPO PATH [options]
+  rush add REPO PATH
   rush add --help | -h
 
 Options:

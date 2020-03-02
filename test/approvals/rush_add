@@ -1,2 +1,2 @@
 missing required argument: REPO
-usage: rush add REPO PATH [options]
+usage: rush add REPO PATH

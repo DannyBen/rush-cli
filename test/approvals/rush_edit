@@ -1,2 +1,2 @@
 missing required argument: PACKAGE
-usage: rush edit PACKAGE [FILE] [options]
+usage: rush edit PACKAGE [FILE]

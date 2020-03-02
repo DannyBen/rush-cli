@@ -1,2 +1,2 @@
 missing required argument: REPO
-usage: rush default REPO [options]
+usage: rush default REPO

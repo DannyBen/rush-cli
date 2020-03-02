@@ -3,7 +3,7 @@ rush pull - Git pull one or all repositories
 Shortcut: p
 
 Usage:
-  rush pull [REPO] [options]
+  rush pull [REPO]
   rush pull --help | -h
 
 Options:
