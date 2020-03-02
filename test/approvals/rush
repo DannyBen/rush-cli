@@ -1,7 +1,7 @@
 rush - Personal package manager
 
 Usage:
-  rush [command] [options]
+  rush [command]
   rush [command] --help | -h
   rush --version | -v
 

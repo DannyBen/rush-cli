@@ -1,2 +1,2 @@
 missing required argument: REPO
-usage: rush remove REPO [options]
+usage: rush remove REPO

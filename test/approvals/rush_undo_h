@@ -6,7 +6,7 @@ rush undo
 Shortcut: u
 
 Usage:
-  rush undo PACKAGE [options]
+  rush undo PACKAGE
   rush undo --help | -h
 
 Options:

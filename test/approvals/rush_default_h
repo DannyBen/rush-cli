@@ -5,7 +5,7 @@ rush default
   configuration file, and copies the path from the provided repo.
 
 Usage:
-  rush default REPO [options]
+  rush default REPO
   rush default --help | -h
 
 Options:

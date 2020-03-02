@@ -18,7 +18,7 @@ rush_usage() {
   fi
 
   printf "Usage:\n"
-  printf "  rush [command] [options]\n"
+  printf "  rush [command]\n"
   printf "  rush [command] --help | -h\n"
   printf "  rush --version | -v\n"
   echo
@@ -79,7 +79,7 @@ rush_add_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush add REPO PATH [options]\n"
+  printf "  rush add REPO PATH\n"
   printf "  rush add --help | -h\n"
   echo
 
@@ -128,7 +128,7 @@ rush_remove_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush remove REPO [options]\n"
+  printf "  rush remove REPO\n"
   printf "  rush remove --help | -h\n"
   echo
 
@@ -226,7 +226,7 @@ rush_pull_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush pull [REPO] [options]\n"
+  printf "  rush pull [REPO]\n"
   printf "  rush pull --help | -h\n"
   echo
 
@@ -331,7 +331,7 @@ rush_default_usage() {
   fi
 
   printf "Usage:\n"
-  printf "  rush default REPO [options]\n"
+  printf "  rush default REPO\n"
   printf "  rush default --help | -h\n"
   echo
 
@@ -375,7 +375,7 @@ rush_get_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush get PACKAGE [options]\n"
+  printf "  rush get PACKAGE\n"
   printf "  rush get --help | -h\n"
   echo
 
@@ -420,7 +420,7 @@ rush_undo_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush undo PACKAGE [options]\n"
+  printf "  rush undo PACKAGE\n"
   printf "  rush undo --help | -h\n"
   echo
 
@@ -562,7 +562,7 @@ rush_search_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush search TEXT [options]\n"
+  printf "  rush search TEXT\n"
   printf "  rush search --help | -h\n"
   echo
 
@@ -598,7 +598,7 @@ rush_edit_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush edit PACKAGE [FILE] [options]\n"
+  printf "  rush edit PACKAGE [FILE]\n"
   printf "  rush edit --help | -h\n"
   echo
 
@@ -1365,7 +1365,7 @@ rush_add_parse_requirements() {
     args[repo]=$1
     shift
   else
-    printf "missing required argument: REPO\nusage: rush add REPO PATH [options]\n"
+    printf "missing required argument: REPO\nusage: rush add REPO PATH\n"
     exit 1
   fi
   
@@ -1373,7 +1373,7 @@ rush_add_parse_requirements() {
     args[path]=$1
     shift
   else
-    printf "missing required argument: PATH\nusage: rush add REPO PATH [options]\n"
+    printf "missing required argument: PATH\nusage: rush add REPO PATH\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1431,7 +1431,7 @@ rush_remove_parse_requirements() {
     args[repo]=$1
     shift
   else
-    printf "missing required argument: REPO\nusage: rush remove REPO [options]\n"
+    printf "missing required argument: REPO\nusage: rush remove REPO\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1725,7 +1725,7 @@ rush_default_parse_requirements() {
     args[repo]=$1
     shift
   else
-    printf "missing required argument: REPO\nusage: rush default REPO [options]\n"
+    printf "missing required argument: REPO\nusage: rush default REPO\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1780,7 +1780,7 @@ rush_get_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]\n"
+    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1835,7 +1835,7 @@ rush_undo_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush undo PACKAGE [options]\n"
+    printf "missing required argument: PACKAGE\nusage: rush undo PACKAGE\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -2005,7 +2005,7 @@ rush_search_parse_requirements() {
     args[text]=$1
     shift
   else
-    printf "missing required argument: TEXT\nusage: rush search TEXT [options]\n"
+    printf "missing required argument: TEXT\nusage: rush search TEXT\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -2060,7 +2060,7 @@ rush_edit_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush edit PACKAGE [FILE] [options]\n"
+    printf "missing required argument: PACKAGE\nusage: rush edit PACKAGE [FILE]\n"
     exit 1
   fi
   # :command.required_flags_filter

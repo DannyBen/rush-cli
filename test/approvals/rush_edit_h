@@ -3,7 +3,7 @@ rush edit - Edit package files
 Shortcut: e
 
 Usage:
-  rush edit PACKAGE [FILE] [options]
+  rush edit PACKAGE [FILE]
   rush edit --help | -h
 
 Options:

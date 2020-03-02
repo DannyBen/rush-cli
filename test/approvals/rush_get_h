@@ -6,7 +6,7 @@ rush get
 Shortcut: g
 
 Usage:
-  rush get PACKAGE [options]
+  rush get PACKAGE
   rush get --help | -h
 
 Options:
