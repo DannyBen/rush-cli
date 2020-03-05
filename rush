@@ -31,7 +31,7 @@ rush_usage() {
   echo "  pull      Git pull one or all repositories"
   echo "  push      Git push one or all repositories"
   printf "\nConfig Commands:\n"
-  echo "  config    Show the configuration file"
+  echo "  config    Show or edit the configuration file"
   echo "  default   Set a default repository"
   printf "\nPackage Commands:\n"
   echo "  get       Install a package (default)"
@@ -288,10 +288,10 @@ rush_push_usage() {
 # :command.usage
 rush_config_usage() {
   if [[ -n $long_usage ]]; then
-    printf "rush config - Show the configuration file\n"
+    printf "rush config - Show or edit the configuration file\n"
     echo 
   else
-    printf "rush config - Show the configuration file\n"
+    printf "rush config - Show or edit the configuration file\n"
     echo 
   fi
 

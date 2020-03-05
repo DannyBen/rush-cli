@@ -15,7 +15,7 @@ Git Commands:
   push      Git push one or all repositories
 
 Config Commands:
-  config    Show the configuration file
+  config    Show or edit the configuration file
   default   Set a default repository
 
 Package Commands:

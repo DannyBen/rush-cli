@@ -106,7 +106,7 @@ commands:
 - name: config
   short: c
   group: Config
-  help: Show the configuration file
+  help: Show or edit the configuration file
 
   flags:
   - long: --edit
