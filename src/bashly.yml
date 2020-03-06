@@ -39,6 +39,11 @@ commands:
     required: true
     help: Repository name
 
+  flags:
+  - long: --purge
+    short: -p
+    help: Also remove the local repository's directory
+
 - name: clone
   group: Git
   help: |-
