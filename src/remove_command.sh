@@ -1,11 +1,14 @@
 repo=${args[repo]}
 purge=${args[--purge]}
 
-echo "remove $(green "$repo")"
+say "remove" "$repo"
 
 if [[ $purge ]] ; then
   repo_path=$(config_get "$repo")
-  [[ -d $repo_path ]] && rm -rf $repo_path
+  if [[ -d $repo_path ]] ; then
+    rm -rf $repo_path
+    say "remove" "purged $repo_path"
+  fi
 fi
 
 config_del "$repo"

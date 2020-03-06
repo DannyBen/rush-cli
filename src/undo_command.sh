@@ -20,7 +20,7 @@ script=$package_path/undo
 export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-echo "undo $(green "$repo:$package")"
+say "undo" "$repo:$package"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
 ./undo

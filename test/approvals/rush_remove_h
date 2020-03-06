@@ -6,12 +6,15 @@ rush remove
 Shortcut: r
 
 Usage:
-  rush remove REPO
+  rush remove REPO [options]
   rush remove --help | -h
 
 Options:
   --help, -h
     Show this help
+
+  --purge, -p
+    Also remove the local repository's directory
 
 Arguments:
   REPO

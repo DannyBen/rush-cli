@@ -846,6 +846,11 @@ is_busybox_grep() {
   grep --version 2>&1 /dev/null | grep -i busybox > /dev/null 2>&1
 }
 
+# :src/lib/say.sh
+say() {
+  printf "%-20s | %s\n" "$(magenta $1)" "$(bold "${*:2}")"
+}
+
 # :command.command_functions
 # :command.function
 rush_add_command() {
@@ -854,7 +859,7 @@ rush_add_command() {
   path=${args[path]}
   
   config_set "$repo" "$path"
-  echo "add $(green "$repo:$path")"
+  say "add" "$repo = $path"
 }
 
 # :command.function
@@ -863,11 +868,14 @@ rush_remove_command() {
   repo=${args[repo]}
   purge=${args[--purge]}
   
-  echo "remove $(green "$repo")"
+  say "remove" "$repo"
   
   if [[ $purge ]] ; then
     repo_path=$(config_get "$repo")
-    [[ -d $repo_path ]] && rm -rf $repo_path
+    if [[ -d $repo_path ]] ; then
+      rm -rf $repo_path
+      say "remove" "purged $repo_path"
+    fi
   fi
   
   config_del "$repo"
@@ -903,6 +911,7 @@ rush_clone_command() {
   set -e
   
   # Clone
+  say "clone" "$repo_url"
   if [[ $full ]]; then
     git clone "$repo_url" "$path"
   else
@@ -923,10 +932,10 @@ rush_pull_command() {
     local repo="$2"
   
     if [[ -d "$repo_path/.git" ]]; then
-      echo "pull $(green "$repo")"
+      say "pull" "$repo"
       ( cd "$repo_path" && git pull )
     else
-      echo "skip $(blue "$repo") (not a git repo)"
+      say "pull" "skipping $repo (not a git repo)"
     fi
   }
   
@@ -953,10 +962,10 @@ rush_push_command() {
     local repo="$2"
   
     if [[ -d "$repo_path/.git" ]]; then
-      echo "push $(green "$repo")"
+      say "push" "$repo"
       ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
     else
-      echo "skip $(blue "$repo") (not a git repo)"
+      say "push" "skipping $repo (not a git repo)"
     fi
   }
   
@@ -995,7 +1004,7 @@ rush_default_command() {
   
   config_set "default" "$repo_path"
   config_del "$repo"
-  echo "default $(green "$repo")"
+  say "default" "$repo ($repo_path)"
 }
 
 # :command.function
@@ -1023,7 +1032,7 @@ rush_get_command() {
   export REPO="$repo"
   export REPO_PATH="$repo_path"
   [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-  echo "run $(green "$repo:$package")"
+  say "get" "$repo:$package"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
   ./main
@@ -1054,7 +1063,7 @@ rush_undo_command() {
   export REPO="$repo"
   export REPO_PATH="$repo_path"
   [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-  echo "undo $(green "$repo:$package")"
+  say "undo" "$repo:$package"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
   ./undo
@@ -1067,7 +1076,7 @@ rush_snatch_command() {
   repo_id=${args[github_user]}
   package=${args[package]}
   
-  echo "snatch $(green "$repo_id $package")"
+  say "snatch" "$repo_id $package"
   
   rush clone "$repo_id" --name snatched
   rush get snatched:$package

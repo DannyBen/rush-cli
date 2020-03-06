@@ -56,6 +56,11 @@ describe "undo"
   approve "rush undo download"
   approve "rush undo sample:download"
 
+describe "snatch"
+  approve "rush snatch"
+  approve "rush snatch -h"
+  approve "rush snatch dannyben hello"
+
 describe "info"
   approve "rush info"
   approve "rush info -h"
@@ -73,8 +78,11 @@ describe "push"
   approve "rush push -h"
 
 describe "remove"
+  dir="/root/rush-repos/dannyben/rush-repo"
   approve "rush remove"
   approve "rush remove -h"
+  approve "rush remove dannyben --purge"
+  [[ -d $dir ]] && fail "Expected directory $dir to not exist"
   approve "rush remove dannyben"
 
 describe "list"
