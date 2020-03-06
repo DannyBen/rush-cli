@@ -100,6 +100,8 @@ Usage
 ```
 $ rush --help
 
+rush - Personal package manager
+
 Usage:
   rush [command]
   rush [command] --help | -h
@@ -215,5 +217,5 @@ to contribute, feel free to [open an issue][issues].
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
 [issues]: https://github.com/DannyBen/rush-cli/issues
-[releases]: https://github.com/DannyBen/rush-cli/releasesrush - Personal package manager
+[releases]: https://github.com/DannyBen/rush-cli/releases
 
