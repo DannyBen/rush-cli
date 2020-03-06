@@ -152,6 +152,13 @@ rush_remove_usage() {
     printf "    Repository name\n"
     echo
 
+    # :command.usage_examples
+    printf "Examples:\n"
+    
+    printf "  rush remove bobby\n"
+    printf "  rush remove bobby --purge\n"
+    echo
+
   fi
 }
 
@@ -848,7 +855,7 @@ is_busybox_grep() {
 
 # :src/lib/say.sh
 say() {
-  printf "%-20s | %s\n" "$(magenta $1)" "$(bold "${*:2}")"
+  printf "%-20s | %s\n" "$(magenta "$1")" "$(bold "${*:2}")"
 }
 
 # :command.command_functions
@@ -873,7 +880,7 @@ rush_remove_command() {
   if [[ $purge ]] ; then
     repo_path=$(config_get "$repo")
     if [[ -d $repo_path ]] ; then
-      rm -rf $repo_path
+      rm -rf "$repo_path"
       say "remove" "purged $repo_path"
     fi
   fi
@@ -1075,11 +1082,12 @@ rush_snatch_command() {
   # Collect variables
   repo_id=${args[github_user]}
   package=${args[package]}
+  path="$HOME/rush-repos/snatched"
   
   say "snatch" "$repo_id $package"
   
-  rush clone "$repo_id" --name snatched
-  rush get snatched:$package
+  rush clone "$repo_id" "$path" --name snatched
+  rush get "snatched:$package"
   rush remove snatched --purge
 }
 

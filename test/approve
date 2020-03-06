@@ -57,9 +57,11 @@ describe "undo"
   approve "rush undo sample:download"
 
 describe "snatch"
+  dir="/root/rush-repos/snatched"
   approve "rush snatch"
   approve "rush snatch -h"
   approve "rush snatch dannyben hello"
+  [[ -d $dir ]] && fail "Expected directory $dir to not exist"
 
 describe "info"
   approve "rush info"

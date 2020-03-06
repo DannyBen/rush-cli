@@ -1,10 +1,10 @@
 [35msnatch[0m      | [1mdannyben hello[0m
 [35mclone[0m       | [1mhttps://github.com/dannyben/rush-repo.git[0m
-Cloning into '/root/rush-repos/dannyben/rush-repo'...
+Cloning into '/root/rush-repos/snatched'...
 [35mget[0m         | [1msnatched:hello[0m
 What's the rush?
 REPO:      snatched
-REPO_PATH: /root/rush-repos/dannyben/rush-repo
+REPO_PATH: /root/rush-repos/snatched
 USER_CWD:  /test
 [35mremove[0m      | [1msnatched[0m
-[35mremove[0m      | [1mpurged /root/rush-repos/dannyben/rush-repo[0m
+[35mremove[0m      | [1mpurged /root/rush-repos/snatched[0m

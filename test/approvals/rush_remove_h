@@ -19,3 +19,7 @@ Options:
 Arguments:
   REPO
     Repository name
+
+Examples:
+  rush remove bobby
+  rush remove bobby --purge

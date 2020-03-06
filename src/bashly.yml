@@ -44,6 +44,10 @@ commands:
     short: -p
     help: Also remove the local repository's directory
 
+  examples:
+  - rush remove bobby
+  - rush remove bobby --purge
+
 - name: clone
   group: Git
   help: |-
