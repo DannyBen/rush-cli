@@ -49,7 +49,7 @@ commands:
   args:
   - name: github_user
     required: true
-    help: |-
+    help: &github_user_help |-
       Github user
       This user is expected to have a repository named 'rush-repo'.
       If you need to use a different name, use the 'user/repo' syntax.
@@ -163,6 +163,26 @@ commands:
   examples:
   - rush undo ruby
   - rush undo centos:ruby 
+
+- name: snatch
+  help: |-
+    Install a package from a remote repo
+    This command is a shortcut to running clone followed by get.
+    It will clone the repository to a temporary directory and run the main
+    package script.
+
+  args:
+  - name: github_user
+    required: true
+    help: *github_user_help
+
+  - name: package
+    required: true
+    help: Package name
+
+  examples:
+  - rush snatch james python
+  - rush snatch james/other-rush-repo python
 
 - name: info
   short: i
