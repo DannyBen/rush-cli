@@ -1,0 +1,2 @@
+missing required argument: GITHUB_USER
+usage: rush snatch GITHUB_USER PACKAGE

@@ -36,14 +36,30 @@ Rush was developed using the [Bashly Command Line Framework][bashly].
 Installation
 --------------------------------------------------
 
-    $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
+> Note that rush requires bash 4.0 or higher (`brew install bash` on mac).
 
-Feel free to inspect the [setup script](setup) before running, or simply
-install manually by placing the [rush](rush) script in `/usr/local/bin` or
-anywhere in your `PATH`.
 
-Note that rush requires bash 4.0 or higher
-(`brew install bash` for mac users).
+### Installing using the setup script
+
+This setup script simply downloads the rush executable to `/usr/local/bin/`.
+You can either install the latest version, or a specific version
+(see available [releases]):
+
+```shell
+# Install the latest (master) version
+$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
+
+# Or, install a specific version
+$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/v0.4.1/setup)
+```
+
+Feel free to inspect the [setup script](setup) before running.
+
+
+### Installing manually
+
+Download the [rush](rush) script to `/usr/local/bin/` or anywhere in your
+`PATH`, and make it executable.
 
 
 Quick Start
@@ -84,8 +100,6 @@ Usage
 ```
 $ rush --help
 
-rush - Personal package manager
-
 Usage:
   rush [command]
   rush [command] --help | -h
@@ -107,6 +121,7 @@ Config Commands:
 Package Commands:
   get       Install a package (default)
   undo      Uninstall a package
+  snatch    Install a package from a remote repo
   info      Show information about a package
   list      Show packages in one or all repositories
   search    Search in package names and info files
@@ -200,3 +215,5 @@ to contribute, feel free to [open an issue][issues].
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
 [issues]: https://github.com/DannyBen/rush-cli/issues
+[releases]: https://github.com/DannyBen/rush-cli/releasesrush - Personal package manager
+

@@ -7,4 +7,4 @@ repo_path=$(config_get "$repo")
 
 config_set "default" "$repo_path"
 config_del "$repo"
-echo "default $(green "$repo")"
+say "default" "$repo ($repo_path)"

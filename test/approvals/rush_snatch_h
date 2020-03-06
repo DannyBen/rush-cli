@@ -1,0 +1,27 @@
+rush snatch
+
+  Install a package from a remote repo
+  This command is a shortcut to running clone followed by get.
+  It will clone the repository to a temporary directory and run the main
+  package script.
+
+Usage:
+  rush snatch GITHUB_USER PACKAGE
+  rush snatch --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  GITHUB_USER
+    Github user
+    This user is expected to have a repository named 'rush-repo'.
+    If you need to use a different name, use the 'user/repo' syntax.
+
+  PACKAGE
+    Package name
+
+Examples:
+  rush snatch james python
+  rush snatch james/other-rush-repo python

@@ -7,10 +7,10 @@ push_repo() {
   local repo="$2"
 
   if [[ -d "$repo_path/.git" ]]; then
-    echo "push $(green "$repo")"
+    say "push" "$repo"
     ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
   else
-    echo "skip $(blue "$repo") (not a git repo)"
+    say "push" "skipping $repo (not a git repo)"
   fi
 }
 

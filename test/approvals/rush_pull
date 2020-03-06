@@ -1,4 +1,4 @@
-pull [32mdannyben[0m
+[35mpull[0m        | [1mdannyben[0m
 Already up to date.
-skip [34mdefault[0m (not a git repo)
-skip [34msample[0m (not a git repo)
+[35mpull[0m        | [1mskipping default (not a git repo)[0m
+[35mpull[0m        | [1mskipping sample (not a git repo)[0m

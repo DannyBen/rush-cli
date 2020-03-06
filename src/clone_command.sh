@@ -25,6 +25,7 @@ fi
 set -e
 
 # Clone
+say "clone" "$repo_url"
 if [[ $full ]]; then
   git clone "$repo_url" "$path"
 else

@@ -20,7 +20,7 @@ script=$package_path/main
 export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-echo "run $(green "$repo:$package")"
+say "get" "$repo:$package"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
 ./main
