@@ -86,12 +86,16 @@ $ rush default sample
 
 # And now you can omit the repository name when getting a package
 $ rush get hello
+
+# Since `get` is the default command, the above command is the same as
+$ rush hello
 ```
 
 In case you prefer testing Rush in a clean, isolated docker environment, you
 can use [this docker image][docker-sandbox], which has Rush copied to its path:
 
-    $ docker run --rm -it dannyben/rush-sandbox
+    $ docker run --rm -it dannyben/rush
+    > rush --help
 
 
 Usage
