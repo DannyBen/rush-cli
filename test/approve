@@ -26,10 +26,19 @@ describe "clone"
   count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
   [[ $count == 1 ]] || fail "Expected shallow clone, got $count commits"
 
-  rm -rf /root/rush-repos/dannyben
+  rush remove dannyben --purge >/dev/null
   approve "rush clone dannyben --full"
   count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
   [[ $count == 10 ]] || fail "Expected full clone, got $count commits"
+
+  approve "rush clone dannyben" "rush_clone_dannyben_dir_exist"
+  expect_exit_code 1
+
+  approve "rush clone sample"
+  expect_exit_code 1
+
+  approve "rush clone sample --ignore"
+  expect_exit_code 0
 
 describe "config"
   approve "rush config"

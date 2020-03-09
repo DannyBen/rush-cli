@@ -2,6 +2,9 @@ rush get
 
   Install a package
   This command runs the main script in the package directory.
+  
+  This is the default command, which means that running 'rush package' is
+  the same as running 'rush get package'.
 
 Shortcut: g
 
@@ -21,5 +24,6 @@ Arguments:
     'repo:package'.
 
 Examples:
+  rush ruby
   rush get ruby
   rush get centos:ruby
