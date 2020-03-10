@@ -161,6 +161,14 @@ commands:
       this case, the default repository will be used) or in the form of
       'repo:package'.
 
+  flags:
+  - long: --clone
+    short: -c
+    help: |-
+      Clone the repository if it is not found locally
+      This flag will look for a GitHub user with the same name as the
+      repository, and attempt to clone their rush-repo repository.
+
   examples:
   - rush ruby
   - rush get ruby

@@ -42,10 +42,10 @@ if [[ $skip ]] ; then
   say "clone" "skipping $repo_name (exists)"
 
 else
-  set -e
-
   # Clone
   say "clone" "$repo_url"
+  github_repo_exist "$repo_id" || abort "cannot find $repo_id on github"
+
   if [[ $full ]]; then
     git clone "$repo_url" "$path"
   else

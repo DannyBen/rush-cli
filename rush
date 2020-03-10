@@ -392,7 +392,7 @@ rush_get_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush get PACKAGE\n"
+  printf "  rush get PACKAGE [options]\n"
   printf "  rush get --help | -h\n"
   echo
 
@@ -402,7 +402,11 @@ rush_get_usage() {
     echo "  --help, -h"
     printf "    Show this help\n"
     echo
-
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --clone, -c"
+    printf "    Clone the repository if it is not found locally\n    This flag will look for a GitHub user with the same name as the\n    repository, and attempt to clone their rush-repo repository.\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -865,6 +869,13 @@ config_has_key() {
   [[ $(config_get "$1") ]]
 }
 
+# :src/lib/github_repo_exist.sh
+# if github_repo_exist dannyben/rush-cli ; then ...
+github_repo_exist() {
+  repo="$1"
+  curl -s -o /dev/null -I -w "%{http_code}"  "https://api.github.com/repos/$repo" | grep 200 > /dev/null
+}
+
 # :src/lib/is_busybox_grep.sh
 is_busybox_grep() {
   grep --version 2>&1 /dev/null | grep -i busybox > /dev/null 2>&1
@@ -952,10 +963,10 @@ rush_clone_command() {
     say "clone" "skipping $repo_name (exists)"
   
   else
-    set -e
-  
     # Clone
     say "clone" "$repo_url"
+    github_repo_exist "$repo_id" || abort "cannot find $repo_id on github"
+  
     if [[ $full ]]; then
       git clone "$repo_url" "$path"
     else
@@ -1059,10 +1070,16 @@ rush_get_command() {
   # Collect variables
   package=${args[package]}
   repo="default"
+  clone=${args[--clone]}
   
   if [[ $package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
     package=${BASH_REMATCH[2]}
+  fi
+  
+  if ! config_has_key "$repo" && [[ $clone ]] && [[ $repo != 'default' ]]; then
+    say "get" "repo $repo does not exist, attempting clone"
+    rush clone "$repo"
   fi
   
   repo_path=$(config_get "$repo")
@@ -1934,7 +1951,7 @@ rush_get_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE\n"
+    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1942,6 +1959,12 @@ rush_get_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --clone | -c )
+      args[--clone]=1
+      shift
+      ;;
+  
   
     -* )
       printf "invalid option: %s\n" "$key"
