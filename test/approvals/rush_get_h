@@ -9,12 +9,17 @@ rush get
 Shortcut: g
 
 Usage:
-  rush get PACKAGE
+  rush get PACKAGE [options]
   rush get --help | -h
 
 Options:
   --help, -h
     Show this help
+
+  --clone, -c
+    Clone the repository if it is not found locally
+    This flag will look for a GitHub user with the same name as the
+    repository, and attempt to clone their rush-repo repository.
 
 Arguments:
   PACKAGE

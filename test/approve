@@ -58,6 +58,10 @@ describe "get"
   approve "rush get sample:hello"
   approve "rush hello"
   approve "rush get package-in-package/one"
+  rush remove dannyben --purge > /dev/null
+  approve "rush get dannyben:hello"
+  approve "rush get dannyben:hello --clone"
+  approve "rush get dannyben:hello" "rush_get_dannyben_hello_works"
 
 describe "undo"
   approve "rush undo"
