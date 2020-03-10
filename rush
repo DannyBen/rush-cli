@@ -200,6 +200,11 @@ rush_clone_usage() {
     echo "  --full, -f"
     printf "    Perform a full clone, instead of the default shallow clone\n"
     echo
+    
+    # :flag.usage
+    echo "  --ignore, -i"
+    printf "    Ignore (do not clone) if a repository with this name exists.\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -218,7 +223,7 @@ rush_clone_usage() {
     
     printf "  rush clone bobby\n"
     printf "  rush clone bobby/bobs-repo ./repos/bobby --ssh\n"
-    printf "  rush clone bobby --name sample\n"
+    printf "  rush clone bobby --name sample --ignore\n"
     echo
 
   fi
@@ -376,7 +381,7 @@ rush_get_usage() {
   if [[ -n $long_usage ]]; then
     printf "rush get\n"
     echo 
-    printf "  Install a package\n  This command runs the main script in the package directory.\n"
+    printf "  Install a package\n  This command runs the main script in the package directory.\n  \n  This is the default command, which means that running 'rush package' is\n  the same as running 'rush get package'.\n"
     echo 
   else
     printf "rush get - Install a package\n"
@@ -387,7 +392,7 @@ rush_get_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush get PACKAGE\n"
+  printf "  rush get PACKAGE [options]\n"
   printf "  rush get --help | -h\n"
   echo
 
@@ -397,7 +402,11 @@ rush_get_usage() {
     echo "  --help, -h"
     printf "    Show this help\n"
     echo
-
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --clone, -c"
+    printf "    Clone the repository if it is not found locally\n    This flag will look for a GitHub user with the same name as the\n    repository, and attempt to clone their rush-repo repository.\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -409,6 +418,7 @@ rush_get_usage() {
     # :command.usage_examples
     printf "Examples:\n"
     
+    printf "  rush ruby\n"
     printf "  rush get ruby\n"
     printf "  rush get centos:ruby\n"
     echo
@@ -848,6 +858,24 @@ config_keys() {
   echo "${keys[@]}"
 }
 
+# Returns true if the specified key exists in the config file
+# Usage:
+#
+#   if config_has_key "key" ; then
+#     echo "key exists"
+#   fi
+#
+config_has_key() {
+  [[ $(config_get "$1") ]]
+}
+
+# :src/lib/github_repo_exist.sh
+# if github_repo_exist dannyben/rush-cli ; then ...
+github_repo_exist() {
+  repo="$1"
+  curl -s -o /dev/null -I -w "%{http_code}"  "https://api.github.com/repos/$repo" | grep 200 > /dev/null
+}
+
 # :src/lib/is_busybox_grep.sh
 is_busybox_grep() {
   grep --version 2>&1 /dev/null | grep -i busybox > /dev/null 2>&1
@@ -896,6 +924,7 @@ rush_clone_command() {
   repo_id=${args[github_user]}
   use_ssh=${args[--ssh]}
   full=${args[--full]}
+  ignore=${args[--ignore]}
   default_repo_name=${repo_id%%/*}
   repo_name=${args[--name]:-$default_repo_name}
   
@@ -903,7 +932,7 @@ rush_clone_command() {
   [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
   
   # Set clone URL - ssh or https?
-  if [[ $use_ssh ]]; then
+  if [[ $use_ssh ]] ; then
     repo_url=git@github.com:$repo_id.git
   else
     repo_url=https://github.com/$repo_id.git
@@ -913,20 +942,41 @@ rush_clone_command() {
   [[ $path ]] || path="$HOME/rush-repos/$repo_id"
   
   # Abort if target directory exists
-  [[ -d $path ]] && abort "Directory $path already exists."
-  
-  set -e
-  
-  # Clone
-  say "clone" "$repo_url"
-  if [[ $full ]]; then
-    git clone "$repo_url" "$path"
-  else
-    git clone --depth 1 "$repo_url" "$path"
+  if [[ -d $path ]] ; then
+    if [[ $ignore ]] ; then
+      skip=1
+    else
+      abort "Directory $path already exists."
+    fi
   fi
   
-  # Save config
-  config_set "$repo_name" "$path"
+  # Abort if a repository with this name already exists
+  if config_has_key "$repo_name" ; then
+    if [[ $ignore ]] ; then
+      skip=1
+    else
+      abort "The repository is already registered:\n$repo_name = $(config_get "$repo_name")."
+    fi
+  fi
+  
+  if [[ $skip ]] ; then
+    say "clone" "skipping $repo_name (exists)"
+  
+  else
+    # Clone
+    say "clone" "$repo_url"
+    github_repo_exist "$repo_id" || abort "cannot find $repo_id on github"
+  
+    if [[ $full ]]; then
+      git clone "$repo_url" "$path"
+    else
+      git clone --depth 1 "$repo_url" "$path"
+    fi
+  
+    # Save config
+    config_set "$repo_name" "$path"
+  
+  fi
 }
 
 # :command.function
@@ -1020,10 +1070,16 @@ rush_get_command() {
   # Collect variables
   package=${args[package]}
   repo="default"
+  clone=${args[--clone]}
   
   if [[ $package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
     package=${BASH_REMATCH[2]}
+  fi
+  
+  if ! config_has_key "$repo" && [[ $clone ]] && [[ $repo != 'default' ]]; then
+    say "get" "repo $repo does not exist, attempting clone"
+    rush clone "$repo"
   fi
   
   repo_path=$(config_get "$repo")
@@ -1627,6 +1683,12 @@ rush_clone_parse_requirements() {
       shift
       ;;
   
+    # :flag.case
+    --ignore | -i )
+      args[--ignore]=1
+      shift
+      ;;
+  
   
     -* )
       printf "invalid option: %s\n" "$key"
@@ -1889,7 +1951,7 @@ rush_get_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE\n"
+    printf "missing required argument: PACKAGE\nusage: rush get PACKAGE [options]\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -1897,6 +1959,12 @@ rush_get_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --clone | -c )
+      args[--clone]=1
+      shift
+      ;;
+  
   
     -* )
       printf "invalid option: %s\n" "$key"
@@ -2270,7 +2338,7 @@ rush_edit_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.5.0"
+  version="0.5.1"
   long_usage=''
   set -e  
 

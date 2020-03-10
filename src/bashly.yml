@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.5.0
+version: 0.5.1
 
 environment_variables:
 - name: rush_config
@@ -84,10 +84,14 @@ commands:
     short: -f
     help: Perform a full clone, instead of the default shallow clone
 
+  - long: --ignore
+    short: -i
+    help: Ignore (do not clone) if a repository with this name exists.
+
   examples:
   - rush clone bobby
   - rush clone bobby/bobs-repo ./repos/bobby --ssh
-  - rush clone bobby --name sample
+  - rush clone bobby --name sample --ignore
 
 - name: pull
   short: p
@@ -142,6 +146,9 @@ commands:
   help: |-
     Install a package
     This command runs the main script in the package directory.
+    
+    This is the default command, which means that running 'rush package' is
+    the same as running 'rush get package'.
 
   default: true
 
@@ -154,7 +161,16 @@ commands:
       this case, the default repository will be used) or in the form of
       'repo:package'.
 
+  flags:
+  - long: --clone
+    short: -c
+    help: |-
+      Clone the repository if it is not found locally
+      This flag will look for a GitHub user with the same name as the
+      repository, and attempt to clone their rush-repo repository.
+
   examples:
+  - rush ruby
   - rush get ruby
   - rush get centos:ruby 
 

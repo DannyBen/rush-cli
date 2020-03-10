@@ -1,10 +1,16 @@
 # Collect variables
 package=${args[package]}
 repo="default"
+clone=${args[--clone]}
 
 if [[ $package =~ (.*):(.*) ]]; then
   repo=${BASH_REMATCH[1]}
   package=${BASH_REMATCH[2]}
+fi
+
+if ! config_has_key "$repo" && [[ $clone ]] && [[ $repo != 'default' ]]; then
+  say "get" "repo $repo does not exist, attempting clone"
+  rush clone "$repo"
 fi
 
 repo_path=$(config_get "$repo")

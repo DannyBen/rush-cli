@@ -22,6 +22,9 @@ Options:
   --full, -f
     Perform a full clone, instead of the default shallow clone
 
+  --ignore, -i
+    Ignore (do not clone) if a repository with this name exists.
+
 Arguments:
   GITHUB_USER
     Github user
@@ -35,4 +38,4 @@ Arguments:
 Examples:
   rush clone bobby
   rush clone bobby/bobs-repo ./repos/bobby --ssh
-  rush clone bobby --name sample
+  rush clone bobby --name sample --ignore
