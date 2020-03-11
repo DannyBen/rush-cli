@@ -14,9 +14,10 @@ list_display_item() {
 }
 
 list_show_repo() {
-  repo_or_package="$1"
-  search="${args[--search]}"
-  repo="$repo_or_package"
+  local repo_or_package="$1"
+  local search="${args[--search]}"
+  local repo="$repo_or_package"
+  local package glob repo_path infofile regex package_name
 
   if [[ $repo_or_package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}

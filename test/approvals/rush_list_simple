@@ -2,4 +2,7 @@ bootstrap
 download
 hello
 nested
-sample:nested/hi
+sample:bootstrap
+sample:download
+sample:hello
+sample:nested
