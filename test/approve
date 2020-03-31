@@ -109,6 +109,7 @@ describe "list"
   approve "rush list nested"
   approve "rush list sample:nested"
   approve "rush list no-such-package"
+  approve "COLUMNS=40 rush list"
 
 describe "search"
   approve "rush search"
