@@ -5,9 +5,13 @@ on:
 
 jobs:
   test:
-    name: Run test suite
+    name: Test on ${{ matrix.os }}
 
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout code
