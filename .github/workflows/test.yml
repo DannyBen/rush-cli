@@ -5,13 +5,9 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.os }}
+    name: Run test suite
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -19,7 +15,6 @@ jobs:
 
     - name: Run shellcheck tests
       run: shellcheck rush
-      if: matrix.os == 'ubuntu-latest'
 
     - name: Build container for approval tests
       run: docker-compose build
