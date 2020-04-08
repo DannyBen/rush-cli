@@ -26,7 +26,14 @@ script=$package_path/main
 export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-say "get" "$repo:$package"
+
+if [[ $repo == "default" ]] ; then
+  package_name="$package"
+else
+  package_name="$repo:$package"
+fi
+
+say "get" "$package_name"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
-./main
+./main || warn "get" "$package_name exited with error ($?)"
