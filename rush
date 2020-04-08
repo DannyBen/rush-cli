@@ -886,6 +886,11 @@ say() {
   printf "%-20s | %s\n" "$(magenta "$1")" "$(bold "${*:2}")"
 }
 
+# :src/lib/warn.sh
+warn() {
+  printf "%-20s | %s\n" "$(red "$1")" "$(red_bold "${*:2}")"
+}
+
 # :command.command_functions
 # :command.function
 rush_add_command() {
@@ -1095,10 +1100,17 @@ rush_get_command() {
   export REPO="$repo"
   export REPO_PATH="$repo_path"
   [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-  say "get" "$repo:$package"
+  
+  if [[ $repo == "default" ]] ; then
+    package_name="$package"
+  else
+    package_name="$repo:$package"
+  fi
+  
+  say "get" "$package_name"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
-  ./main
+  ./main || warn "get" "$package_name exited with error ($?)"
 }
 
 # :command.function
@@ -1126,10 +1138,17 @@ rush_undo_command() {
   export REPO="$repo"
   export REPO_PATH="$repo_path"
   [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-  say "undo" "$repo:$package"
+  
+  if [[ $repo == "default" ]] ; then
+    package_name="$package"
+  else
+    package_name="$repo:$package"
+  fi
+  
+  say "undo" "$package_name"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
-  ./undo
+  ./undo || warn "undo" "$package_name exited with error ($?)"
 }
 
 # :command.function

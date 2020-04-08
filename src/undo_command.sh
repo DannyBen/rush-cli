@@ -20,7 +20,14 @@ script=$package_path/undo
 export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
-say "undo" "$repo:$package"
+
+if [[ $repo == "default" ]] ; then
+  package_name="$package"
+else
+  package_name="$repo:$package"
+fi
+
+say "undo" "$package_name"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
-./undo
+./undo || warn "undo" "$package_name exited with error ($?)"
