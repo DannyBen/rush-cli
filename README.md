@@ -12,7 +12,7 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 /_/      Personal Package Manager
 ```
 
-![Version](https://img.shields.io/badge/version-0.5.4-blue.svg)
+![Version](https://img.shields.io/badge/version-0.5.5-blue.svg)
 [![Build Status](https://github.com/DannyBen/rush-cli/workflows/Test/badge.svg)](https://github.com/DannyBen/rush-cli/actions?query=workflow%3ATest)
 
 </div>
@@ -55,7 +55,7 @@ You can either install the latest version, or a specific version
 $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
 
 # Or, install a specific version
-$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/v0.5.4/setup)
+$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/v0.5.5/setup)
 ```
 
 Feel free to inspect the [setup script](setup) before running.
