@@ -30,4 +30,12 @@ fi
 say "undo" "$package_name"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
-./undo || warn "undo" "$package_name exited with error ($?)"
+
+finish() {
+  exitcode="$?"
+  [[ $exitcode == 0 ]] || warn "undo" "$package_name exited with error ($exitcode)"
+}
+
+trap finish EXIT
+
+./undo
