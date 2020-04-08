@@ -1,5 +1,84 @@
 # Changelog
 
+## [v0.5.5](https://github.com/DannyBen/rush-cli/tree/v0.5.5) (2020-04-08)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.4...v0.5.5)
+
+**Merged pull requests:**
+
+- Show warning when get or undo exit with nonzero code [\#41](https://github.com/DannyBen/rush-cli/pull/41) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.4](https://github.com/DannyBen/rush-cli/tree/v0.5.4) (2020-04-01)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.3...v0.5.4)
+
+**Merged pull requests:**
+
+- Fix config regex for mac [\#40](https://github.com/DannyBen/rush-cli/pull/40) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.3](https://github.com/DannyBen/rush-cli/tree/v0.5.3) (2020-03-31)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.2...v0.5.3)
+
+**Implemented enhancements:**
+
+- Improve list command [\#38](https://github.com/DannyBen/rush-cli/issues/38)
+
+**Merged pull requests:**
+
+- Improve rush list output [\#39](https://github.com/DannyBen/rush-cli/pull/39) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.2](https://github.com/DannyBen/rush-cli/tree/v0.5.2) (2020-03-11)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.1...v0.5.2)
+
+**Merged pull requests:**
+
+- Fix list command [\#37](https://github.com/DannyBen/rush-cli/pull/37) ([DannyBen](https://github.com/DannyBen))
+- Add rush clone --ignore and rueh get --clone [\#36](https://github.com/DannyBen/rush-cli/pull/36) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.1](https://github.com/DannyBen/rush-cli/tree/v0.5.1) (2020-03-10)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.0...v0.5.1)
+
+## [v0.5.0](https://github.com/DannyBen/rush-cli/tree/v0.5.0) (2020-03-06)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.4.1...v0.5.0)
+
+**Merged pull requests:**
+
+- Add snatch command and beautify output [\#35](https://github.com/DannyBen/rush-cli/pull/35) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.4.1](https://github.com/DannyBen/rush-cli/tree/v0.4.1) (2020-03-02)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.4.0...v0.4.1)
+
+## [v0.4.0](https://github.com/DannyBen/rush-cli/tree/v0.4.0) (2020-02-26)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.15...v0.4.0)
+
+**Merged pull requests:**
+
+- Default to shallow clone, and add --full for full clone [\#33](https://github.com/DannyBen/rush-cli/pull/33) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.3.15](https://github.com/DannyBen/rush-cli/tree/v0.3.15) (2020-02-06)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.14...v0.3.15)
+
+**Merged pull requests:**
+
+- Regenerate with bashly 0.3.8 [\#34](https://github.com/DannyBen/rush-cli/pull/34) ([DannyBen](https://github.com/DannyBen))
+- Non interactive setup script [\#32](https://github.com/DannyBen/rush-cli/pull/32) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.3.14](https://github.com/DannyBen/rush-cli/tree/v0.3.14) (2020-02-03)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.13...v0.3.14)
+
+**Merged pull requests:**
+
+- Add USER\_CWD variable [\#31](https://github.com/DannyBen/rush-cli/pull/31) ([DannyBen](https://github.com/DannyBen))
+- Switch to github actions [\#30](https://github.com/DannyBen/rush-cli/pull/30) ([DannyBen](https://github.com/DannyBen))
+
 ## [v0.3.13](https://github.com/DannyBen/rush-cli/tree/v0.3.13) (2020-01-24)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.12...v0.3.13)
