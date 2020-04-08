@@ -36,4 +36,12 @@ fi
 say "get" "$package_name"
 [[ -x "$script" ]] || chmod u+x "$script"
 cd "$package_path"
-./main || warn "get" "$package_name exited with error ($?)"
+
+finish() {
+  exitcode="$?"
+  [[ $exitcode == 0 ]] || warn "get" "$package_name exited with error ($exitcode)"
+}
+
+trap finish EXIT
+
+./main

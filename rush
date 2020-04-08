@@ -1110,7 +1110,15 @@ rush_get_command() {
   say "get" "$package_name"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
-  ./main || warn "get" "$package_name exited with error ($?)"
+  
+  finish() {
+    exitcode="$?"
+    [[ $exitcode == 0 ]] || warn "get" "$package_name exited with error ($exitcode)"
+  }
+  
+  trap finish EXIT
+  
+  ./main
 }
 
 # :command.function
@@ -1148,7 +1156,15 @@ rush_undo_command() {
   say "undo" "$package_name"
   [[ -x "$script" ]] || chmod u+x "$script"
   cd "$package_path"
-  ./undo || warn "undo" "$package_name exited with error ($?)"
+  
+  finish() {
+    exitcode="$?"
+    [[ $exitcode == 0 ]] || warn "undo" "$package_name exited with error ($exitcode)"
+  }
+  
+  trap finish EXIT
+  
+  ./undo
 }
 
 # :command.function
