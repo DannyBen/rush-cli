@@ -9,7 +9,7 @@ ____  /  ___________  ___________  /_
 ___  /   __  ___/  / / /_  ___/_  __ \
 __  /    _  /   / /_/ /_(__  )_  / / /
 _  /     /_/    \__,_/ /____/ /_/ /_/ 
-/_/      Personal Package Manager
+/_/      Personal Package Manager     
 ```
 
 ![Version](https://img.shields.io/badge/version-0.5.6-blue.svg)
