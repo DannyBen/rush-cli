@@ -47,15 +47,9 @@ Installation
 ### Installing using the setup script
 
 This setup script simply downloads the rush executable to `/usr/local/bin/`.
-You can either install the latest version, or a specific version
-(see available [releases]):
 
 ```shell
-# Install the latest (master) version
-$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/setup)
-
-# Or, install a specific version
-$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/v0.5.6/setup)
+$ bash <(curl -Ls get.dannyb.co/rush/setup)
 ```
 
 Feel free to inspect the [setup script](setup) before running.
@@ -226,5 +220,3 @@ to contribute, feel free to [open an issue][issues].
 [bashly]: https://github.com/dannyben/bashly
 [docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
 [issues]: https://github.com/DannyBen/rush-cli/issues
-[releases]: https://github.com/DannyBen/rush-cli/releases
-
