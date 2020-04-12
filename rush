@@ -1335,7 +1335,7 @@ rush_search_command() {
   }
   
   if is_busybox_grep; then
-    abort "cannot run with BusyBox grep.\nplease install GNU grep:\napk add --no-cache grep"
+    abort "cannot run with BusyBox grep.\nPlease install GNU grep:\napk add --no-cache grep"
   fi
   
   text=${args[text]}
@@ -2369,7 +2369,7 @@ rush_edit_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.5.6"
+  version="0.5.7"
   long_usage=''
   set -e  
 
