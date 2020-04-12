@@ -869,13 +869,6 @@ config_has_key() {
   [[ $(config_get "$1") ]]
 }
 
-# :src/lib/github_repo_exist.sh
-# if github_repo_exist dannyben/rush-cli ; then ...
-github_repo_exist() {
-  repo="$1"
-  curl -s -o /dev/null -I -w "%{http_code}"  "https://api.github.com/repos/$repo" | grep 200 > /dev/null
-}
-
 # :src/lib/is_busybox_grep.sh
 is_busybox_grep() {
   grep --version 2>&1 /dev/null | grep -i busybox > /dev/null 2>&1
@@ -951,7 +944,7 @@ rush_clone_command() {
     if [[ $ignore ]] ; then
       skip=1
     else
-      abort "Directory $path already exists."
+      abort "directory $path already exists."
     fi
   fi
   
@@ -960,7 +953,7 @@ rush_clone_command() {
     if [[ $ignore ]] ; then
       skip=1
     else
-      abort "The repository is already registered:\n$repo_name = $(config_get "$repo_name")."
+      abort "the repository is already registered:\n$repo_name = $(config_get "$repo_name")."
     fi
   fi
   
@@ -970,7 +963,6 @@ rush_clone_command() {
   else
     # Clone
     say "clone" "$repo_url"
-    github_repo_exist "$repo_id" || abort "cannot find $repo_id on github"
   
     if [[ $full ]]; then
       git clone "$repo_url" "$path"
@@ -1343,7 +1335,7 @@ rush_search_command() {
   }
   
   if is_busybox_grep; then
-    abort "Cannot run with BusyBox grep.\nPlease install GNU grep:\napk add --no-cache grep"
+    abort "cannot run with BusyBox grep.\nplease install GNU grep:\napk add --no-cache grep"
   fi
   
   text=${args[text]}

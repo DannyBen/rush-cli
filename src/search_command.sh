@@ -23,7 +23,7 @@ search_repo() {
 }
 
 if is_busybox_grep; then
-  abort "Cannot run with BusyBox grep.\nPlease install GNU grep:\napk add --no-cache grep"
+  abort "cannot run with BusyBox grep.\nPlease install GNU grep:\napk add --no-cache grep"
 fi
 
 text=${args[text]}
