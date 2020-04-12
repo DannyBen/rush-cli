@@ -25,7 +25,7 @@ if [[ -d $path ]] ; then
   if [[ $ignore ]] ; then
     skip=1
   else
-    abort "Directory $path already exists."
+    abort "directory $path already exists."
   fi
 fi
 
@@ -34,7 +34,7 @@ if config_has_key "$repo_name" ; then
   if [[ $ignore ]] ; then
     skip=1
   else
-    abort "The repository is already registered:\n$repo_name = $(config_get "$repo_name")."
+    abort "the repository is already registered:\n$repo_name = $(config_get "$repo_name")."
   fi
 fi
 
@@ -44,7 +44,6 @@ if [[ $skip ]] ; then
 else
   # Clone
   say "clone" "$repo_url"
-  github_repo_exist "$repo_id" || abort "cannot find $repo_id on github"
 
   if [[ $full ]]; then
     git clone "$repo_url" "$path"
