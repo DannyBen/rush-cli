@@ -9,6 +9,7 @@ push_repo() {
   if [[ -d "$repo_path/.git" ]]; then
     say "push" "$repo"
     (
+      set -e
       cd "$repo_path"
       git add . --all
       ls -1 **/{main,undo} | xargs git update-index --chmod +x
