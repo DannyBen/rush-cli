@@ -12,7 +12,7 @@ push_repo() {
       set -e
       cd "$repo_path"
       git add . --all
-      ls -1 **/{main,undo} | xargs git update-index --chmod +x
+      find . -type f \( -name main -o -name undo \) -exec git update-index --chmod +x {} \;
       git commit -am "$message"
       git push
     )
