@@ -8,7 +8,13 @@ push_repo() {
 
   if [[ -d "$repo_path/.git" ]]; then
     say "push" "$repo"
-    ( cd "$repo_path" && git add . --all && git commit -am "$message" && git push )
+    (
+      cd "$repo_path"
+      git add . --all
+      ls -1 **/{main,undo} | xargs git update-index --chmod +x
+      git commit -am "$message"
+      git push
+    )
   else
     say "push" "skipping $repo (not a git repo)"
   fi
