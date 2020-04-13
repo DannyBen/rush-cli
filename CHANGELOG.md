@@ -1,5 +1,29 @@
 # Changelog
 
+## [v0.5.8](https://github.com/DannyBen/rush-cli/tree/v0.5.8) (2020-04-13)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.7...v0.5.8)
+
+**Merged pull requests:**
+
+- chmod +x {main,undo} on push [\#44](https://github.com/DannyBen/rush-cli/pull/44) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.7](https://github.com/DannyBen/rush-cli/tree/v0.5.7) (2020-04-12)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.6...v0.5.7)
+
+**Merged pull requests:**
+
+- Fix rush clone for private repos [\#43](https://github.com/DannyBen/rush-cli/pull/43) ([DannyBen](https://github.com/DannyBen))
+
+## [v0.5.6](https://github.com/DannyBen/rush-cli/tree/v0.5.6) (2020-04-08)
+
+[Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.5...v0.5.6)
+
+**Merged pull requests:**
+
+- Fix non zero exit [\#42](https://github.com/DannyBen/rush-cli/pull/42) ([DannyBen](https://github.com/DannyBen))
+
 ## [v0.5.5](https://github.com/DannyBen/rush-cli/tree/v0.5.5) (2020-04-08)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.4...v0.5.5)
@@ -53,6 +77,10 @@
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.4.0...v0.4.1)
 
+**Merged pull requests:**
+
+- Regenerate with bashly 0.3.8 [\#34](https://github.com/DannyBen/rush-cli/pull/34) ([DannyBen](https://github.com/DannyBen))
+
 ## [v0.4.0](https://github.com/DannyBen/rush-cli/tree/v0.4.0) (2020-02-26)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.15...v0.4.0)
@@ -67,7 +95,6 @@
 
 **Merged pull requests:**
 
-- Regenerate with bashly 0.3.8 [\#34](https://github.com/DannyBen/rush-cli/pull/34) ([DannyBen](https://github.com/DannyBen))
 - Non interactive setup script [\#32](https://github.com/DannyBen/rush-cli/pull/32) ([DannyBen](https://github.com/DannyBen))
 
 ## [v0.3.14](https://github.com/DannyBen/rush-cli/tree/v0.3.14) (2020-02-03)
@@ -98,10 +125,6 @@
 ## [v0.3.11](https://github.com/DannyBen/rush-cli/tree/v0.3.11) (2019-12-23)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.3.10...v0.3.11)
-
-**Merged pull requests:**
-
-- Generate with bashly 0.3.5 [\#27](https://github.com/DannyBen/rush-cli/pull/27) ([DannyBen](https://github.com/DannyBen))
 
 ## [v0.3.10](https://github.com/DannyBen/rush-cli/tree/v0.3.10) (2019-12-20)
 
@@ -142,6 +165,7 @@
 
 **Merged pull requests:**
 
+- Generate with bashly 0.3.5 [\#27](https://github.com/DannyBen/rush-cli/pull/27) ([DannyBen](https://github.com/DannyBen))
 - Add rush info --extended [\#22](https://github.com/DannyBen/rush-cli/pull/22) ([DannyBen](https://github.com/DannyBen))
 - Build with bashly 0.3.3 [\#21](https://github.com/DannyBen/rush-cli/pull/21) ([DannyBen](https://github.com/DannyBen))
 
