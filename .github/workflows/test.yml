@@ -4,21 +4,33 @@ on:
   push: { branches: master }
 
 jobs:
-  test:
-    name: Run test suite
-
+  ubuntu:
+    name: Ubuntu
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
     - name: Run shellcheck tests
       run: shellcheck rush
-
-    - name: Build container for approval tests
-      run: docker-compose build
-
+    - name: Add current directory to path
+      run: echo "::add-path::$PWD"
     - name: Run approval tests
-      run: docker-compose run ci
+      run: test/approve
+    # - name: Build container for approval tests
+    #   run: docker-compose build
+    # - name: Run approval tests
+    #   run: docker-compose run ci
+
+  macos:
+    name: macOS
+    runs-on: macos-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Add current directory to path
+      run: echo "::add-path::$PWD"
+    - name: Upgrade the outdated bash
+      run: brew install bash
+    - name: Run approval tests
+      run: test/approve
 
