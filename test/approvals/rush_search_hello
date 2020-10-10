@@ -1,0 +1,15 @@
+[34mMatching packages:
+[0m
+[01;31m[Khello[m[K
+[34m
+Matching info files:
+[0m
+[35m[Khello[m[K[36m[K:[m[K	  $ rush info [01;31m[Khello[m[K
+
+[34mMatching packages:
+[0m
+sample:[01;31m[Khello[m[K
+[34m
+Matching info files:
+[0m
+[35m[Ksample:hello[m[K[36m[K:[m[K	  $ rush info [01;31m[Khello[m[K
