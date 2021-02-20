@@ -8,6 +8,8 @@ WORKDIR /tmp
 
 WORKDIR /test
 
+RUN git config --global pull.rebase false
+
 COPY rush /usr/local/bin/rush
 COPY sample-repo /root/rush-repos/sample-repo
 COPY test .
