@@ -696,8 +696,13 @@ rush_edit_usage() {
 
 # :command.inspect_args
 inspect_args() {
-  echo args:
-  for k in "${!args[@]}"; do echo "- \${args[$k]} = ${args[$k]}"; done
+  readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | sort)
+  if (( ${#args[@]} )); then
+    echo args:
+    for k in "${sorted_keys[@]}"; do echo "- \${args[$k]} = ${args[$k]}"; done
+  else
+    echo args: none
+  fi
 }
 
 # :command.user_lib
@@ -1707,7 +1712,7 @@ rush_clone_parse_requirements() {
   
     # :flag.case
     --name | -n )
-      if [[ $2 && $2 != -* ]]; then
+      if [[ $2 ]]; then
         args[--name]="$2"
         shift
         shift
@@ -1830,7 +1835,7 @@ rush_push_parse_requirements() {
     case "$key" in
     # :flag.case
     --message | -m )
-      if [[ $2 && $2 != -* ]]; then
+      if [[ $2 ]]; then
         args[--message]="$2"
         shift
         shift
