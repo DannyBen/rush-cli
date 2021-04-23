@@ -41,6 +41,7 @@ rush_usage() {
   echo "  list      Show packages in one or all repositories"
   echo "  search    Search in package names and info files"
   echo "  edit      Edit package files"
+  echo "  show      Show package files"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -534,7 +535,7 @@ rush_info_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush info PACKAGE [options]\n"
+  printf "  rush info PACKAGE\n"
   printf "  rush info --help | -h\n"
   echo
 
@@ -544,11 +545,7 @@ rush_info_usage() {
     echo "  --help, -h"
     printf "    Show this help\n"
     echo
-    # :command.usage_flags
-    # :flag.usage
-    echo "  --extended, -x"
-    printf "    Show source code for the main and undo scripts\n"
-    echo
+
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -689,6 +686,44 @@ rush_edit_usage() {
     # :argument.usage
     echo "  FILE"
     printf "    File to edit\n    Default: main\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_show_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush show - Show package files\n"
+    echo 
+  else
+    printf "rush show - Show package files\n"
+    echo 
+  fi
+
+  printf "Usage:\n"
+  printf "  rush show PACKAGE [FILE]\n"
+  printf "  rush show --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  PACKAGE"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    echo
+    
+    # :argument.usage
+    echo "  FILE"
+    printf "    File to show (show all if not specified)\n"
     echo
 
   fi
@@ -1196,7 +1231,6 @@ rush_info_command() {
   # :src/info_command.sh
   # Collect variables
   package=${args[package]}
-  extended=${args[--extended]}
   repo="default"
   
   if [[ $package =~ (.*):(.*) ]]; then
@@ -1213,29 +1247,7 @@ rush_info_command() {
   [[ -d $package_path ]] || abort "package not found: $repo/$package"
   [[ -f $infofile ]] || abort "infofile not found: $infofile"
   
-  # Show the package data
-  if [[ $extended ]]; then
-    mainfile="$package_path/main"
-    undofile="$package_path/undo"
-  
-    green "info:"
-    cat "$infofile"
-    echo
-  
-    if [[ -f $mainfile ]]; then
-      green "main:"
-      cat "$mainfile"
-      echo
-    fi
-    
-    if [[ -f $undofile ]]; then
-      green "undo:"
-      cat "$undofile"
-      echo
-    fi
-  else
-    cat "$infofile"
-  fi
+  cat "$infofile"
 }
 
 # :command.function
@@ -1386,6 +1398,43 @@ rush_edit_command() {
   "$edit" "$file_path"
 }
 
+# :command.function
+rush_show_command() {
+  # :src/show_command.sh
+  # Collect variables
+  package=${args[package]}
+  file=${args[file]}
+  repo="default"
+  
+  if [[ $package =~ (.*):(.*) ]]; then
+    repo=${BASH_REMATCH[1]}
+    package=${BASH_REMATCH[2]}
+  fi
+  
+  repo_path=$(config_get "$repo")
+  package_path="$repo_path/$package"
+  file_path="$package_path/$file"
+  
+  # Verify we have everything we need
+  [[ $repo_path ]] || abort "repo not found: $repo"
+  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  
+  # Show the package data
+  if [[ $file ]]; then
+    [[ -f $file_path ]] || abort "file not found: $file_path"
+    cat "$file_path"
+  else
+    shopt -s dotglob
+    for f in "$package_path"/*; do
+      green "$(basename "$f")"
+      cat "$f"
+      echo
+      echo
+    done
+    shopt -u dotglob
+  fi
+}
+
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flag_filter
@@ -1506,6 +1555,13 @@ parse_requirements() {
     action="edit"
     shift
     rush_edit_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  show )
+    action="show"
+    shift
+    rush_show_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -2189,7 +2245,7 @@ rush_info_parse_requirements() {
     args[package]=$1
     shift
   else
-    printf "missing required argument: PACKAGE\nusage: rush info PACKAGE [options]\n"
+    printf "missing required argument: PACKAGE\nusage: rush info PACKAGE\n"
     exit 1
   fi
   # :command.required_flags_filter
@@ -2197,12 +2253,6 @@ rush_info_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
-    # :flag.case
-    --extended | -x )
-      args[--extended]=1
-      shift
-      ;;
-  
   
     -* )
       printf "invalid option: %s\n" "$key"
@@ -2396,6 +2446,65 @@ rush_edit_parse_requirements() {
   # :command.whitelist_filter
 }
 
+# :command.parse_requirements
+rush_show_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version | -v )
+    version_command
+    exit
+    ;;
+  
+  --help | -h )
+    long_usage=yes
+    rush_show_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="show"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[package]=$1
+    shift
+  else
+    printf "missing required argument: PACKAGE\nusage: rush show PACKAGE [FILE]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[package]} ]]; then
+        args[package]=$1
+        shift
+      elif [[ ! ${args[file]} ]]; then
+        args[file]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+  # :command.default_assignments
+  # :command.whitelist_filter
+}
+
 # :command.initialize
 initialize() {
   version="0.5.9"
@@ -2521,6 +2630,14 @@ run() {
       rush_edit_usage
     else
       rush_edit_command
+    fi
+  
+  elif [[ $action == "show" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_show_usage
+    else
+      rush_show_command
     fi
   
   elif [[ $action == "root" ]]; then

@@ -1,13 +1,8 @@
-rush info
-
-  Show information about a package
-  This command shows the info file from the package directory.
-
-Shortcut: i
+rush show - Show package files
 
 Usage:
-  rush info PACKAGE
-  rush info --help | -h
+  rush show PACKAGE [FILE]
+  rush show --help | -h
 
 Options:
   --help, -h
@@ -20,6 +15,5 @@ Arguments:
     this case, the default repository will be used) or in the form of
     'repo:package'.
 
-Examples:
-  rush info ruby
-  rush info centos:ruby
+  FILE
+    File to show (show all if not specified)

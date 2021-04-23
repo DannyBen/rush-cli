@@ -220,11 +220,6 @@ commands:
     required: true
     help: *package_help
 
-  flags:
-  - long: --extended
-    short: -x
-    help: Show source code for the main and undo scripts
-
   examples:
   - rush info ruby
   - rush info centos:ruby
@@ -277,3 +272,13 @@ commands:
       File to edit
       Default: main
 
+- name: show
+  help: Show package files
+
+  args:
+  - name: package
+    required: true
+    help: *package_help
+
+  - name: file
+    help: File to show (show all if not specified)
