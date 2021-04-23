@@ -1,2 +1,2 @@
 missing required argument: PACKAGE
-usage: rush info PACKAGE
+usage: rush show PACKAGE [FILE]
