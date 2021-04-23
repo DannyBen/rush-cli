@@ -131,6 +131,7 @@ Package Commands:
   list      Show packages in one or all repositories
   search    Search in package names and info files
   edit      Edit package files
+  show      Show package files
 
 Options:
   --help, -h
@@ -143,6 +144,7 @@ Environment Variables:
   RUSH_CONFIG
     Location of the rush config file
     Default: ~/rush.ini
+
 ```
 
 
