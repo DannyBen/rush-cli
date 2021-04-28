@@ -91,7 +91,7 @@ $ rush hello
 ```
 
 In case you prefer testing Rush in a clean, isolated docker environment, you
-can use [this docker image][docker-sandbox], which has Rush copied to its path:
+can use [this docker image][docker-image], which has Rush copied to its path:
 
     $ docker run --rm -it --entrypoint bash dannyben/rush
     > rush --help
@@ -220,5 +220,5 @@ to contribute, feel free to [open an issue][issues].
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
 [bashly]: https://github.com/dannyben/bashly
-[docker-sandbox]: https://github.com/DannyBen/docker-rush-sandbox
+[docker-image]: https://github.com/dannyben/docker-rush
 [issues]: https://github.com/DannyBen/rush-cli/issues
