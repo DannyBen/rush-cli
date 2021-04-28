@@ -17,13 +17,13 @@ Options:
     Show this help
 
   --clone, -c
-    Clone the repository if it is not found locally
+    Clone the repository if it is not found locally.
     This flag will look for a GitHub user with the same name as the
     repository, and attempt to clone their rush-repo repository.
 
 Arguments:
   PACKAGE
-    Package name
+    Package name.
     This can either be the package name without the repository name (in
     this case, the default repository will be used) or in the form of
     'repo:package'.

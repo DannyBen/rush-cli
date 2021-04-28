@@ -15,10 +15,10 @@ Options:
 
 Arguments:
   REPO
-    Repository name
+    Repository name.
 
   PATH
-    Path to the repository
+    Path to the repository.
 
 Examples:
   rush add default ~/rush-repos/default

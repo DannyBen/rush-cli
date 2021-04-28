@@ -14,7 +14,7 @@ Options:
 
 Arguments:
   REPO
-    Repository name
+    Repository name.
 
 Examples:
   rush default sample

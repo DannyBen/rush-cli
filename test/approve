@@ -22,12 +22,19 @@ describe "clone"
   approve "rush clone"
   approve "rush clone -h"
   
-  approve "rush clone dannyben"
+  approve "rush clone dannyben --shallow"
   count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
   [[ $count == 1 ]] || fail "Expected shallow clone, got $count commits"
 
   rush remove dannyben --purge >/dev/null
-  approve "rush clone dannyben --full"
+  approve "rush clone dannyben --shallow --name somename && rush config"
+
+  rush remove somename --purge >/dev/null
+  approve "rush clone dannyben --shallow --default && rush config"
+  rush remove default --purge >/dev/null
+
+  rush remove dannyben --purge >/dev/null
+  approve "rush clone dannyben"
   count=$(cd /root/rush-repos/dannyben/rush-repo && git rev-list --count HEAD -n 10)
   [[ $count == 10 ]] || fail "Expected full clone, got $count commits"
 

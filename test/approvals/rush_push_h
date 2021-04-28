@@ -9,9 +9,9 @@ Options:
     Show this help
 
   --message, -m TEXT
-    Commit message
+    Commit message.
     Default: automatic commit
 
 Arguments:
   REPO
-    Repository name
+    Repository name.
