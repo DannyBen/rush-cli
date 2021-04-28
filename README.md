@@ -93,7 +93,7 @@ $ rush hello
 In case you prefer testing Rush in a clean, isolated docker environment, you
 can use [this docker image][docker-sandbox], which has Rush copied to its path:
 
-    $ docker run --rm -it dannyben/rush
+    $ docker run --rm -it --entrypoint bash dannyben/rush
     > rush --help
 
 
