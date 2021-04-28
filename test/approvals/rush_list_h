@@ -11,11 +11,11 @@ Options:
     Show this help
 
   --simple, -s
-    Show only package names
+    Show only package names.
 
 Arguments:
   REPO_OR_PACKAGE
-    Repository name or package name
+    Repository name or package name.
     - Leave blank to show all packages in all repositories.
     - Provide a repository name to show only packages in this repository.
     - Provide a package name (may be in the form of 'repo:package') to

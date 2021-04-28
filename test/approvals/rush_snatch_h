@@ -15,12 +15,12 @@ Options:
 
 Arguments:
   GITHUB_USER
-    Github user
+    Github user.
     This user is expected to have a repository named 'rush-repo'.
     If you need to use a different name, use the 'user/repo' syntax.
 
   PACKAGE
-    Package name
+    Package name.
 
 Examples:
   rush snatch james python

@@ -14,11 +14,11 @@ Options:
     Show this help
 
   --purge, -p
-    Also remove the local repository's directory
+    Also remove the local repository's directory.
 
 Arguments:
   REPO
-    Repository name
+    Repository name.
 
 Examples:
   rush remove bobby

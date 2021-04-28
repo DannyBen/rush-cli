@@ -5,7 +5,7 @@ version: 0.6.0
 environment_variables:
 - name: rush_config
   help: |-
-    Location of the rush config file
+    Location of the rush config file.
     Default: ~/rush.ini
 
 commands:
@@ -19,11 +19,11 @@ commands:
   args:
   - name: repo
     required: true
-    help: Repository name
+    help: Repository name.
 
   - name: path
     required: true
-    help: Path to the repository
+    help: Path to the repository.
 
   examples:
   - rush add default ~/rush-repos/default
@@ -37,12 +37,12 @@ commands:
   args:
   - name: repo
     required: true
-    help: Repository name
+    help: Repository name.
 
   flags:
   - long: --purge
     short: -p
-    help: Also remove the local repository's directory
+    help: Also remove the local repository's directory.
 
   examples:
   - rush remove bobby
@@ -59,30 +59,34 @@ commands:
   - name: github_user
     required: true
     help: &github_user_help |-
-      Github user
+      Github user.
       This user is expected to have a repository named 'rush-repo'.
       If you need to use a different name, use the 'user/repo' syntax.
 
   - name: path
     help: |-
-      Local path to clone the repository to
+      Local path to clone the repository to.
       Default: ~/rush-repos/<github_user>/<github_repo>
 
   flags:
   - long: --ssh
     short: -s
-    help: Clone using SSH instead of HTTPS
+    help: Clone using SSH instead of HTTPS.
+
+  - long: --default
+    short: -d
+    help: Set this as the default repository (same as '--name default').
 
   - long: --name
     short: -n
     arg: name
     help: |-
-      Name to use in the config file
+      Name to use in the config file.
       Default: GitHub user
 
-  - long: --full
-    short: -f
-    help: Perform a full clone, instead of the default shallow clone
+  - long: --shallow
+    short: -w
+    help: Perform a shallow clone, instead of the default full clone.
 
   - long: --ignore
     short: -i
@@ -90,6 +94,7 @@ commands:
 
   examples:
   - rush clone bobby
+  - rush clone bobby --default
   - rush clone bobby/bobs-repo ./repos/bobby --ssh
   - rush clone bobby --name sample --ignore
 
@@ -99,21 +104,21 @@ commands:
 
   args:
   - name: repo
-    help: Repository name
+    help: Repository name.
 
 - name: push
   help: Git push one or all repositories
 
   args:
   - name: repo
-    help: Repository name
+    help: Repository name.
 
   flags:
   - long: --message
     short: -m
     arg: TEXT
     help: |-
-      Commit message
+      Commit message.
       Default: automatic commit
 
 - name: config
@@ -124,7 +129,7 @@ commands:
   flags:
   - long: --edit
     short: -e
-    help: Open the configuration file for editing
+    help: Open the configuration file for editing.
 
 - name: default
   help: |-
@@ -135,7 +140,7 @@ commands:
   args:
   - name: repo
     required: true
-    help: Repository name
+    help: Repository name.
 
   examples:
   - rush default sample
@@ -156,7 +161,7 @@ commands:
   - name: package
     required: true
     help: &package_help |-
-      Package name
+      Package name.
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
@@ -165,7 +170,7 @@ commands:
   - long: --clone
     short: -c
     help: |-
-      Clone the repository if it is not found locally
+      Clone the repository if it is not found locally.
       This flag will look for a GitHub user with the same name as the
       repository, and attempt to clone their rush-repo repository.
 
@@ -203,7 +208,7 @@ commands:
 
   - name: package
     required: true
-    help: Package name
+    help: Package name.
 
   examples:
   - rush snatch james python
@@ -231,7 +236,7 @@ commands:
   args:
   - name: repo_or_package
     help: |-
-      Repository name or package name
+      Repository name or package name.
       - Leave blank to show all packages in all repositories.
       - Provide a repository name to show only packages in this repository.
       - Provide a package name (may be in the form of 'repo:package') to
@@ -240,7 +245,7 @@ commands:
   flags:
   - long: --simple
     short: -s
-    help: Show only package names
+    help: Show only package names.
 
   examples:
   - rush list
@@ -255,7 +260,7 @@ commands:
 
   args:
   - name: text
-    help: Text to search for
+    help: Text to search for.
     required: true
 
 - name: edit
@@ -269,7 +274,7 @@ commands:
 
   - name: file
     help: |-
-      File to edit
+      File to edit.
       Default: main
 
 - name: show
@@ -281,4 +286,4 @@ commands:
     help: *package_help
 
   - name: file
-    help: File to show (show all if not specified)
+    help: File to show (show all if not specified).

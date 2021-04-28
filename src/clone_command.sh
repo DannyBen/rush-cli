@@ -2,10 +2,16 @@
 path=${args[path]}
 repo_id=${args[github_user]}
 use_ssh=${args[--ssh]}
-full=${args[--full]}
+shallow=${args[--shallow]}
 ignore=${args[--ignore]}
 default_repo_name=${repo_id%%/*}
-repo_name=${args[--name]:-$default_repo_name}
+default=${args[--default]}
+
+if [[ $default ]] ; then
+  repo_name=default
+else
+  repo_name=${args[--name]:-$default_repo_name}
+fi
 
 # Adjust repo_id - defaults to $user/rush-repo
 [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
@@ -45,10 +51,10 @@ else
   # Clone
   say "clone" "$repo_url"
 
-  if [[ $full ]]; then
-    git clone "$repo_url" "$path"
-  else
+  if [[ $shallow ]]; then
     git clone --depth 1 "$repo_url" "$path"
+  else
+    git clone "$repo_url" "$path"
   fi
 
   # Save config
