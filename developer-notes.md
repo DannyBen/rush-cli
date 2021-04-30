@@ -2,8 +2,9 @@
 
 ## Prerequisites
 
-- [Bashly](https://github.com/DannyBen/bashly)
-- [Direnv](https://direnv.net/) (optional but recommended)
+- [bashly](https://github.com/DannyBen/bashly)
+- [direnv](https://direnv.net/) (optional)
+- [opcode](https://github.com/DannyBen/opcode)  (optional)
 
 ## Setup
 
