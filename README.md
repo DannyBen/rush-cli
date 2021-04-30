@@ -127,6 +127,7 @@ Package Commands:
   get       Install a package (default)
   undo      Uninstall a package
   snatch    Install a package from a remote repo
+  copy      Copy a package between local repositories
   info      Show information about a package
   list      Show packages in one or all repositories
   search    Search in package names and info files
@@ -142,7 +143,7 @@ Options:
 
 Environment Variables:
   RUSH_CONFIG
-    Location of the rush config file
+    Location of the rush config file.
     Default: ~/rush.ini
 
 ```

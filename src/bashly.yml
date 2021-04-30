@@ -220,6 +220,37 @@ commands:
   - rush snatch james python
   - rush snatch james/other-rush-repo python
 
+- name: copy
+  help: Copy a package between local repositories
+
+  args:
+  - name: source_package
+    required: true
+    help: |-
+      Source package name.
+      This can either be the package name without the repository name (in
+      this case, the default repository will be used) or in the form of
+      'repo:package'.
+
+  - name: target_package
+    help: |-
+      Target package name.
+      This can either be the package name without the repository name (in
+      this case, the default repository will be used) or in the form of
+      'repo:package'.
+      If left empty, the package will be copied with the same name to the
+      default repository.
+
+  flags:
+  - long: --force
+    short: -f
+    help: Copy the package even if it already exists in the target repository.
+
+  examples:
+  - rush copy james:python
+  - rush copy james:python bobby
+  - rush copy james:python bobby:python3 --force
+
 - name: info
   short: i
   help: |-

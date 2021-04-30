@@ -14,7 +14,7 @@ file_path="$package_path/$file"
 
 # Verify we have everything we need
 [[ $repo_path ]] || abort "repo not found: $repo"
-[[ -d $package_path ]] || abort "package not found: $repo/$package"
+[[ -d $package_path ]] || abort "package not found: $repo:$package"
 
 # Show the package data
 if [[ $file ]]; then

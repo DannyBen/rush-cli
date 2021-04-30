@@ -1,0 +1,32 @@
+rush copy - Copy a package between local repositories
+
+Usage:
+  rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [options]
+  rush copy --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+  --force, -f
+    Copy the package even if it already exists in the target repository.
+
+Arguments:
+  SOURCE_PACKAGE
+    Source package name.
+    This can either be the package name without the repository name (in
+    this case, the default repository will be used) or in the form of
+    'repo:package'.
+
+  TARGET_PACKAGE
+    Target package name.
+    This can either be the package name without the repository name (in
+    this case, the default repository will be used) or in the form of
+    'repo:package'.
+    If left empty, the package will be copied with the same name to the
+    default repository.
+
+Examples:
+  rush copy james:python
+  rush copy james:python bobby
+  rush copy james:python bobby:python3 --force
