@@ -45,4 +45,5 @@ if [[ -d $target_package_path ]]; then
 fi
 
 say "copy" "$source_display_name to $target_display_name"
+mkdir -p "$(dirname "$target_package_path")"
 cp -R "$source_package_path" "$target_package_path"
