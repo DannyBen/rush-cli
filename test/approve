@@ -95,6 +95,8 @@ describe "pull"
 
 describe "push"
   approve "rush push"
+  approve "rush push dannyben"
+  approve "rush push --all"
   approve "rush push -h"
 
 describe "remove"

@@ -111,9 +111,15 @@ commands:
 
   args:
   - name: repo
-    help: Repository name.
+    help: |-
+      Repository name.
+      Default: default
 
   flags:
+  - long: --all
+    short: -a
+    help: Push all repositories.
+
   - long: --message
     short: -m
     arg: TEXT
