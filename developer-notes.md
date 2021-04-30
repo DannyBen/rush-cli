@@ -13,7 +13,7 @@ reposotory to use the included sample repo.
 
 If you are using direnv, create this file:
 
-```
+```bash
 # .envrc
 export RUSH_CONFIG=$PWD/rush-dev.ini
 ```
