@@ -139,4 +139,17 @@ describe "show"
   approve "rush show download"
   approve "rush show download main"
 
+describe "copy"
+  mkdir ~/rush-repos/target
+  rush add default ~/rush-repos/target
+  approve "rush copy"
+  approve "rush copy -h"
+  approve "rush copy sample:hello"
+  approve "ls ~/rush-repos/target/hello" "rush_copy_files_list"
+  approve "rush copy sample:download download1"
+  approve "rush copy sample:download default:download2" "rush_copy_sample_download_default_download2_1-of-2"
+  approve "rush copy sample:download default:download2" "rush_copy_sample_download_default_download2_2-of-2"
+  approve "rush copy sample:download default:download2 -f"
+  approve "ls -R ~/rush-repos/target" "rush_copy_files_list2"
+
 green "All OK"

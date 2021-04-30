@@ -37,6 +37,7 @@ rush_usage() {
   echo "  get       Install a package (default)"
   echo "  undo      Uninstall a package"
   echo "  snatch    Install a package from a remote repo"
+  echo "  copy      Copy a package between local repositories"
   echo "  info      Show information about a package"
   echo "  list      Show packages in one or all repositories"
   echo "  search    Search in package names and info files"
@@ -525,6 +526,56 @@ rush_snatch_usage() {
     
     printf "  rush snatch james python\n"
     printf "  rush snatch james/other-rush-repo python\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+rush_copy_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "rush copy - Copy a package between local repositories\n"
+    echo 
+  else
+    printf "rush copy - Copy a package between local repositories\n"
+    echo 
+  fi
+
+  printf "Usage:\n"
+  printf "  rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [options]\n"
+  printf "  rush copy --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --force, -f"
+    printf "    Copy the package even if it already exists in the target repository.\n"
+    echo
+    # :command.usage_args
+    printf "Arguments:\n"
+    
+    # :argument.usage
+    echo "  SOURCE_PACKAGE"
+    printf "    Source package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    echo
+    
+    # :argument.usage
+    echo "  TARGET_PACKAGE"
+    printf "    Target package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n    If left empty, the package will be copied with the same name to the\n    default repository.\n"
+    echo
+
+    # :command.usage_examples
+    printf "Examples:\n"
+    
+    printf "  rush copy james:python\n"
+    printf "  rush copy james:python bobby\n"
+    printf "  rush copy james:python bobby:python3 --force\n"
     echo
 
   fi
@@ -1245,6 +1296,59 @@ rush_snatch_command() {
 }
 
 # :command.function
+rush_copy_command() {
+  # :src/copy_command.sh
+  source_package=${args[source_package]}
+  target_package=${args[target_package]}
+  force=${args[--force]}
+  source_repo=default
+  target_repo=default
+  
+  if [[ $source_package =~ (.*):(.*) ]]; then
+    source_repo=${BASH_REMATCH[1]}
+    source_package=${BASH_REMATCH[2]}
+  fi
+  
+  if [[ -z "$target_package" ]]; then
+    target_package="$source_package"
+  elif [[ $target_package =~ (.*):(.*) ]]; then
+    target_repo=${BASH_REMATCH[1]}
+    target_package=${BASH_REMATCH[2]}
+  fi
+  
+  source_repo_path=$(config_get "$source_repo")
+  target_repo_path=$(config_get "$target_repo")
+  source_package_path="$source_repo_path/$source_package"
+  target_package_path="$target_repo_path/$target_package"
+  
+  if [[ $source_repo == "default" ]]; then
+    source_display_name="$source_package"
+  else
+    source_display_name="$source_repo:$source_package"
+  fi
+  
+  if [[ $target_repo == "default" ]]; then
+    target_display_name="$target_package"
+  else
+    target_display_name="$target_repo:$target_package"
+  fi
+  
+  [[ $source_repo_path ]] || abort "source repo not found: $source_repo"
+  [[ $target_repo_path ]] || abort "target repo not found: $target_repo"
+  [[ -d $source_package_path ]] || abort "source package not found: $source_repo:$source_package"
+  if [[ -d $target_package_path ]]; then
+    if [[ $force ]]; then
+      rm -rf "$target_package_path"
+    else
+      abort "target package already exists: $target_repo:$target_package\nrun again with --force to copy anyway"
+    fi
+  fi
+  
+  say "copy" "$source_display_name to $target_display_name"
+  cp -R "$source_package_path" "$target_package_path"
+}
+
+# :command.function
 rush_info_command() {
   # :src/info_command.sh
   # Collect variables
@@ -1262,7 +1366,7 @@ rush_info_command() {
   
   # Verify we have everything we need
   [[ $repo_path ]] || abort "repo not found: $repo"
-  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  [[ -d $package_path ]] || abort "package not found: $repo:$package"
   [[ -f $infofile ]] || abort "infofile not found: $infofile"
   
   cat "$infofile"
@@ -1435,7 +1539,7 @@ rush_show_command() {
   
   # Verify we have everything we need
   [[ $repo_path ]] || abort "repo not found: $repo"
-  [[ -d $package_path ]] || abort "package not found: $repo/$package"
+  [[ -d $package_path ]] || abort "package not found: $repo:$package"
   
   # Show the package data
   if [[ $file ]]; then
@@ -1545,6 +1649,13 @@ parse_requirements() {
     action="snatch"
     shift
     rush_snatch_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  copy )
+    action="copy"
+    shift
+    rush_copy_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -2251,6 +2362,71 @@ rush_snatch_parse_requirements() {
 }
 
 # :command.parse_requirements
+rush_copy_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version | -v )
+    version_command
+    exit
+    ;;
+  
+  --help | -h )
+    long_usage=yes
+    rush_copy_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="copy"
+  # :command.required_args_filter
+  if [[ $1 && $1 != -* ]]; then
+    args[source_package]=$1
+    shift
+  else
+    printf "missing required argument: SOURCE_PACKAGE\nusage: rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [options]\n"
+    exit 1
+  fi
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+    # :flag.case
+    --force | -f )
+      args[--force]=1
+      shift
+      ;;
+  
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      if [[ ! ${args[source_package]} ]]; then
+        args[source_package]=$1
+        shift
+      elif [[ ! ${args[target_package]} ]]; then
+        args[target_package]=$1
+        shift
+      else
+        printf "invalid argument: %s\n" "$key"
+        exit 1
+      fi
+      ;;
+  
+    esac
+  done
+  # :command.default_assignments
+  # :command.whitelist_filter
+}
+
+# :command.parse_requirements
 rush_info_parse_requirements() {
   # :command.fixed_flag_filter
   case "$1" in
@@ -2628,6 +2804,14 @@ run() {
       rush_snatch_usage
     else
       rush_snatch_command
+    fi
+  
+  elif [[ $action == "copy" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      rush_copy_usage
+    else
+      rush_copy_command
     fi
   
   elif [[ $action == "info" ]]; then
