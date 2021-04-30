@@ -8,6 +8,9 @@ Options:
   --help, -h
     Show this help
 
+  --all, -a
+    Push all repositories.
+
   --message, -m TEXT
     Commit message.
     Default: automatic commit
@@ -15,3 +18,4 @@ Options:
 Arguments:
   REPO
     Repository name.
+    Default: default

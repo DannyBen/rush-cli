@@ -295,6 +295,11 @@ rush_push_usage() {
     echo
     # :command.usage_flags
     # :flag.usage
+    echo "  --all, -a"
+    printf "    Push all repositories.\n"
+    echo
+    
+    # :flag.usage
     echo "  --message, -m TEXT"
     printf "    Commit message.\n    Default: automatic commit\n"
     echo
@@ -303,7 +308,7 @@ rush_push_usage() {
     
     # :argument.usage
     echo "  REPO"
-    printf "    Repository name.\n"
+    printf "    Repository name.\n    Default: default\n"
     echo
 
   fi
@@ -1060,7 +1065,8 @@ rush_pull_command() {
 rush_push_command() {
   # :src/push_command.sh
   set +e
-  repo=${args[repo]}
+  all=${args[--all]}
+  repo=${args[repo]:-default}
   message=${args[--message]:-"automatic commit"}
   
   push_repo() {
@@ -1082,14 +1088,14 @@ rush_push_command() {
     fi
   }
   
-  if [[ $repo ]]; then
-    repo_path=$(config_get "$repo")
-    [[ $repo_path ]] || abort "no such repo: $repo"
-    push_repo "$repo_path" "$repo"
-  else
+  if [[ $all ]]; then
     for k in $(config_keys); do
       push_repo "$(config_get "$k")" "$k"
     done
+  else
+    repo_path=$(config_get "$repo")
+    [[ $repo_path ]] || abort "no such repo: $repo"
+    push_repo "$repo_path" "$repo"
   fi
 }
 
@@ -1912,6 +1918,12 @@ rush_push_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --all | -a )
+      args[--all]=1
+      shift
+      ;;
+  
     # :flag.case
     --message | -m )
       if [[ $2 ]]; then

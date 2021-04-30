@@ -1,5 +1,6 @@
 set +e
-repo=${args[repo]}
+all=${args[--all]}
+repo=${args[repo]:-default}
 message=${args[--message]:-"automatic commit"}
 
 push_repo() {
@@ -21,13 +22,13 @@ push_repo() {
   fi
 }
 
-if [[ $repo ]]; then
-  repo_path=$(config_get "$repo")
-  [[ $repo_path ]] || abort "no such repo: $repo"
-  push_repo "$repo_path" "$repo"
-else
+if [[ $all ]]; then
   for k in $(config_keys); do
     push_repo "$(config_get "$k")" "$k"
   done
+else
+  repo_path=$(config_get "$repo")
+  [[ $repo_path ]] || abort "no such repo: $repo"
+  push_repo "$repo_path" "$repo"
 fi
 
