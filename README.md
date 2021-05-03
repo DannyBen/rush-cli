@@ -61,6 +61,16 @@ Download the [rush](rush) script to `/usr/local/bin/` or anywhere in your
 `PATH`, and make it executable.
 
 
+### Installing auto-completion script
+
+If you wish to have all package name auto-completed for all `rush` commands, 
+add this line to your startup script (for example: `~/.bashrc`):
+
+```bash
+complete -W '$(rush list -s)' rush
+```
+
+
 Quick Start
 --------------------------------------------------
 
