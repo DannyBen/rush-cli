@@ -46,7 +46,8 @@ Installation
 
 ### Installing using the setup script
 
-This setup script simply downloads the rush executable to `/usr/local/bin/`.
+This setup script will download the rush executable to `/usr/local/bin/` and
+install an autocomplete script in the bash completions directory.
 
 ```shell
 $ bash <(curl -Ls get.dannyb.co/rush/setup)
@@ -59,9 +60,6 @@ Feel free to inspect the [setup script](setup) before running.
 
 Download the [rush](rush) script to `/usr/local/bin/` or anywhere in your
 `PATH`, and make it executable.
-
-
-### Installing auto-completion script
 
 If you wish to have all package name auto-completed for all `rush` commands, 
 add this line to your startup script (for example: `~/.bashrc`):
