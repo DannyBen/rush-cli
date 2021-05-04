@@ -6,19 +6,38 @@ on:
 jobs:
   test:
     name: Run test suite
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
     - name: Run shellcheck tests
-      run: shellcheck rush
-
+      run: shellcheck rush setup
     - name: Build container for approval tests
       run: docker-compose build
-
     - name: Run approval tests
       run: docker-compose run ci
+
+  ubuntu_setup:
+    name: Setup on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run setup
+      run: ./setup
+    - name: Test setup artifacts
+      run: test/setup_artifacts
+
+  macos_setup:
+    name: Setup on macOS
+    runs-on: macos-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Upgrade the outdated bash
+      run: brew install bash
+    - name: Run setup
+      run: ./setup
+    - name: Test setup artifacts
+      run: test/setup_artifacts
 
