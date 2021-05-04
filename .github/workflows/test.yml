@@ -14,5 +14,7 @@ jobs:
       run: echo "$PWD" >> $GITHUB_PATH
     - name: Run shellcheck tests
       run: shellcheck rush setup
+    - name: Prepare testing environment
+      run: ln -s $PWD /app
     - name: Run approval tests
-      run: test/approve
+      run: cd /app && test/approve

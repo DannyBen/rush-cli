@@ -11,5 +11,5 @@ services:
 
   test: &test
     <<: *default
-    command: bash approve
+    command: bash test/approve
 
