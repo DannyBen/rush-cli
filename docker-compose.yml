@@ -11,5 +11,9 @@ services:
 
   test: &test
     <<: *default
-    command: bash test/approve
+    command: bash approve
+
+  ci:
+    <<: *test
+    volumes: []
 
