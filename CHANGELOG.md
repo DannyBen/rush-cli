@@ -1,6 +1,12 @@
 Change Log
 ========================================
 
+Untagged - Latest
+----------------------------------------
+
+- Refactor setup script for a more polite autocomplete location
+
+
 v0.6.3 - 2021-04-30
 ----------------------------------------
 
