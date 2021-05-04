@@ -13,7 +13,3 @@ services:
     <<: *default
     command: bash approve
 
-  ci:
-    <<: *test
-    volumes: []
-

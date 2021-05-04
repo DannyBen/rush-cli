@@ -4,21 +4,15 @@ on:
   push: { branches: master }
 
 jobs:
-  test:
-    name: Run test suite
-
+  ubuntu:
+    name: Ubuntu
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    - name: Add current directory to path
+      run: echo "$PWD" >> $GITHUB_PATH
     - name: Run shellcheck tests
-      run: shellcheck rush
-
-    - name: Build container for approval tests
-      run: docker-compose build
-
+      run: shellcheck rush setup
     - name: Run approval tests
-      run: docker-compose run ci
-
+      run: test/approve

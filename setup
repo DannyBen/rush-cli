@@ -1,21 +1,39 @@
 #!/usr/bin/env bash
-echo "Downloading to /usr/local/bin/rush"
 
-curl_command="curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > /usr/local/bin/rush"
-
+# Figure out if we need sudo or not
+sudo=''
 if [[ $EUID -ne 0 ]]; then
-  # not root, need sudo
-  sudo bash -c "$curl_command"
-  sudo chmod a+x /usr/local/bin/rush
-else
-  # root
-  bash -c "$curl_command"
-  chmod a+x /usr/local/bin/rush
+  sudo='sudo'
 fi
 
-if type rush > /dev/null; then
-  echo "Done. Type 'rush --help' for more info."
+# Download script from Github
+echo "=== Saving executable to /usr/local/bin/op"
+curl_command="curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > /usr/local/bin/rush"
+$sudo bash -c "$curl_command"
+$sudo chmod a+x /usr/local/bin/rush
+
+# Install completions
+if [[ -d "/usr/share/bash-completion/completions" ]]; then
+  compdir="/usr/share/bash-completion/completions"
+elif [[ -d "/usr/local/etc/bash_completion.d" ]]; then
+  compdir="/usr/local/etc/bash_completion.d"
 else
-  echo "Failed downloading."
+  compdir=''
+fi
+
+if [[ -n $compdir ]]; then
+  echo "=== Installing autocompletions to $compdir"
+  echo "complete -W '$(rush list -s)' rush" | $sudo tee "${compdir}/rush" > /dev/null
+else
+  echo "=== Completion script was not installed"
+  echo "    To install it manually add this to your startup script:"
+  echo "    complete -W '$(rush list -s)' rush"
+fi
+
+# Verify
+if type rush > /dev/null; then
+  echo "=== Done. Type 'rush --help' for more info."
+else
+  echo "=== Setup failed."
   exit 1
 fi
