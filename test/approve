@@ -141,7 +141,7 @@ describe "show"
 
 describe "copy"
   mkdir ~/rush-repos/target
-  rush add default ~/rush-repos/target
+  rush add default ~/rush-repos/target > /dev/null
   approve "rush copy"
   approve "rush copy -h"
   approve "rush copy sample:hello"

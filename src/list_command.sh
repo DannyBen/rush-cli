@@ -46,7 +46,7 @@ list_show_repo() {
     if [[ -f "$infofile" ]]; then
       list_display_item "$package" "$infofile" "$repo"
     else
-      red "no matches"
+      red "nothing in $repo trpo"
     fi
   
   else
