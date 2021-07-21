@@ -19,6 +19,7 @@ list_display_item() {
 list_show_repo() {
   local repo_or_package="$1"
   local search="${args[--search]}"
+  local simple=${args[--simple]}
   local repo="$repo_or_package"
   local package glob repo_path infofile regex package_name
 
@@ -45,7 +46,7 @@ list_show_repo() {
     infofile="$repo_path/$package/info"
     if [[ -f "$infofile" ]]; then
       list_display_item "$package" "$infofile" "$repo"
-    else
+    elif [[ ! $simple ]]; then
       red "nothing in $repo trpo"
     fi
   

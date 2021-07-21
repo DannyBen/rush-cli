@@ -800,6 +800,15 @@ inspect_args() {
   else
     echo args: none
   fi
+
+  if (( ${#other_args[@]} )); then
+    echo
+    echo other_args:
+    echo "- \${other_args[*]} = ${other_args[*]}"
+    for i in "${!other_args[@]}"; do
+      echo "- \${other_args[$i]} = ${other_args[$i]}"
+    done
+  fi
 }
 
 # :command.user_lib
@@ -1397,6 +1406,7 @@ rush_list_command() {
   list_show_repo() {
     local repo_or_package="$1"
     local search="${args[--search]}"
+    local simple=${args[--simple]}
     local repo="$repo_or_package"
     local package glob repo_path infofile regex package_name
   
@@ -1423,7 +1433,7 @@ rush_list_command() {
       infofile="$repo_path/$package/info"
       if [[ -f "$infofile" ]]; then
         list_display_item "$package" "$infofile" "$repo"
-      else
+      elif [[ ! $simple ]]; then
         red "nothing in $repo trpo"
       fi
     
@@ -1695,6 +1705,7 @@ parse_requirements() {
     shift $#
     ;;    
   
+  # :command.command_fallback
   "" )
     rush_usage
     exit 1
@@ -2725,6 +2736,7 @@ initialize() {
 # :command.run
 run() {
   declare -A args
+  declare -a other_args
   parse_requirements "$@"
 
   if [[ $action == "add" ]]; then
