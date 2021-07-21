@@ -152,4 +152,8 @@ describe "copy"
   approve "rush copy sample:download default:download2 -f"
   approve "ls -R ~/rush-repos/target" "rush_copy_files_list2"
 
+describe "completions"
+  approve "rush completions"
+  approve "rush completions -h"
+
 green "All OK"

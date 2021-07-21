@@ -1,6 +1,7 @@
 name: rush
 help: Personal package manager
 version: 0.6.4
+completions: [$(rush list -s)]
 
 environment_variables:
 - name: rush_config
@@ -11,6 +12,7 @@ environment_variables:
 commands:
 - name: add
   short: a
+  completions: [<directory>]
   group: Repository
   help: |-
     Register a local repository
@@ -49,6 +51,7 @@ commands:
   - rush remove bobby --purge
 
 - name: clone
+  completions: [<directory>]
   group: Git
   help: |-
     Clone a GitHub package repository
@@ -153,6 +156,7 @@ commands:
 
 - name: get
   short: g
+  completions: [$(rush list -s)]
   group: Package
   help: |-
     Install a package
@@ -187,6 +191,7 @@ commands:
 
 - name: undo
   short: u
+  completions: [$(rush list -s)]
   help: |-
     Uninstall a package
     This command runs the undo script in the package directory.
@@ -221,6 +226,7 @@ commands:
   - rush snatch james/other-rush-repo python
 
 - name: copy
+  completions: [$(rush list -s)]
   help: Copy a package between local repositories
 
   args:
@@ -253,6 +259,7 @@ commands:
 
 - name: info
   short: i
+  completions: [$(rush list -s)]
   help: |-
     Show information about a package
     This command shows the info file from the package directory.
@@ -302,6 +309,7 @@ commands:
 
 - name: edit
   short: e
+  completions: [$(rush list -s)]
   help: Edit package files
 
   args:
@@ -315,6 +323,7 @@ commands:
       Default: main
 
 - name: show
+  completions: [$(rush list -s)]
   help: Show package files
 
   args:
@@ -324,3 +333,8 @@ commands:
 
   - name: file
     help: File to show (show all if not specified).
+
+- name: completions
+  group: Internal
+  help: |-
+    Generate bash completions

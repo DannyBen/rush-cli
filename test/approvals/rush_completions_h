@@ -1,0 +1,9 @@
+rush completions - Generate bash completions
+
+Usage:
+  rush completions
+  rush completions --help | -h
+
+Options:
+  --help, -h
+    Show this help

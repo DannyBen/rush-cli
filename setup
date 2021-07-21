@@ -23,11 +23,11 @@ fi
 
 if [[ -n $compdir ]]; then
   echo "=== Installing autocompletions to $compdir"
-  echo "complete -W '\$(rush list -s)' rush" | $sudo tee "${compdir}/rush" > /dev/null
+  echo "eval \"\$(rush completions)\"" | $sudo tee "${compdir}/rush" > /dev/null
 else
   echo "=== Completion script was not installed"
   echo "    To install it manually add this to your startup script:"
-  echo "    complete -W '\$(rush list -s)' rush"
+  echo "    eval \"\$(rush completions)\""
 fi
 
 # Verify
