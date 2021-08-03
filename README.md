@@ -228,6 +228,6 @@ to contribute, feel free to [open an issue][issues].
 
 [sample]: https://github.com/DannyBen/rush-repo-template
 [dannyben-repo]: https://github.com/dannyben/rush-repo
-[bashly]: https://github.com/dannyben/bashly
+[bashly]: https://bashly.dannyb.co/
 [docker-image]: https://github.com/dannyben/docker-rush
 [issues]: https://github.com/DannyBen/rush-cli/issues
