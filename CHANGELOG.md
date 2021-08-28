@@ -1,10 +1,17 @@
 Change Log
 ========================================
 
-Untagged - Latest
+v0.6.5 - 2021-07-21
+----------------------------------------
+
+- Implement full bash completion
+
+
+v0.6.4 - 2021-07-21
 ----------------------------------------
 
 - Refactor setup script for a more polite autocomplete location
+- Fix rush list -s to not show empty repos
 
 
 v0.6.3 - 2021-04-30
