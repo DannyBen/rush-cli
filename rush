@@ -1648,7 +1648,7 @@ parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -1813,6 +1813,7 @@ parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -1829,7 +1830,7 @@ rush_add_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_add_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -1880,6 +1881,7 @@ rush_add_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -1896,7 +1898,7 @@ rush_remove_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_remove_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -1942,6 +1944,7 @@ rush_remove_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -1958,7 +1961,7 @@ rush_clone_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_clone_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2037,6 +2040,7 @@ rush_clone_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2053,7 +2057,7 @@ rush_pull_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_pull_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2086,6 +2090,7 @@ rush_pull_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2102,7 +2107,7 @@ rush_push_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_push_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2153,6 +2158,7 @@ rush_push_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2169,7 +2175,7 @@ rush_config_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_config_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2203,6 +2209,7 @@ rush_config_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2219,7 +2226,7 @@ rush_default_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_default_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2259,6 +2266,7 @@ rush_default_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2275,7 +2283,7 @@ rush_get_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_get_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2321,6 +2329,7 @@ rush_get_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2337,7 +2346,7 @@ rush_undo_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_undo_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2377,6 +2386,7 @@ rush_undo_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2393,7 +2403,7 @@ rush_snatch_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_snatch_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2444,6 +2454,7 @@ rush_snatch_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2460,7 +2471,7 @@ rush_copy_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_copy_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2509,6 +2520,7 @@ rush_copy_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2525,7 +2537,7 @@ rush_info_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_info_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2565,6 +2577,7 @@ rush_info_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2581,7 +2594,7 @@ rush_list_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_list_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2620,6 +2633,7 @@ rush_list_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2636,7 +2650,7 @@ rush_search_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_search_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2676,6 +2690,7 @@ rush_search_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2692,7 +2707,7 @@ rush_edit_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_edit_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2735,6 +2750,7 @@ rush_edit_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2751,7 +2767,7 @@ rush_show_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_show_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2794,6 +2810,7 @@ rush_show_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2810,7 +2827,7 @@ rush_completions_parse_requirements() {
   --help | -h )
     long_usage=yes
     rush_completions_usage
-    exit 1
+    exit
     ;;
   
   esac
@@ -2838,6 +2855,7 @@ rush_completions_parse_requirements() {
   
     esac
   done
+  # :command.catch_all_filter
   # :command.default_assignments
   # :command.whitelist_filter
 }
@@ -2846,7 +2864,12 @@ rush_completions_parse_requirements() {
 initialize() {
   version="0.6.5"
   long_usage=''
-  set -e  
+  set -e
+
+  if [[ "${BASH_VERSINFO:-0}" -lt 4 ]]; then
+    printf "bash version 4 or higher is required\n"
+    exit 1
+  fi
 
   # :src/initialize.sh
   CONFIG_FILE=${RUSH_CONFIG:-~/rush.ini}
