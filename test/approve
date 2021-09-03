@@ -138,6 +138,7 @@ describe "show"
   approve "rush show -h"
   approve "rush show download"
   approve "rush show download main"
+  approve "rush show nested"
 
 describe "copy"
   mkdir ~/rush-repos/target
