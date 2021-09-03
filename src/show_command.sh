@@ -23,10 +23,12 @@ if [[ $file ]]; then
 else
   shopt -s dotglob
   for f in "$package_path"/*; do
-    green "$(basename "$f")"
-    cat "$f"
-    echo
-    echo
+    if [[ -f "$f" ]]; then
+      green "$(basename "$f")"
+      cat "$f"
+      echo
+      echo
+    fi
   done
   shopt -u dotglob
 fi
