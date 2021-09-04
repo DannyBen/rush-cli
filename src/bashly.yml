@@ -1,7 +1,7 @@
 name: rush
 help: Personal package manager
 version: 0.6.8
-completions: [$(rush list -s)]
+completions: [$(rush list -s -a)]
 
 environment_variables:
 - name: rush_config
@@ -156,7 +156,7 @@ commands:
 
 - name: get
   short: g
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   group: Package
   help: |-
     Install a package
@@ -191,7 +191,7 @@ commands:
 
 - name: undo
   short: u
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   help: |-
     Uninstall a package
     This command runs the undo script in the package directory.
@@ -226,7 +226,7 @@ commands:
   - rush snatch james/other-rush-repo python
 
 - name: copy
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   help: Copy a package between local repositories
 
   args:
@@ -259,7 +259,7 @@ commands:
 
 - name: info
   short: i
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   help: |-
     Show information about a package
     This command shows the info file from the package directory.
@@ -291,12 +291,16 @@ commands:
     short: -s
     help: Show only package names.
 
+  - long: --all
+    short: -a
+    help: Show nested packages as well.
+
   examples:
   - rush list
   - rush list personal:apps
   - rush list personal
   - rush list apps
-  - rush list apps --simple
+  - rush list apps --simple --all
 
 - name: search
   short: s
@@ -309,7 +313,7 @@ commands:
 
 - name: edit
   short: e
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   help: Edit package files
 
   args:
@@ -323,7 +327,7 @@ commands:
       Default: main
 
 - name: show
-  completions: [$(rush list -s)]
+  completions: [$(rush list -s -a)]
   help: Show package files
 
   args:

@@ -17,15 +17,15 @@ _rush_completions() {
     'clone'*) COMPREPLY=($(compgen -A directory -W "--default --help --ignore --name --shallow --ssh -d -h -i -n -s -w" -- "$cur")) ;;
     'pull'*) COMPREPLY=($(compgen -W "--help -h" -- "$cur")) ;;
     'push'*) COMPREPLY=($(compgen -W "--all --help --message -a -h -m" -- "$cur")) ;;
-    'undo'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;
-    'copy'*) COMPREPLY=($(compgen -W "$(rush list -s) --force --help -f -h" -- "$cur")) ;;
-    'info'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;
-    'list'*) COMPREPLY=($(compgen -W "--help --simple -h -s" -- "$cur")) ;;
-    'edit'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;
-    'show'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;
+    'undo'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;
+    'copy'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --force --help -f -h" -- "$cur")) ;;
+    'info'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;
+    'list'*) COMPREPLY=($(compgen -W "--all --help --simple -a -h -s" -- "$cur")) ;;
+    'edit'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;
+    'show'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;
     'add'*) COMPREPLY=($(compgen -A directory -W "--help -h" -- "$cur")) ;;
-    'get'*) COMPREPLY=($(compgen -W "$(rush list -s) --clone --help -c -h" -- "$cur")) ;;
-    ''*) COMPREPLY=($(compgen -W "$(rush list -s) --help --version -h -v add clone completions config copy default edit get info list pull push remove search show snatch undo" -- "$cur")) ;;
+    'get'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --clone --help -c -h" -- "$cur")) ;;
+    ''*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help --version -h -v add clone completions config copy default edit get info list pull push remove search show snatch undo" -- "$cur")) ;;
   esac
 }
 

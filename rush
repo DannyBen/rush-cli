@@ -657,6 +657,11 @@ rush_list_usage() {
     echo "  --simple, -s"
     printf "    Show only package names.\n"
     echo
+    
+    # :flag.usage
+    echo "  --all, -a"
+    printf "    Show nested packages as well.\n"
+    echo
     # :command.usage_args
     printf "Arguments:\n"
     
@@ -672,7 +677,7 @@ rush_list_usage() {
     printf "  rush list personal:apps\n"
     printf "  rush list personal\n"
     printf "  rush list apps\n"
-    printf "  rush list apps --simple\n"
+    printf "  rush list apps --simple --all\n"
     echo
 
   fi
@@ -1038,15 +1043,15 @@ send_completions() {
   echo $'    \'clone\'*) COMPREPLY=($(compgen -A directory -W "--default --help --ignore --name --shallow --ssh -d -h -i -n -s -w" -- "$cur")) ;;'
   echo $'    \'pull\'*) COMPREPLY=($(compgen -W "--help -h" -- "$cur")) ;;'
   echo $'    \'push\'*) COMPREPLY=($(compgen -W "--all --help --message -a -h -m" -- "$cur")) ;;'
-  echo $'    \'undo\'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;'
-  echo $'    \'copy\'*) COMPREPLY=($(compgen -W "$(rush list -s) --force --help -f -h" -- "$cur")) ;;'
-  echo $'    \'info\'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;'
-  echo $'    \'list\'*) COMPREPLY=($(compgen -W "--help --simple -h -s" -- "$cur")) ;;'
-  echo $'    \'edit\'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;'
-  echo $'    \'show\'*) COMPREPLY=($(compgen -W "$(rush list -s) --help -h" -- "$cur")) ;;'
+  echo $'    \'undo\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;'
+  echo $'    \'copy\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --force --help -f -h" -- "$cur")) ;;'
+  echo $'    \'info\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;'
+  echo $'    \'list\'*) COMPREPLY=($(compgen -W "--all --help --simple -a -h -s" -- "$cur")) ;;'
+  echo $'    \'edit\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;'
+  echo $'    \'show\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help -h" -- "$cur")) ;;'
   echo $'    \'add\'*) COMPREPLY=($(compgen -A directory -W "--help -h" -- "$cur")) ;;'
-  echo $'    \'get\'*) COMPREPLY=($(compgen -W "$(rush list -s) --clone --help -c -h" -- "$cur")) ;;'
-  echo $'    \'\'*) COMPREPLY=($(compgen -W "$(rush list -s) --help --version -h -v add clone completions config copy default edit get info list pull push remove search show snatch undo" -- "$cur")) ;;'
+  echo $'    \'get\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --clone --help -c -h" -- "$cur")) ;;'
+  echo $'    \'\'*) COMPREPLY=($(compgen -W "$(rush list -s -a) --help --version -h -v add clone completions config copy default edit get info list pull push remove search show snatch undo" -- "$cur")) ;;'
   echo $'  esac'
   echo $'}'
   echo $''
@@ -1470,8 +1475,13 @@ rush_list_command() {
     local repo_or_package="$1"
     local search="${args[--search]}"
     local simple=${args[--simple]}
+    local all=${args[--all]}
     local repo="$repo_or_package"
     local package glob repo_path infofile regex package_name
+  
+    if [[ $all ]]; then
+      shopt -s globstar
+    fi
   
     if [[ $repo_or_package =~ (.*):(.*) ]]; then
       repo=${BASH_REMATCH[1]}
@@ -1487,9 +1497,9 @@ rush_list_command() {
     fi
   
     if [[ $package ]]; then
-      glob=( "$repo_path"/"$package"/*/info )
+      glob=( "$repo_path"/"$package"/**/info )
     else
-      glob=( "$repo_path"/*/info )
+      glob=( "$repo_path"/**/info )
     fi
   
     if [[ ${glob[0]} =~ .*\*.* ]]; then
@@ -2614,6 +2624,12 @@ rush_list_parse_requirements() {
     # :flag.case
     --simple | -s )
       args[--simple]=1
+      shift
+      ;;
+  
+    # :flag.case
+    --all | -a )
+      args[--all]=1
       shift
       ;;
   
