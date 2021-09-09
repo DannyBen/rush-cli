@@ -52,7 +52,7 @@ list_show_repo() {
     if [[ -f "$infofile" ]]; then
       list_display_item "$package" "$infofile" "$repo"
     elif [[ ! $simple ]]; then
-      red "nothing in $repo trpo"
+      red "nothing in $repo repo"
     fi
   
   else

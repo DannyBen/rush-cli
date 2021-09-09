@@ -823,6 +823,30 @@ rush_completions_usage() {
   fi
 }
 
+# :command.normalize_input
+normalize_input() {
+  local arg flags
+
+  while [[ $# -gt 0 ]]; do
+    arg="$1"
+    if [[ $arg =~ ^(--[a-zA-Z0-9_\-]+)=(.+)$ ]]; then
+      input+=("${BASH_REMATCH[1]}")
+      input+=("${BASH_REMATCH[2]}")
+    elif [[ $arg =~ ^(-[a-zA-Z0-9])=(.+)$ ]]; then
+      input+=("${BASH_REMATCH[1]}")
+      input+=("${BASH_REMATCH[2]}")
+    elif [[ $arg =~ ^-([a-zA-Z0-9][a-zA-Z0-9]+)$ ]]; then
+      flags="${BASH_REMATCH[1]}"
+      for (( i=0 ; i < ${#flags} ; i++ )); do
+        input+=("-${flags:i:1}")
+      done
+    else
+      input+=("$arg")
+    fi
+
+    shift
+  done
+}
 # :command.inspect_args
 inspect_args() {
   readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | sort)
@@ -1507,7 +1531,7 @@ rush_list_command() {
       if [[ -f "$infofile" ]]; then
         list_display_item "$package" "$infofile" "$repo"
       elif [[ ! $simple ]]; then
-        red "nothing in $repo trpo"
+        red "nothing in $repo repo"
       fi
     
     else
@@ -2898,7 +2922,9 @@ initialize() {
 run() {
   declare -A args
   declare -a other_args
-  parse_requirements "$@"
+  declare -a input
+  normalize_input "$@"
+  parse_requirements "${input[@]}"
 
   if [[ $action == "add" ]]; then
     if [[ ${args[--help]} ]]; then
