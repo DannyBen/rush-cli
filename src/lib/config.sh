@@ -1,27 +1,27 @@
-# ---
-# Config functions
-# This file is a part of Bashly standard library
-#
-# Usage:
-# - In your script, set the CONFIG_FILE variable. For rxample:
-#   CONFIG_FILE=settings.ini.
-#   If it is unset, it will default to 'config.ini'.
-# - Use any of the functions below to access the config file.
-# ---
-
-# Create a new config file.
-# There is normally no need to use this fucntion, it is used by other
-# functions as needed.
+## Config functions [@bashly-upgrade config]
+## This file is a part of Bashly standard library
+##
+## Usage:
+## - In your script, set the CONFIG_FILE variable. For rxample:
+##   CONFIG_FILE=settings.ini.
+##   If it is unset, it will default to 'config.ini'.
+## - Use any of the functions below to access the config file.
+##
+## Create a new config file.
+## There is normally no need to use this function, it is used by other
+## functions as needed.
+##
 config_init() {
   CONFIG_FILE=${CONFIG_FILE:=config.ini}
   [[ -f "$CONFIG_FILE" ]] || touch "$CONFIG_FILE"
 }
 
-# Get a value from the config
-# Usage: result=$(config_get hello)
+## Get a value from the config.
+## Usage: result=$(config_get hello)
 config_get() {
-  key=$1
-  regex="^$key *= *(.+)$"
+  local key=$1
+  local regex="^$key *= *(.+)$"
+  local value=""
 
   config_init
   
@@ -35,18 +35,19 @@ config_get() {
   echo "$value"
 }
 
-# Add or update a key=value pair in the config.
-# Usage: config_set key value
+## Add or update a key=value pair in the config.
+## Usage: config_set key value
 config_set() {
-  key=$1
+  local key=$1
   shift
-  value="$*"
+  local value="$*"
 
   config_init
 
-  regex="^($key) *= *.+$"
-  output=""
-  found_key=""
+  local regex="^($key) *= *.+$"
+  local output=""
+  local found_key=""
+  local newline
   
   while IFS= read -r line || [ -n "$line" ]; do
     newline=$line
@@ -66,18 +67,17 @@ config_set() {
   printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
-# Delete a key from teh config.
-# Usage: config_del key
+## Delete a key from the config.
+## Usage: config_del key
 config_del() {
-  key=$1
+  local key=$1
 
-  regex="^($key) *="
-  output=""
+  local regex="^($key) *="
+  local output=""
 
   config_init
 
   while IFS= read -r line || [ -n "$line" ]; do
-    newline=$line
     if [[ $line ]] && [[ ! $line =~ $regex ]]; then
       output="$output$line\n"
     fi
@@ -86,25 +86,27 @@ config_del() {
   printf "%b\n" "$output" > "$CONFIG_FILE"
 }
 
-# Show the config file
+## Show the config file
 config_show() {
   config_init
   cat "$CONFIG_FILE"
 }
 
-# Return an array of the keys in the config file
-# Usage:
-#
-#   for k in $(config_keys); do
-#     echo "- $k = $(config_get "$k")";
-#   done
-#
+## Return an array of the keys in the config file.
+## Usage:
+##
+##   for k in $(config_keys); do
+##     echo "- $k = $(config_get "$k")";
+##   done
+##
 config_keys() {
-  regex="^([a-zA-Z0-9_\-]+) *="
+  local regex="^([a-zA-Z0-9_\-\/\.]+) *="
 
   config_init
 
-  keys=()
+  local keys=()
+  local key
+  
   while IFS= read -r line || [ -n "$line" ]; do
     if [[ $line =~ $regex ]]; then
       key="${BASH_REMATCH[1]}"
@@ -114,13 +116,13 @@ config_keys() {
   echo "${keys[@]}"
 }
 
-# Returns true if the specified key exists in the config file
-# Usage:
-#
-#   if config_has_key "key" ; then
-#     echo "key exists"
-#   fi
-#
+## Returns true if the specified key exists in the config file.
+## Usage:
+##
+##   if config_has_key "key" ; then
+##     echo "key exists"
+##   fi
+##
 config_has_key() {
   [[ $(config_get "$1") ]]
 }
