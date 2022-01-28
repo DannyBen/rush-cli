@@ -1071,7 +1071,7 @@ send_completions() {
   echo $'# Modifying it manually is not recommended'
   echo $'_rush_completions() {'
   echo $'  local cur=${COMP_WORDS[COMP_CWORD]}'
-  echo $'  local comp_line="${COMP_WORDS[*]:1}"'
+  echo $'  local comp_line="${COMP_WORDS[@]:1}"'
   echo $''
   echo $'  case "$comp_line" in'
   echo $'    \'completions\'*) COMPREPLY=($(compgen -W "--help -h" -- "$cur")) ;;'
@@ -1692,7 +1692,7 @@ rush_completions_command() {
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -1708,7 +1708,7 @@ parse_requirements() {
   # :command.environment_variables_filter
   # :command.dependencies_filter
   # :command.command_filter
-  action=$1
+  action=${1:-}
 
   case $action in
   -* )
@@ -1851,7 +1851,7 @@ parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -1874,7 +1874,7 @@ parse_requirements() {
 # :command.parse_requirements
 rush_add_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -1896,7 +1896,7 @@ rush_add_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -1937,7 +1937,7 @@ rush_add_parse_requirements() {
 # :command.parse_requirements
 rush_remove_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -1964,7 +1964,7 @@ rush_remove_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -1997,7 +1997,7 @@ rush_remove_parse_requirements() {
 # :command.parse_requirements
 rush_clone_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2055,7 +2055,7 @@ rush_clone_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2092,7 +2092,7 @@ rush_clone_parse_requirements() {
 # :command.parse_requirements
 rush_pull_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2114,7 +2114,7 @@ rush_pull_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2143,7 +2143,7 @@ rush_pull_parse_requirements() {
 # :command.parse_requirements
 rush_push_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2183,7 +2183,7 @@ rush_push_parse_requirements() {
       fi
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2212,7 +2212,7 @@ rush_push_parse_requirements() {
 # :command.parse_requirements
 rush_config_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2239,7 +2239,7 @@ rush_config_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2262,7 +2262,7 @@ rush_config_parse_requirements() {
 # :command.parse_requirements
 rush_default_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2284,7 +2284,7 @@ rush_default_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2317,7 +2317,7 @@ rush_default_parse_requirements() {
 # :command.parse_requirements
 rush_get_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2344,7 +2344,7 @@ rush_get_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2377,7 +2377,7 @@ rush_get_parse_requirements() {
 # :command.parse_requirements
 rush_undo_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2399,7 +2399,7 @@ rush_undo_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2432,7 +2432,7 @@ rush_undo_parse_requirements() {
 # :command.parse_requirements
 rush_snatch_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2454,7 +2454,7 @@ rush_snatch_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2495,7 +2495,7 @@ rush_snatch_parse_requirements() {
 # :command.parse_requirements
 rush_copy_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2522,7 +2522,7 @@ rush_copy_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2559,7 +2559,7 @@ rush_copy_parse_requirements() {
 # :command.parse_requirements
 rush_info_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2581,7 +2581,7 @@ rush_info_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2614,7 +2614,7 @@ rush_info_parse_requirements() {
 # :command.parse_requirements
 rush_list_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2647,7 +2647,7 @@ rush_list_parse_requirements() {
       shift
       ;;
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2676,7 +2676,7 @@ rush_list_parse_requirements() {
 # :command.parse_requirements
 rush_search_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2698,7 +2698,7 @@ rush_search_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2731,7 +2731,7 @@ rush_search_parse_requirements() {
 # :command.parse_requirements
 rush_edit_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2753,7 +2753,7 @@ rush_edit_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2790,7 +2790,7 @@ rush_edit_parse_requirements() {
 # :command.parse_requirements
 rush_show_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2812,7 +2812,7 @@ rush_show_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2849,7 +2849,7 @@ rush_show_parse_requirements() {
 # :command.parse_requirements
 rush_completions_parse_requirements() {
   # :command.fixed_flag_filter
-  case "$1" in
+  case "${1:-}" in
   --version | -v )
     version_command
     exit
@@ -2871,7 +2871,7 @@ rush_completions_parse_requirements() {
     key="$1"
     case "$key" in
 
-    -* )
+    -?* )
       printf "invalid option: %s\n" "$key"
       exit 1
       ;;
@@ -2903,14 +2903,14 @@ initialize() {
 
 # :command.run
 run() {
-  declare -A args
-  declare -a other_args
-  declare -a input
+  declare -A args=()
+  declare -a other_args=()
+  declare -a input=()
   normalize_input "$@"
   parse_requirements "${input[@]}"
 
   if [[ $action == "add" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_add_usage
     else
@@ -2918,7 +2918,7 @@ run() {
     fi
 
   elif [[ $action == "remove" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_remove_usage
     else
@@ -2926,7 +2926,7 @@ run() {
     fi
 
   elif [[ $action == "clone" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_clone_usage
     else
@@ -2934,7 +2934,7 @@ run() {
     fi
 
   elif [[ $action == "pull" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_pull_usage
     else
@@ -2942,7 +2942,7 @@ run() {
     fi
 
   elif [[ $action == "push" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_push_usage
     else
@@ -2950,7 +2950,7 @@ run() {
     fi
 
   elif [[ $action == "config" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_config_usage
     else
@@ -2958,7 +2958,7 @@ run() {
     fi
 
   elif [[ $action == "default" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_default_usage
     else
@@ -2966,7 +2966,7 @@ run() {
     fi
 
   elif [[ $action == "get" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_get_usage
     else
@@ -2974,7 +2974,7 @@ run() {
     fi
 
   elif [[ $action == "undo" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_undo_usage
     else
@@ -2982,7 +2982,7 @@ run() {
     fi
 
   elif [[ $action == "snatch" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_snatch_usage
     else
@@ -2990,7 +2990,7 @@ run() {
     fi
 
   elif [[ $action == "copy" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_copy_usage
     else
@@ -2998,7 +2998,7 @@ run() {
     fi
 
   elif [[ $action == "info" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_info_usage
     else
@@ -3006,7 +3006,7 @@ run() {
     fi
 
   elif [[ $action == "list" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_list_usage
     else
@@ -3014,7 +3014,7 @@ run() {
     fi
 
   elif [[ $action == "search" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_search_usage
     else
@@ -3022,7 +3022,7 @@ run() {
     fi
 
   elif [[ $action == "edit" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_edit_usage
     else
@@ -3030,7 +3030,7 @@ run() {
     fi
 
   elif [[ $action == "show" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_show_usage
     else
@@ -3038,7 +3038,7 @@ run() {
     fi
 
   elif [[ $action == "completions" ]]; then
-    if [[ ${args[--help]} ]]; then
+    if [[ ${args[--help]:-} ]]; then
       long_usage=yes
       rush_completions_usage
     else
