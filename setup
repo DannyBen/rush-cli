@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Download script from Github
-echo "=== Saving executable to /usr/local/bin/op"
+echo "=== Saving executable to /usr/local/bin/rush"
 curl_command="curl -s https://raw.githubusercontent.com/DannyBen/rush-cli/master/rush > /usr/local/bin/rush"
 $sudo bash -c "$curl_command"
 $sudo chmod a+x /usr/local/bin/rush
