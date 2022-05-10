@@ -50,7 +50,7 @@ This setup script will download the rush executable to `/usr/local/bin/` and
 install an autocomplete script in the bash completions directory.
 
 ```shell
-$ bash <(curl -Ls get.dannyb.co/rush/setup)
+$ curl -Ls get.dannyb.co/rush/setup | bash
 ```
 
 Feel free to inspect the [setup script](setup) before running.
