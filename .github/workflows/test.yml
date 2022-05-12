@@ -13,9 +13,9 @@ jobs:
     - name: Run shellcheck tests
       run: shellcheck rush setup
     - name: Build container for approval tests
-      run: docker-compose build
+      run: docker compose build
     - name: Run approval tests
-      run: docker-compose run ci
+      run: docker compose run ci
 
   ubuntu_setup:
     name: Setup on Ubuntu
