@@ -1,5 +1,7 @@
 rush push - Git push one or all repositories
 
+Alias: upload
+
 Usage:
   rush push [REPO] [options]
   rush push --help | -h

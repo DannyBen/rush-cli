@@ -1,6 +1,6 @@
 rush config - Show or edit the configuration file
 
-Shortcut: c
+Alias: c
 
 Usage:
   rush config [options]
