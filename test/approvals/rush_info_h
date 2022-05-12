@@ -3,7 +3,7 @@ rush info
   Show information about a package
   This command shows the info file from the package directory.
 
-Shortcut: i
+Alias: i
 
 Usage:
   rush info PACKAGE

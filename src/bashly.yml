@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.7.1
+version: 0.7.2
 completions: [$(rush list -s -a)]
 
 environment_variables:
@@ -11,7 +11,7 @@ environment_variables:
 
 commands:
 - name: add
-  short: a
+  alias: a
   completions: [<directory>]
   group: Repository
   help: |-
@@ -31,7 +31,7 @@ commands:
   - rush add default ~/rush-repos/default
 
 - name: remove
-  short: r
+  alias: r
   help: |-
     Unregister a local repository
     This command removes the specified path to the configuration file.
@@ -102,7 +102,7 @@ commands:
   - rush clone bobby --name sample --ignore
 
 - name: pull
-  short: p
+  alias: [p, download, update]
   help: Git pull one or all repositories
 
   args:
@@ -110,6 +110,7 @@ commands:
     help: Repository name.
 
 - name: push
+  alias: upload
   help: Git push one or all repositories
 
   args:
@@ -131,7 +132,7 @@ commands:
       Default: automatic commit
 
 - name: config
-  short: c
+  alias: c
   group: Config
   help: Show or edit the configuration file
 
@@ -155,7 +156,7 @@ commands:
   - rush default sample
 
 - name: get
-  short: g
+  alias: g
   completions: [$(rush list -s -a)]
   group: Package
   help: |-
@@ -190,7 +191,7 @@ commands:
   - rush get centos:ruby 
 
 - name: undo
-  short: u
+  alias: u
   completions: [$(rush list -s -a)]
   help: |-
     Uninstall a package
@@ -258,7 +259,7 @@ commands:
   - rush copy james:python bobby:python3 --force
 
 - name: info
-  short: i
+  alias: i
   completions: [$(rush list -s -a)]
   help: |-
     Show information about a package
@@ -274,7 +275,7 @@ commands:
   - rush info centos:ruby
 
 - name: list
-  short: l
+  alias: l
   help: Show packages in one or all repositories
 
   args:
@@ -303,7 +304,7 @@ commands:
   - rush list apps --simple --all
 
 - name: search
-  short: s
+  alias: s
   help: Search in package names and info files
 
   args:
@@ -312,7 +313,7 @@ commands:
     required: true
 
 - name: edit
-  short: e
+  alias: e
   completions: [$(rush list -s -a)]
   help: Edit package files
 

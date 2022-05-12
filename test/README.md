@@ -11,7 +11,7 @@ testing on CI will be non-interactive.
 To run tests locally:
 
     # For development, with volume mounts
-    $ docker-compose run test
+    $ docker compose run test
 
     # or, for CI, without volume mounts
-    $ docker-compose run ci
+    $ docker compose run ci

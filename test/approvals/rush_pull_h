@@ -1,6 +1,6 @@
 rush pull - Git pull one or all repositories
 
-Shortcut: p
+Alias: p, download, update
 
 Usage:
   rush pull [REPO]

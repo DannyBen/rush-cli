@@ -1,6 +1,6 @@
 rush search - Search in package names and info files
 
-Shortcut: s
+Alias: s
 
 Usage:
   rush search TEXT

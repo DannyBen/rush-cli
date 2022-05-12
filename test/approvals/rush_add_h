@@ -3,7 +3,7 @@ rush add
   Register a local repository
   This command adds the specified path to the configuration file.
 
-Shortcut: a
+Alias: a
 
 Usage:
   rush add REPO PATH

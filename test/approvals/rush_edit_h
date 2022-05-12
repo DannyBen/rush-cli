@@ -1,6 +1,6 @@
 rush edit - Edit package files
 
-Shortcut: e
+Alias: e
 
 Usage:
   rush edit PACKAGE [FILE]

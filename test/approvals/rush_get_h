@@ -6,7 +6,7 @@ rush get
   This is the default command, which means that running 'rush package' is
   the same as running 'rush get package'.
 
-Shortcut: g
+Alias: g
 
 Usage:
   rush get PACKAGE [options]

@@ -3,7 +3,7 @@ rush remove
   Unregister a local repository
   This command removes the specified path to the configuration file.
 
-Shortcut: r
+Alias: r
 
 Usage:
   rush remove REPO [options]

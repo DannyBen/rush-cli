@@ -1,6 +1,6 @@
 rush list - Show packages in one or all repositories
 
-Shortcut: l
+Alias: l
 
 Usage:
   rush list [REPO_OR_PACKAGE] [options]
