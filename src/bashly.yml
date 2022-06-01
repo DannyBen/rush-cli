@@ -12,8 +12,8 @@ environment_variables:
 commands:
 - name: add
   alias: a
-  completions: [<directory>]
   group: Repository
+  completions: [<directory>]
   help: |-
     Register a local repository
     This command adds the specified path to the configuration file.
@@ -32,6 +32,7 @@ commands:
 
 - name: remove
   alias: r
+  group: Repository
   help: |-
     Unregister a local repository
     This command removes the specified path to the configuration file.
@@ -51,8 +52,8 @@ commands:
   - rush remove bobby --purge
 
 - name: clone
-  completions: [<directory>]
   group: Git
+  completions: [<directory>]
   help: |-
     Clone a GitHub package repository
     This command clones the repository and registers it in the
@@ -103,6 +104,7 @@ commands:
 
 - name: pull
   alias: [p, download, update]
+  group: Git
   help: Git pull one or all repositories
 
   args:
@@ -111,6 +113,7 @@ commands:
 
 - name: push
   alias: upload
+  group: Git
   help: Git push one or all repositories
 
   args:
@@ -142,6 +145,7 @@ commands:
     help: Open the configuration file for editing.
 
 - name: default
+  group: Config
   help: |-
     Set a default repository
     This command adds (or updates) a repository named 'default' to the
@@ -157,8 +161,8 @@ commands:
 
 - name: get
   alias: g
-  completions: [$(rush list -s -a)]
   group: Package
+  completions: [$(rush list -s -a)]
   help: |-
     Install a package
     This command runs the main script in the package directory.
@@ -192,6 +196,7 @@ commands:
 
 - name: undo
   alias: u
+  group: Package
   completions: [$(rush list -s -a)]
   help: |-
     Uninstall a package
@@ -207,6 +212,7 @@ commands:
   - rush undo centos:ruby 
 
 - name: snatch
+  group: Package
   help: |-
     Install a package from a remote repo
     This command is a shortcut to running clone followed by get.
@@ -227,6 +233,7 @@ commands:
   - rush snatch james/other-rush-repo python
 
 - name: copy
+  group: Package
   completions: [$(rush list -s -a)]
   help: Copy a package between local repositories
 
@@ -260,6 +267,7 @@ commands:
 
 - name: info
   alias: i
+  group: Package
   completions: [$(rush list -s -a)]
   help: |-
     Show information about a package
@@ -276,6 +284,7 @@ commands:
 
 - name: list
   alias: l
+  group: Package
   help: Show packages in one or all repositories
 
   args:
@@ -305,6 +314,7 @@ commands:
 
 - name: search
   alias: s
+  group: Package
   help: Search in package names and info files
 
   args:
@@ -314,6 +324,7 @@ commands:
 
 - name: edit
   alias: e
+  group: Package
   completions: [$(rush list -s -a)]
   help: Edit package files
 
@@ -328,6 +339,7 @@ commands:
       Default: main
 
 - name: show
+  group: Package
   completions: [$(rush list -s -a)]
   help: Show package files
 
