@@ -4,133 +4,152 @@
 # completely (https://github.com/dannyben/completely)
 # Modifying it manually is not recommended
 
+_rush_completions_filter() {
+  local words="$1"
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local result=()
+
+  if [[ "${cur:0:1}" == "-" ]]; then
+    echo "$words"
+  
+  else
+    for word in $words; do
+      [[ "${word:0:1}" != "-" ]] && result+=("$word")
+    done
+
+    echo "${result[*]}"
+
+  fi
+}
+
 _rush_completions() {
   local cur=${COMP_WORDS[COMP_CWORD]}
-  local compline="${COMP_WORDS[@]:1:$COMP_CWORD-1}"
+  local compwords=("${COMP_WORDS[@]:1:$COMP_CWORD-1}")
+  local compline="${compwords[*]}"
 
   case "$compline" in
     'completions'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'download'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'default'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'remove'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help --purge -h -p" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help --purge -h -p")" -- "$cur" )
       ;;
 
     'update'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'upload'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--all --help --message -a -h -m" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --message -a -h -m")" -- "$cur" )
       ;;
 
     'config'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--edit --help -e -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--edit --help -e -h")" -- "$cur" )
       ;;
 
     'snatch'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'search'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'clone'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "--default --help --ignore --name --shallow --ssh -d -h -i -n -s -w" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "$(_rush_completions_filter "--default --help --ignore --name --shallow --ssh -d -h -i -n -s -w")" -- "$cur" )
       ;;
 
     'pull'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'push'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--all --help --message -a -h -m" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --message -a -h -m")" -- "$cur" )
       ;;
 
     'undo'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'copy'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --force --help -f -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --force --help -f -h")" -- "$cur" )
       ;;
 
     'info'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'list'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--all --help --simple -a -h -s" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --simple -a -h -s")" -- "$cur" )
       ;;
 
     'edit'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'show'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'add'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'get'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --clone --help -c -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --help -c -h")" -- "$cur" )
       ;;
 
     'a'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'r'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help --purge -h -p" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help --purge -h -p")" -- "$cur" )
       ;;
 
     'p'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'c'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--edit --help -e -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--edit --help -e -h")" -- "$cur" )
       ;;
 
     'g'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --clone --help -c -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --help -c -h")" -- "$cur" )
       ;;
 
     'u'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'i'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     'l'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--all --help --simple -a -h -s" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --simple -a -h -s")" -- "$cur" )
       ;;
 
     's'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "--help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
 
     'e'*)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help -h" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
       ;;
 
     *)
-      while read; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list p pull push r remove s search show snatch u undo update upload" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list p pull push r remove s search show snatch u undo update upload")" -- "$cur" )
       ;;
 
   esac
