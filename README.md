@@ -211,11 +211,11 @@ jobs:
 
     steps:
     - name: Install rush
-      run: bash <(curl -s http://get.dannyb.co/rush/setup)
+      run: curl -Ls http://get.dannyb.co/rush/setup | bash
 
     # Replace with your own repository
     - name: Connect to rush repository
-      run: rush clone dannyben/rush-repo-template --default
+      run: rush clone dannyben/rush-repo-template --default --shallow
 
     - name: Run a sample script from the repo
       run: rush get hello
