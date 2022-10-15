@@ -6,16 +6,19 @@ rush undo
 Alias: u
 
 Usage:
-  rush undo PACKAGE
+  rush undo PACKAGE [OPTIONS]
   rush undo --help | -h
 
 Options:
   --help, -h
     Show this help
 
+  --verbose, -v
+    Show additional details if possible
+
 Arguments:
   PACKAGE
-    Package name.
+    Package name
     This can either be the package name without the repository name (in
     this case, the default repository will be used) or in the form of
     'repo:package'.

@@ -6,16 +6,23 @@ rush snatch
   package script.
 
 Usage:
-  rush snatch GITHUB_USER PACKAGE
+  rush snatch GITHUB_USER PACKAGE [OPTIONS]
   rush snatch --help | -h
 
 Options:
   --help, -h
     Show this help
 
+  --force, -f
+    Force installation
+    This may mean different things in different packages.
+
+  --verbose, -v
+    Show additional details if possible.
+
 Arguments:
   GITHUB_USER
-    Github user.
+    Github user
     This user is expected to have a repository named 'rush-repo'.
     If you need to use a different name, use the 'user/repo' syntax.
 

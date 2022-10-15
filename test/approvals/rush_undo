@@ -1,2 +1,2 @@
 missing required argument: PACKAGE
-usage: rush undo PACKAGE
+usage: rush undo PACKAGE [OPTIONS]

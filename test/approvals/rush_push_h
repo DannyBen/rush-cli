@@ -14,10 +14,10 @@ Options:
     Push all repositories.
 
   --message, -m TEXT
-    Commit message.
+    Commit message
     Default: automatic commit
 
 Arguments:
   REPO
-    Repository name.
+    Repository name
     Default: default

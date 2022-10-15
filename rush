@@ -78,7 +78,7 @@ rush_usage() {
 
     # :environment_variable.usage
     echo "  RUSH_CONFIG"
-    printf "    Location of the rush config file.\n    Default: ~/rush.ini\n"
+    printf "    Location of the rush config file\n    Default: ~/rush.ini\n"
     echo
 
   fi
@@ -224,27 +224,27 @@ rush_clone_usage() {
     # :command.usage_flags
     # :flag.usage
     echo "  --ssh, -s"
-    printf "    Clone using SSH instead of HTTPS.\n"
+    printf "    Clone using SSH instead of HTTPS\n"
     echo
 
     # :flag.usage
     echo "  --default, -d"
-    printf "    Set this as the default repository (same as '--name default').\n"
+    printf "    Set this as the default repository (same as '--name default')\n"
     echo
 
     # :flag.usage
     echo "  --name, -n NAME"
-    printf "    Name to use in the config file.\n    Default: GitHub user\n"
+    printf "    Name to use in the config file\n    Default: GitHub user\n"
     echo
 
     # :flag.usage
     echo "  --shallow, -w"
-    printf "    Perform a shallow clone, instead of the default full clone.\n"
+    printf "    Perform a shallow clone, instead of the default full clone\n"
     echo
 
     # :flag.usage
     echo "  --ignore, -i"
-    printf "    Ignore (do not clone) if a repository with this name exists.\n"
+    printf "    Ignore (do not clone) if a repository with this name exists\n"
     echo
 
     # :command.usage_args
@@ -252,12 +252,12 @@ rush_clone_usage() {
 
     # :argument.usage
     echo "  GITHUB_USER"
-    printf "    Github user.\n    This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax.\n"
+    printf "    Github user\n    This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax.\n"
     echo
 
     # :argument.usage
     echo "  PATH"
-    printf "    Local path to clone the repository to.\n    Default: ~/rush-repos/<github_user>/<github_repo>\n"
+    printf "    Local path to clone the repository into\n    Default: ~/rush-repos/<github_user>/<github_repo>\n"
     echo
 
     # :command.usage_examples
@@ -348,7 +348,7 @@ rush_push_usage() {
 
     # :flag.usage
     echo "  --message, -m TEXT"
-    printf "    Commit message.\n    Default: automatic commit\n"
+    printf "    Commit message\n    Default: automatic commit\n"
     echo
 
     # :command.usage_args
@@ -356,7 +356,7 @@ rush_push_usage() {
 
     # :argument.usage
     echo "  REPO"
-    printf "    Repository name.\n    Default: default\n"
+    printf "    Repository name\n    Default: default\n"
     echo
 
   fi
@@ -434,7 +434,7 @@ rush_default_usage() {
 
     # :argument.usage
     echo "  REPO"
-    printf "    Repository name.\n"
+    printf "    Repository name\n"
     echo
 
     # :command.usage_examples
@@ -480,12 +480,12 @@ rush_get_usage() {
     # :command.usage_flags
     # :flag.usage
     echo "  --clone, -c"
-    printf "    Clone the repository if it is not found locally.\n    This flag will look for a GitHub user with the same name as the\n    repository, and attempt to clone their rush-repo repository.\n"
+    printf "    Clone the repository if it is not found locally\n    This flag will look for a GitHub user with the same name as the\n    repository, and attempt to clone their rush-repo repository.\n"
     echo
 
     # :flag.usage
     echo "  --force, -f"
-    printf "    Force installation.\n    This may mean different things in different packages.\n"
+    printf "    Force installation\n    This may mean different things in different packages.\n"
     echo
 
     # :flag.usage
@@ -498,7 +498,7 @@ rush_get_usage() {
 
     # :argument.usage
     echo "  PACKAGE"
-    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :command.usage_examples
@@ -530,7 +530,7 @@ rush_undo_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  rush undo PACKAGE\n"
+  printf "  rush undo PACKAGE [OPTIONS]\n"
   printf "  rush undo --help | -h\n"
   echo
 
@@ -543,12 +543,18 @@ rush_undo_usage() {
     printf "    Show this help\n"
     echo
 
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --verbose, -v"
+    printf "    Show additional details if possible\n"
+    echo
+
     # :command.usage_args
     printf "Arguments:\n"
 
     # :argument.usage
     echo "  PACKAGE"
-    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :command.usage_examples
@@ -576,7 +582,7 @@ rush_snatch_usage() {
   fi
 
   printf "Usage:\n"
-  printf "  rush snatch GITHUB_USER PACKAGE\n"
+  printf "  rush snatch GITHUB_USER PACKAGE [OPTIONS]\n"
   printf "  rush snatch --help | -h\n"
   echo
 
@@ -589,12 +595,23 @@ rush_snatch_usage() {
     printf "    Show this help\n"
     echo
 
+    # :command.usage_flags
+    # :flag.usage
+    echo "  --force, -f"
+    printf "    Force installation\n    This may mean different things in different packages.\n"
+    echo
+
+    # :flag.usage
+    echo "  --verbose, -v"
+    printf "    Show additional details if possible.\n"
+    echo
+
     # :command.usage_args
     printf "Arguments:\n"
 
     # :argument.usage
     echo "  GITHUB_USER"
-    printf "    Github user.\n    This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax.\n"
+    printf "    Github user\n    This user is expected to have a repository named 'rush-repo'.\n    If you need to use a different name, use the 'user/repo' syntax.\n"
     echo
 
     # :argument.usage
@@ -640,7 +657,7 @@ rush_copy_usage() {
     # :command.usage_flags
     # :flag.usage
     echo "  --force, -f"
-    printf "    Copy the package even if it already exists in the target repository.\n"
+    printf "    Copy the package even if it already exists in the target repository\n"
     echo
 
     # :command.usage_args
@@ -648,12 +665,12 @@ rush_copy_usage() {
 
     # :argument.usage
     echo "  SOURCE_PACKAGE"
-    printf "    Source package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Source package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :argument.usage
     echo "  TARGET_PACKAGE"
-    printf "    Target package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n    If left empty, the package will be copied with the same name to the\n    default repository.\n"
+    printf "    Target package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n    If left empty, the package will be copied with the same name to the\n    default repository.\n"
     echo
 
     # :command.usage_examples
@@ -703,7 +720,7 @@ rush_info_usage() {
 
     # :argument.usage
     echo "  PACKAGE"
-    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :command.usage_examples
@@ -747,12 +764,12 @@ rush_list_usage() {
     # :command.usage_flags
     # :flag.usage
     echo "  --simple, -s"
-    printf "    Show only package names.\n"
+    printf "    Show only package names\n"
     echo
 
     # :flag.usage
     echo "  --all, -a"
-    printf "    Show nested packages as well.\n"
+    printf "    Show nested packages as well\n"
     echo
 
     # :command.usage_args
@@ -760,7 +777,7 @@ rush_list_usage() {
 
     # :argument.usage
     echo "  REPO_OR_PACKAGE"
-    printf "    Repository name or package name.\n    - Leave blank to show all packages in all repositories.\n    - Provide a repository name to show only packages in this repository.\n    - Provide a package name (may be in the form of 'repo:package') to\n      show nested packages.\n"
+    printf "    Repository name or package name\n    - Leave blank to show all packages in all repositories.\n    - Provide a repository name to show only packages in this repository.\n    - Provide a package name (may be in the form of 'repo:package') to\n      show nested packages.\n"
     echo
 
     # :command.usage_examples
@@ -809,7 +826,7 @@ rush_search_usage() {
 
     # :argument.usage
     echo "  TEXT"
-    printf "    Text to search for.\n"
+    printf "    Text to search for\n"
     echo
 
   fi
@@ -849,12 +866,12 @@ rush_edit_usage() {
 
     # :argument.usage
     echo "  PACKAGE"
-    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :argument.usage
     echo "  FILE"
-    printf "    File to edit.\n    Default: main\n"
+    printf "    File to edit\n    Default: main\n"
     echo
 
   fi
@@ -891,12 +908,12 @@ rush_show_usage() {
 
     # :argument.usage
     echo "  PACKAGE"
-    printf "    Package name.\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
+    printf "    Package name\n    This can either be the package name without the repository name (in\n    this case, the default repository will be used) or in the form of\n    'repo:package'.\n"
     echo
 
     # :argument.usage
     echo "  FILE"
-    printf "    File to show (show all if not specified).\n"
+    printf "    File to show (show all if not specified)\n"
     echo
 
   fi
@@ -1545,6 +1562,7 @@ rush_undo_command() {
   # Collect variables
   package=${args[package]}
   repo="default"
+  export VERBOSE=${args['--verbose']}
 
   if [[ $package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
@@ -1593,6 +1611,8 @@ rush_snatch_command() {
   repo_id=${args[github_user]}
   package=${args[package]}
   path="$HOME/rush-repos/snatched"
+  export FORCE=${args['--force']}
+  export VERBOSE=${args['--verbose']}
 
   cleanup() {
     rush remove snatched --purge
@@ -2577,6 +2597,13 @@ rush_undo_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --verbose | -v )
+
+      # :flag.case_no_arg
+      args[--verbose]=1
+      shift
+      ;;
 
     -?* )
       printf "invalid option: %s\n" "$key" >&2
@@ -2601,7 +2628,7 @@ rush_undo_parse_requirements() {
   done
   # :command.required_args_filter
   if [[ -z ${args[package]+x} ]]; then
-    printf "missing required argument: PACKAGE\nusage: rush undo PACKAGE\n" >&2
+    printf "missing required argument: PACKAGE\nusage: rush undo PACKAGE [OPTIONS]\n" >&2
     exit 1
   fi
 
@@ -2626,6 +2653,21 @@ rush_snatch_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --force | -f )
+
+      # :flag.case_no_arg
+      args[--force]=1
+      shift
+      ;;
+
+    # :flag.case
+    --verbose | -v )
+
+      # :flag.case_no_arg
+      args[--verbose]=1
+      shift
+      ;;
 
     -?* )
       printf "invalid option: %s\n" "$key" >&2
@@ -2654,11 +2696,11 @@ rush_snatch_parse_requirements() {
   done
   # :command.required_args_filter
   if [[ -z ${args[github_user]+x} ]]; then
-    printf "missing required argument: GITHUB_USER\nusage: rush snatch GITHUB_USER PACKAGE\n" >&2
+    printf "missing required argument: GITHUB_USER\nusage: rush snatch GITHUB_USER PACKAGE [OPTIONS]\n" >&2
     exit 1
   fi
   if [[ -z ${args[package]+x} ]]; then
-    printf "missing required argument: PACKAGE\nusage: rush snatch GITHUB_USER PACKAGE\n" >&2
+    printf "missing required argument: PACKAGE\nusage: rush snatch GITHUB_USER PACKAGE [OPTIONS]\n" >&2
     exit 1
   fi
 

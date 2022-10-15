@@ -16,5 +16,5 @@ echo "Saved '.somefile' in the current directory"
 [32mundo[0m
 #!/usr/bin/env bash
 set -e
-rm $USER_CWD/.somefile
+rm -f $USER_CWD/.somefile
 echo "Removed '.somefile' from the current directory"

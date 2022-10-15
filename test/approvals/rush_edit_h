@@ -12,11 +12,11 @@ Options:
 
 Arguments:
   PACKAGE
-    Package name.
+    Package name
     This can either be the package name without the repository name (in
     this case, the default repository will be used) or in the form of
     'repo:package'.
 
   FILE
-    File to edit.
+    File to edit
     Default: main

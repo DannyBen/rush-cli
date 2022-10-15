@@ -41,5 +41,5 @@ Options:
 
 Environment Variables:
   RUSH_CONFIG
-    Location of the rush config file.
+    Location of the rush config file
     Default: ~/rush.ini
