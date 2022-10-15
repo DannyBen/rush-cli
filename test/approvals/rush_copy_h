@@ -1,7 +1,7 @@
 rush copy - Copy a package between local repositories
 
 Usage:
-  rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [options]
+  rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [OPTIONS]
   rush copy --help | -h
 
 Options:

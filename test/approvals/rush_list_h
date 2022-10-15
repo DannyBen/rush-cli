@@ -3,7 +3,7 @@ rush list - Show packages in one or all repositories
 Alias: l
 
 Usage:
-  rush list [REPO_OR_PACKAGE] [options]
+  rush list [REPO_OR_PACKAGE] [OPTIONS]
   rush list --help | -h
 
 Options:

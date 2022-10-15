@@ -9,7 +9,7 @@ rush get
 Alias: g
 
 Usage:
-  rush get PACKAGE [options]
+  rush get PACKAGE [OPTIONS]
   rush get --help | -h
 
 Options:
@@ -21,6 +21,13 @@ Options:
     This flag will look for a GitHub user with the same name as the
     repository, and attempt to clone their rush-repo repository.
 
+  --force, -f
+    Force installation.
+    This may mean different things in different packages.
+
+  --verbose, -v
+    Show additional details if possible.
+
 Arguments:
   PACKAGE
     Package name.
@@ -30,5 +37,5 @@ Arguments:
 
 Examples:
   rush ruby
-  rush get ruby
+  rush get ruby --force
   rush get centos:ruby

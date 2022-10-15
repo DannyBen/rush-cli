@@ -1,2 +1,2 @@
 missing required argument: GITHUB_USER
-usage: rush clone GITHUB_USER [PATH] [options]
+usage: rush clone GITHUB_USER [PATH] [OPTIONS]

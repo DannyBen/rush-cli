@@ -188,10 +188,18 @@ commands:
       Clone the repository if it is not found locally.
       This flag will look for a GitHub user with the same name as the
       repository, and attempt to clone their rush-repo repository.
+  - long: --force
+    short: -f
+    help: |-
+      Force installation.
+      This may mean different things in different packages.
+  - long: --verbose
+    short: -v
+    help: Show additional details if possible.
 
   examples:
   - rush ruby
-  - rush get ruby
+  - rush get ruby --force
   - rush get centos:ruby 
 
 - name: undo

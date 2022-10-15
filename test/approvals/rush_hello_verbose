@@ -3,5 +3,5 @@ What's the rush?
 REPO:      default
 REPO_PATH: /root/rush-repos/sample-repo
 USER_CWD:  /test
-VERBOSE:   
+VERBOSE:   1
 FORCE:     

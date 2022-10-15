@@ -3,7 +3,7 @@ rush config - Show or edit the configuration file
 Alias: c
 
 Usage:
-  rush config [options]
+  rush config [OPTIONS]
   rush config --help | -h
 
 Options:

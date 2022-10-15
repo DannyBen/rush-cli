@@ -2,6 +2,8 @@
 package=${args[package]}
 repo="default"
 clone=${args[--clone]}
+export FORCE=${args['--force']}
+export VERBOSE=${args['--verbose']}
 
 if [[ $package =~ (.*):(.*) ]]; then
   repo=${BASH_REMATCH[1]}

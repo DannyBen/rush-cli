@@ -5,7 +5,7 @@ rush clone
   configuration file.
 
 Usage:
-  rush clone GITHUB_USER [PATH] [options]
+  rush clone GITHUB_USER [PATH] [OPTIONS]
   rush clone --help | -h
 
 Options:

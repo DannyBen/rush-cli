@@ -4,4 +4,4 @@ REPO:      default
 REPO_PATH: /root/rush-repos/sample-repo
 USER_CWD:  /test
 VERBOSE:   
-FORCE:     
+FORCE:     1

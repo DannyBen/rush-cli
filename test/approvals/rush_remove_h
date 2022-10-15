@@ -6,7 +6,7 @@ rush remove
 Alias: r
 
 Usage:
-  rush remove REPO [options]
+  rush remove REPO [OPTIONS]
   rush remove --help | -h
 
 Options:
