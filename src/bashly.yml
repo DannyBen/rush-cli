@@ -6,7 +6,7 @@ completions: [$(rush list -s -a)]
 environment_variables:
 - name: rush_config
   help: |-
-    Location of the rush config file.
+    Location of the rush config file
     Default: ~/rush.ini
 
 commands:
@@ -63,38 +63,38 @@ commands:
   - name: github_user
     required: true
     help: &github_user_help |-
-      Github user.
+      Github user
       This user is expected to have a repository named 'rush-repo'.
       If you need to use a different name, use the 'user/repo' syntax.
 
   - name: path
     help: |-
-      Local path to clone the repository to.
+      Local path to clone the repository into
       Default: ~/rush-repos/<github_user>/<github_repo>
 
   flags:
   - long: --ssh
     short: -s
-    help: Clone using SSH instead of HTTPS.
+    help: Clone using SSH instead of HTTPS
 
   - long: --default
     short: -d
-    help: Set this as the default repository (same as '--name default').
+    help: Set this as the default repository (same as '--name default')
 
   - long: --name
     short: -n
     arg: name
     help: |-
-      Name to use in the config file.
+      Name to use in the config file
       Default: GitHub user
 
   - long: --shallow
     short: -w
-    help: Perform a shallow clone, instead of the default full clone.
+    help: Perform a shallow clone, instead of the default full clone
 
   - long: --ignore
     short: -i
-    help: Ignore (do not clone) if a repository with this name exists.
+    help: Ignore (do not clone) if a repository with this name exists
 
   examples:
   - rush clone bobby
@@ -118,9 +118,8 @@ commands:
 
   args:
   - name: repo
-    help: |-
-      Repository name.
-      Default: default
+    help: Repository name
+    default: default
 
   flags:
   - long: --all
@@ -130,9 +129,8 @@ commands:
   - long: --message
     short: -m
     arg: TEXT
-    help: |-
-      Commit message.
-      Default: automatic commit
+    help: Commit message
+    default: automatic commit
 
 - name: config
   alias: c
@@ -154,7 +152,7 @@ commands:
   args:
   - name: repo
     required: true
-    help: Repository name.
+    help: Repository name
 
   examples:
   - rush default sample
@@ -176,7 +174,7 @@ commands:
   - name: package
     required: true
     help: &package_help |-
-      Package name.
+      Package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
@@ -185,13 +183,21 @@ commands:
   - long: --clone
     short: -c
     help: |-
-      Clone the repository if it is not found locally.
+      Clone the repository if it is not found locally
       This flag will look for a GitHub user with the same name as the
       repository, and attempt to clone their rush-repo repository.
+  - long: --force
+    short: -f
+    help: |-
+      Force installation
+      This may mean different things in different packages.
+  - long: --verbose
+    short: -v
+    help: Show additional details if possible.
 
   examples:
   - rush ruby
-  - rush get ruby
+  - rush get ruby --force
   - rush get centos:ruby 
 
 - name: undo
@@ -206,6 +212,11 @@ commands:
   - name: package
     required: true
     help: *package_help
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show additional details if possible
 
   examples:
   - rush undo ruby
@@ -228,6 +239,17 @@ commands:
     required: true
     help: Package name.
 
+  flags:
+  - long: --force
+    short: -f
+    help: |-
+      Force installation
+      This may mean different things in different packages.
+  - long: --verbose
+    short: -v
+    help: Show additional details if possible.
+
+
   examples:
   - rush snatch james python
   - rush snatch james/other-rush-repo python
@@ -241,14 +263,14 @@ commands:
   - name: source_package
     required: true
     help: |-
-      Source package name.
+      Source package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
 
   - name: target_package
     help: |-
-      Target package name.
+      Target package name
       This can either be the package name without the repository name (in
       this case, the default repository will be used) or in the form of
       'repo:package'.
@@ -258,7 +280,7 @@ commands:
   flags:
   - long: --force
     short: -f
-    help: Copy the package even if it already exists in the target repository.
+    help: Copy the package even if it already exists in the target repository
 
   examples:
   - rush copy james:python
@@ -290,7 +312,7 @@ commands:
   args:
   - name: repo_or_package
     help: |-
-      Repository name or package name.
+      Repository name or package name
       - Leave blank to show all packages in all repositories.
       - Provide a repository name to show only packages in this repository.
       - Provide a package name (may be in the form of 'repo:package') to
@@ -299,11 +321,11 @@ commands:
   flags:
   - long: --simple
     short: -s
-    help: Show only package names.
+    help: Show only package names
 
   - long: --all
     short: -a
-    help: Show nested packages as well.
+    help: Show nested packages as well
 
   examples:
   - rush list
@@ -319,7 +341,7 @@ commands:
 
   args:
   - name: text
-    help: Text to search for.
+    help: Text to search for
     required: true
 
 - name: edit
@@ -334,9 +356,8 @@ commands:
     help: *package_help
 
   - name: file
-    help: |-
-      File to edit.
-      Default: main
+    help: File to edit
+    default: main
 
 - name: show
   group: Package
@@ -349,9 +370,8 @@ commands:
     help: *package_help
 
   - name: file
-    help: File to show (show all if not specified).
+    help: File to show (show all if not specified)
 
 - name: completions
   group: Internal
-  help: |-
-    Generate bash completions
+  help: Generate bash completions

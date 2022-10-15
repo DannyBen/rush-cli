@@ -1,8 +1,8 @@
 rush - Personal package manager
 
 Usage:
-  rush [command]
-  rush [command] --help | -h
+  rush COMMAND
+  rush [COMMAND] --help | -h
   rush --version | -v
 
 Repository Commands:

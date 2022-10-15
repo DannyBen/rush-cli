@@ -6,7 +6,7 @@ What's the rush?
 REPO:      snatched
 REPO_PATH: /root/rush-repos/snatched
 USER_CWD:  /test
-VERBOSE:   
-FORCE:     
+VERBOSE:   1
+FORCE:     1
 [35mremove[0m      | [1msnatched[0m
 [35mremove[0m      | [1mpurged /root/rush-repos/snatched[0m

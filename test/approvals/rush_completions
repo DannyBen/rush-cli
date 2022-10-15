@@ -105,7 +105,7 @@ _rush_completions() {
       ;;
 
     'get'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --help -c -h")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --force --help --verbose -c -f -h -v")" -- "$cur" )
       ;;
 
     'a'*)
@@ -125,7 +125,7 @@ _rush_completions() {
       ;;
 
     'g'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --help -c -h")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --force --help --verbose -c -f -h -v")" -- "$cur" )
       ;;
 
     'u'*)

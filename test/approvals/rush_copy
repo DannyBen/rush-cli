@@ -1,2 +1,2 @@
 missing required argument: SOURCE_PACKAGE
-usage: rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [options]
+usage: rush copy SOURCE_PACKAGE [TARGET_PACKAGE] [OPTIONS]

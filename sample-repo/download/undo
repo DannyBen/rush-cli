@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -e
-rm $USER_CWD/.somefile
+rm -f $USER_CWD/.somefile
 echo "Removed '.somefile' from the current directory"
+echo "VERBOSE: $VERBOSE"
