@@ -1,7 +1,6 @@
 <div align='center'>
 
-Rush - Personal Package Manager
-==================================================
+# Rush - Personal Package Manager
 
 ```
 _______                       ______  
@@ -33,16 +32,14 @@ you install things.
 Rush was developed using the [Bashly Command Line Framework][bashly].
 
 
-Prerequisites
---------------------------------------------------
+## Prerequisites
 
 - Bash 4.0 or higher (`brew install bash` on mac).
 - curl 
 - git
 
 
-Installation
---------------------------------------------------
+## Installation
 
 ### Installing using the setup script
 
@@ -69,8 +66,7 @@ complete -W '$(rush list -s)' rush
 ```
 
 
-Quick Start
---------------------------------------------------
+## Quick Start
 
 After installing, you can follow these steps to quickly see how it works:
 
@@ -105,8 +101,7 @@ can use [this docker image][docker-image], which has Rush copied to its path:
     > rush --help
 
 
-Usage
---------------------------------------------------
+## Usage
 
 ```
 $ rush --help
@@ -160,8 +155,7 @@ Environment Variables:
 ```
 
 
-Building your own Rush repository
---------------------------------------------------
+## Building your own Rush repository
 
 Create your own repository, either manually or by using
 [this Github template][sample]. In any case, it is recommended you name your 
@@ -178,10 +172,13 @@ To create a repository manually, follow these steps:
      `rush info yourpackage`.
    - An executable script named `undo` (optional) - this will be executed 
      when running `rush undo yourpackage`.
-4. In the `main` and `undo` scripts, you have the environment variables
-   `$REPO` and `$REPO_PATH` available to you, in case you need it (for
-   example, if you want your script to run another script in the same
-   repository).
+4. In the `main` and `undo` scripts, you have the following environment
+   variables available to you:
+   - `$REPO` - name of the rush repo
+   - `$REPO_PATH` - path of the rush repo
+   - `$USER_CWD` - the directory from which rush was executed
+   - `$VERBOSE` - if the user passed `--verbose`
+   - `$FORCE` - if the user passed `--force`
 5. Note that the `main` and `undo` scripts are executed in the same folder it
    lives in, so you can copy files from the package's directory to wherever
    they need to be.
@@ -192,8 +189,7 @@ To create a repository manually, follow these steps:
 
 
 
-Using with GitHub Actions
---------------------------------------------------
+## Using with GitHub Actions
 
 Rush can be very useful for running remote shell scripts as part of your
 GitHub Actions workflow. This sample configuration shows how to install rush
@@ -221,8 +217,7 @@ jobs:
       run: rush get hello
 ```
 
-Contributing / Support
---------------------------------------------------
+## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
 to contribute, feel free to [open an issue][issues].
