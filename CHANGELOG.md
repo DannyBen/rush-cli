@@ -1,6 +1,13 @@
 Change Log
 ========================================
 
+v0.7.5 - 2022-10-15
+----------------------------------------
+
+- Add --force and --verbose to 'rush get' command
+- Add --force and --verbose to 'rush undo' and 'rush snatch'
+
+
 v0.7.4 - 2022-09-04
 ----------------------------------------
 
