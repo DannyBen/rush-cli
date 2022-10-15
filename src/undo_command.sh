@@ -1,7 +1,7 @@
 # Collect variables
 package=${args[package]}
 repo="default"
-export VERBOSE=${args['--verbose']}
+[[ -n "${args['--verbose']}" ]] && export VERBOSE=1
 
 if [[ $package =~ (.*):(.*) ]]; then
   repo=${BASH_REMATCH[1]}

@@ -118,9 +118,8 @@ commands:
 
   args:
   - name: repo
-    help: |-
-      Repository name
-      Default: default
+    help: Repository name
+    default: default
 
   flags:
   - long: --all
@@ -130,9 +129,8 @@ commands:
   - long: --message
     short: -m
     arg: TEXT
-    help: |-
-      Commit message
-      Default: automatic commit
+    help: Commit message
+    default: automatic commit
 
 - name: config
   alias: c
@@ -358,9 +356,8 @@ commands:
     help: *package_help
 
   - name: file
-    help: |-
-      File to edit
-      Default: main
+    help: File to edit
+    default: main
 
 - name: show
   group: Package

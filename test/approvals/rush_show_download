@@ -18,3 +18,4 @@ echo "Saved '.somefile' in the current directory"
 set -e
 rm -f $USER_CWD/.somefile
 echo "Removed '.somefile' from the current directory"
+echo "VERBOSE: $VERBOSE"

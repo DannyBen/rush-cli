@@ -2,8 +2,8 @@
 repo_id=${args[github_user]}
 package=${args[package]}
 path="$HOME/rush-repos/snatched"
-export FORCE=${args['--force']}
-export VERBOSE=${args['--verbose']}
+[[ -n "${args['--force']}" ]] && export FORCE=1
+[[ -n "${args['--verbose']}" ]] && export VERBOSE=1
 
 cleanup() {
   rush remove snatched --purge

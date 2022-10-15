@@ -348,7 +348,8 @@ rush_push_usage() {
 
     # :flag.usage
     echo "  --message, -m TEXT"
-    printf "    Commit message\n    Default: automatic commit\n"
+    printf "    Commit message\n"
+    printf "    Default: automatic commit\n"
     echo
 
     # :command.usage_args
@@ -356,7 +357,8 @@ rush_push_usage() {
 
     # :argument.usage
     echo "  REPO"
-    printf "    Repository name\n    Default: default\n"
+    printf "    Repository name\n"
+    printf "    Default: default\n"
     echo
 
   fi
@@ -871,7 +873,8 @@ rush_edit_usage() {
 
     # :argument.usage
     echo "  FILE"
-    printf "    File to edit\n    Default: main\n"
+    printf "    File to edit\n"
+    printf "    Default: main\n"
     echo
 
   fi
@@ -1508,8 +1511,8 @@ rush_get_command() {
   package=${args[package]}
   repo="default"
   clone=${args[--clone]}
-  export FORCE=${args['--force']}
-  export VERBOSE=${args['--verbose']}
+  [[ -n "${args['--force']}" ]] && export FORCE=1
+  [[ -n "${args['--verbose']}" ]] && export VERBOSE=1
 
   if [[ $package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
@@ -1562,7 +1565,7 @@ rush_undo_command() {
   # Collect variables
   package=${args[package]}
   repo="default"
-  export VERBOSE=${args['--verbose']}
+  [[ -n "${args['--verbose']}" ]] && export VERBOSE=1
 
   if [[ $package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
@@ -1611,8 +1614,8 @@ rush_snatch_command() {
   repo_id=${args[github_user]}
   package=${args[package]}
   path="$HOME/rush-repos/snatched"
-  export FORCE=${args['--force']}
-  export VERBOSE=${args['--verbose']}
+  [[ -n "${args['--force']}" ]] && export FORCE=1
+  [[ -n "${args['--verbose']}" ]] && export VERBOSE=1
 
   cleanup() {
     rush remove snatched --purge
@@ -2410,6 +2413,10 @@ rush_push_parse_requirements() {
     esac
   done
 
+  # :command.default_assignments
+  [[ -n ${args[repo]:-} ]] || args[repo]="default"
+  [[ -n ${args[--message]:-} ]] || args[--message]="automatic commit"
+
 }
 
 # :command.parse_requirements
@@ -2973,6 +2980,9 @@ rush_edit_parse_requirements() {
     printf "missing required argument: PACKAGE\nusage: rush edit PACKAGE [FILE]\n" >&2
     exit 1
   fi
+
+  # :command.default_assignments
+  [[ -n ${args[file]:-} ]] || args[file]="main"
 
 }
 
