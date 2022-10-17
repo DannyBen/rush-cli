@@ -109,8 +109,8 @@ $ rush --help
 rush - Personal package manager
 
 Usage:
-  rush [command]
-  rush [command] --help | -h
+  rush COMMAND
+  rush [COMMAND] --help | -h
   rush --version | -v
 
 Repository Commands:
@@ -149,9 +149,8 @@ Options:
 
 Environment Variables:
   RUSH_CONFIG
-    Location of the rush config file.
+    Location of the rush config file
     Default: ~/rush.ini
-
 ```
 
 
