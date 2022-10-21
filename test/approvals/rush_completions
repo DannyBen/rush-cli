@@ -57,7 +57,7 @@ _rush_completions() {
       ;;
 
     'snatch'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--force --help --verbose -f -h -v")" -- "$cur" )
       ;;
 
     'search'*)
@@ -77,7 +77,7 @@ _rush_completions() {
       ;;
 
     'undo'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --verbose -h -v")" -- "$cur" )
       ;;
 
     'copy'*)
@@ -129,7 +129,7 @@ _rush_completions() {
       ;;
 
     'u'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help -h")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --verbose -h -v")" -- "$cur" )
       ;;
 
     'i'*)
