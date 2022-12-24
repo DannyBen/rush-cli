@@ -7,7 +7,7 @@ ignore=${args[--ignore]}
 default_repo_name=${repo_id%%/*}
 default=${args[--default]}
 
-if [[ $default ]] ; then
+if [[ $default ]]; then
   repo_name=default
 else
   repo_name=${args[--name]:-$default_repo_name}
@@ -17,7 +17,7 @@ fi
 [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
 
 # Set clone URL - ssh or https?
-if [[ $use_ssh ]] ; then
+if [[ $use_ssh ]]; then
   repo_url=git@github.com:$repo_id.git
 else
   repo_url=https://github.com/$repo_id.git
@@ -27,8 +27,8 @@ fi
 [[ $path ]] || path="$HOME/rush-repos/$repo_id"
 
 # Abort if target directory exists
-if [[ -d $path ]] ; then
-  if [[ $ignore ]] ; then
+if [[ -d $path ]]; then
+  if [[ $ignore ]]; then
     skip=1
   else
     abort "directory $path already exists."
@@ -36,15 +36,15 @@ if [[ -d $path ]] ; then
 fi
 
 # Abort if a repository with this name already exists
-if config_has_key "$repo_name" ; then
-  if [[ $ignore ]] ; then
+if config_has_key "$repo_name"; then
+  if [[ $ignore ]]; then
     skip=1
   else
     abort "the repository is already registered:\n$repo_name = $(config_get "$repo_name")."
   fi
 fi
 
-if [[ $skip ]] ; then
+if [[ $skip ]]; then
   say "clone" "skipping $repo_name (exists)"
 
 else

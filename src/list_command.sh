@@ -3,13 +3,13 @@ list_display_item() {
   infofile="$2"
   repo="$3"
   simple=${args[--simple]}
-  width=$(( ${COLUMNS:-80} + 9))
+  width=$((${COLUMNS:-80} + 9))
 
   [[ "$repo" != "default" ]] && package="$repo:$package"
   if [[ $simple ]]; then
     printf "%s\n" "$package"
   else
-    info=$(head -1 "$infofile" 2> /dev/null)
+    info=$(head -1 "$infofile" 2>/dev/null)
     padded_package=$(printf "%-20s" "$package")
     message="$(green "$padded_package")  $info"
     printf "%.${width}s\n" "$message"
@@ -42,9 +42,9 @@ list_show_repo() {
   fi
 
   if [[ $package ]]; then
-    glob=( "$repo_path"/"$package"/**/info )
+    glob=("$repo_path"/"$package"/**/info)
   else
-    glob=( "$repo_path"/**/info )
+    glob=("$repo_path"/**/info)
   fi
 
   if [[ ${glob[0]} =~ .*\*.* ]]; then
