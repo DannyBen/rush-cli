@@ -29,7 +29,7 @@ export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"
 
-if [[ $repo == "default" ]] ; then
+if [[ $repo == "default" ]]; then
   package_name="$package"
 else
   package_name="$repo:$package"
