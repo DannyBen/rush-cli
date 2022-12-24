@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager
-version: 0.7.5
+version: 0.7.6
 completions: [$(rush list -s -a)]
 
 environment_variables:
