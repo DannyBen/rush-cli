@@ -1,14 +1,14 @@
 rush show - Show package files
 
-Usage:
+[1mUsage:[0m
   rush show PACKAGE [FILE]
   rush show --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help
 
-Arguments:
+[1mArguments:[0m
   PACKAGE
     Package name
     This can either be the package name without the repository name (in

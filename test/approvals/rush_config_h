@@ -2,13 +2,13 @@ rush config - Show or edit the configuration file
 
 Alias: c
 
-Usage:
+[1mUsage:[0m
   rush config [OPTIONS]
   rush config --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --edit, -e
     Open the configuration file for editing.
+
+  --help, -h
+    Show this help

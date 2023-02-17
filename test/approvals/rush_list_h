@@ -2,21 +2,21 @@ rush list - Show packages in one or all repositories
 
 Alias: l
 
-Usage:
+[1mUsage:[0m
   rush list [REPO_OR_PACKAGE] [OPTIONS]
   rush list --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --simple, -s
     Show only package names
 
   --all, -a
     Show nested packages as well
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   REPO_OR_PACKAGE
     Repository name or package name
     - Leave blank to show all packages in all repositories.
@@ -24,7 +24,7 @@ Arguments:
     - Provide a package name (may be in the form of 'repo:package') to
       show nested packages.
 
-Examples:
+[1mExamples:[0m
   rush list
   rush list personal:apps
   rush list personal

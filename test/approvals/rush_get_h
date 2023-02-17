@@ -8,14 +8,11 @@ rush get
 
 Alias: g
 
-Usage:
+[1mUsage:[0m
   rush get PACKAGE [OPTIONS]
   rush get --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --clone, -c
     Clone the repository if it is not found locally
     This flag will look for a GitHub user with the same name as the
@@ -28,14 +25,17 @@ Options:
   --verbose, -v
     Show additional details if possible.
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   PACKAGE
     Package name
     This can either be the package name without the repository name (in
     this case, the default repository will be used) or in the form of
     'repo:package'.
 
-Examples:
+[1mExamples:[0m
   rush ruby
   rush get ruby --force
   rush get centos:ruby

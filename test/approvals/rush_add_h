@@ -5,20 +5,20 @@ rush add
 
 Alias: a
 
-Usage:
+[1mUsage:[0m
   rush add REPO PATH
   rush add --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help
 
-Arguments:
+[1mArguments:[0m
   REPO
     Repository name.
 
   PATH
     Path to the repository.
 
-Examples:
+[1mExamples:[0m
   rush add default ~/rush-repos/default

@@ -4,14 +4,11 @@ rush clone
   This command clones the repository and registers it in the
   configuration file.
 
-Usage:
+[1mUsage:[0m
   rush clone GITHUB_USER [PATH] [OPTIONS]
   rush clone --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --ssh, -s
     Clone using SSH instead of HTTPS
 
@@ -28,7 +25,10 @@ Options:
   --ignore, -i
     Ignore (do not clone) if a repository with this name exists
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   GITHUB_USER
     Github user
     This user is expected to have a repository named 'rush-repo'.
@@ -38,7 +38,7 @@ Arguments:
     Local path to clone the repository into
     Default: ~/rush-repos/<github_user>/<github_repo>
 
-Examples:
+[1mExamples:[0m
   rush clone bobby
   rush clone bobby --default
   rush clone bobby/bobs-repo ./repos/bobby --ssh
