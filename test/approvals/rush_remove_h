@@ -5,21 +5,21 @@ rush remove
 
 Alias: r
 
-Usage:
+[1mUsage:[0m
   rush remove REPO [OPTIONS]
   rush remove --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --purge, -p
     Also remove the local repository's directory.
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   REPO
     Repository name.
 
-Examples:
+[1mExamples:[0m
   rush remove bobby
   rush remove bobby --purge

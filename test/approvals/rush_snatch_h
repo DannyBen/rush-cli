@@ -5,14 +5,11 @@ rush snatch
   It will clone the repository to a temporary directory and run the main
   package script.
 
-Usage:
+[1mUsage:[0m
   rush snatch GITHUB_USER PACKAGE [OPTIONS]
   rush snatch --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --force, -f
     Force installation
     This may mean different things in different packages.
@@ -20,7 +17,10 @@ Options:
   --verbose, -v
     Show additional details if possible.
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   GITHUB_USER
     Github user
     This user is expected to have a repository named 'rush-repo'.
@@ -29,6 +29,6 @@ Arguments:
   PACKAGE
     Package name.
 
-Examples:
+[1mExamples:[0m
   rush snatch james python
   rush snatch james/other-rush-repo python

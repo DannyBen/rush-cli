@@ -1,9 +1,9 @@
 rush completions - Generate bash completions
 
-Usage:
+[1mUsage:[0m
   rush completions
   rush completions --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help

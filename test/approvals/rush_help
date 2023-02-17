@@ -1,24 +1,24 @@
 rush - Personal package manager
 
-Usage:
+[1mUsage:[0m
   rush COMMAND
   rush [COMMAND] --help | -h
   rush --version | -v
 
-Repository Commands:
+[1mRepository Commands:[0m
   add           Register a local repository
   remove        Unregister a local repository
 
-Git Commands:
+[1mGit Commands:[0m
   clone         Clone a GitHub package repository
   pull          Git pull one or all repositories
   push          Git push one or all repositories
 
-Config Commands:
+[1mConfig Commands:[0m
   config        Show or edit the configuration file
   default       Set a default repository
 
-Package Commands:
+[1mPackage Commands:[0m
   get           Install a package (default)
   undo          Uninstall a package
   snatch        Install a package from a remote repo
@@ -29,17 +29,17 @@ Package Commands:
   edit          Edit package files
   show          Show package files
 
-Internal Commands:
+[1mInternal Commands:[0m
   completions   Generate bash completions
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help
 
   --version, -v
     Show version number
 
-Environment Variables:
+[1mEnvironment Variables:[0m
   RUSH_CONFIG
     Location of the rush config file
     Default: ~/rush.ini
