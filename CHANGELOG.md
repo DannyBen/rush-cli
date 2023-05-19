@@ -4,13 +4,8 @@ Change Log
 v0.7.9 - 2023-05-19
 ----------------------------------------
 
-- Change push command to only chmod new (untracked) files
-
-
-v1.0.2 - 2023-03-23
-----------------------------------------
-
 - Regenerate with bashly 1.0.2
+- Change push command to only chmod new (untracked) files
 
 
 v0.7.7 - 2023-02-17
