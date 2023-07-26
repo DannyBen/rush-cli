@@ -24,10 +24,6 @@ list_show_repo() {
   local repo="$repo_or_package"
   local package glob repo_path infofile regex package_name
 
-  if [[ $all ]]; then
-    shopt -s globstar
-  fi
-
   if [[ $repo_or_package =~ (.*):(.*) ]]; then
     repo=${BASH_REMATCH[1]}
     package=${BASH_REMATCH[2]}
@@ -44,7 +40,12 @@ list_show_repo() {
   if [[ $package ]]; then
     glob=("$repo_path"/"$package"/**/info)
   else
-    glob=("$repo_path"/**/info)
+    if [[ $all ]]; then
+      glob_files=$(find "$repo_path" -type f -name 'info')
+    else
+      glob_files=$(find "$repo_path" -maxdepth 2 -type f -name 'info')
+    fi
+    readarray -t glob < <(echo "${glob_files[@]}")
   fi
 
   if [[ ${glob[0]} =~ .*\*.* ]]; then
