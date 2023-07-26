@@ -48,6 +48,8 @@ list_show_repo() {
     readarray -t glob < <(echo "${glob_files[@]}")
   fi
 
+  glob=($(echo "${glob[@]}" | tr ' ' '\n' | sort))
+
   if [[ ${glob[0]} =~ .*\*.* ]]; then
     infofile="$repo_path/$package/info"
     if [[ -f "$infofile" ]]; then
