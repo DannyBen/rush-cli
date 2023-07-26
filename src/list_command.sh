@@ -41,14 +41,12 @@ list_show_repo() {
     glob=("$repo_path"/"$package"/**/info)
   else
     if [[ $all ]]; then
-      glob_files=$(find "$repo_path" -type f -name 'info')
+      glob_files=$(find "$repo_path" -type f -name 'info' | sort)
     else
-      glob_files=$(find "$repo_path" -maxdepth 2 -type f -name 'info')
+      glob_files=$(find "$repo_path" -maxdepth 2 -type f -name 'info' | sort)
     fi
     readarray -t glob < <(echo "${glob_files[@]}")
   fi
-
-  glob=($(echo "${glob[@]}" | tr ' ' '\n' | sort))
 
   if [[ ${glob[0]} =~ .*\*.* ]]; then
     infofile="$repo_path/$package/info"
