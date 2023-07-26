@@ -4,6 +4,8 @@ services:
   bash: &default
     build: .
     image: dannyben/rush-cli
+    environment: 
+      LC_ALL: en_US.UTF-8 # consistent sort order
     volumes: 
     - ./rush:/usr/local/bin/rush
     - ./test:/test
