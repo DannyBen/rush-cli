@@ -347,6 +347,11 @@ rush_push_usage() {
     printf "    Default: automatic commit\n"
     echo
 
+    # :flag.usage
+    printf "  %s\n" "--chmod, -x"
+    printf "    Apply the executable bit to all main and undo scripts in the git repository\n    index\n"
+    echo
+
     # :command.usage_fixed_flags
     printf "  %s\n" "--help, -h"
     printf "    Show this help\n"
@@ -1201,7 +1206,7 @@ send_completions() {
   echo $'      ;;'
   echo $''
   echo $'    \'upload\'*)'
-  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --message -a -h -m")" -- "$cur" )'
+  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --chmod --help --message -a -h -m -x")" -- "$cur" )'
   echo $'      ;;'
   echo $''
   echo $'    \'config\'*)'
@@ -1225,7 +1230,7 @@ send_completions() {
   echo $'      ;;'
   echo $''
   echo $'    \'push\'*)'
-  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --message -a -h -m")" -- "$cur" )'
+  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --chmod --help --message -a -h -m -x")" -- "$cur" )'
   echo $'      ;;'
   echo $''
   echo $'    \'undo\'*)'
@@ -1462,13 +1467,22 @@ rush_push_command() {
       (
         set -e
         cd "$repo_path"
+
+        say "push" "$repo: adding files"
         git add . --all
-        git ls-files | grep -E "undo|main" | xargs -I {} git update-index --chmod +x {}
+
+        if [[ -n "${args[--chmod]}" ]]; then
+          say "push" "$repo: applying chmod +x"
+          git ls-files | grep -E "undo|main" | xargs -I {} git update-index --chmod +x {}
+        fi
+        say "push" "$repo: committing"
         git commit -am "$message"
+
+        say "push" "$repo: pushing"
         git push
       )
     else
-      say "push" "skipping $repo (not a git repo)"
+      say "push" "$repo: skipping (not a git repo)"
     fi
   }
 
@@ -2436,6 +2450,14 @@ rush_push_parse_requirements() {
           printf "%s\n" "--message requires an argument: --message, -m TEXT" >&2
           exit 1
         fi
+        ;;
+
+      # :flag.case
+      --chmod | -x)
+
+        # :flag.case_no_arg
+        args['--chmod']=1
+        shift
         ;;
 
       -?*)
