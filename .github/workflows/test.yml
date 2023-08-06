@@ -57,8 +57,8 @@ jobs:
     - name: Connect rush repo
       run: rush clone dannyben --shallow --default
 
-    - name: Install shfmt
-      run: rush get shfmt
+    - name: Install shfmt and opcode
+      run: rush get shfmt && rush get opcode
 
     # libyaml needed for Ruby's YAML library
     - name: Install OS dependencies
@@ -71,7 +71,7 @@ jobs:
         bundler-cache: true
 
     - name: Run shellcheck tests
-      run: shellcheck rush
+      run: op shellcheck
 
     - name: Run shfmt tests
-      run: shfmt -d -i 2 -ci rush
+      run: op shfmt
