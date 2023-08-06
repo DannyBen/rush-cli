@@ -1048,99 +1048,139 @@ magenta_underlined() { print_in_color "\e[4;35m" "$*"; }
 cyan_underlined() { print_in_color "\e[4;36m" "$*"; }
 
 # src/lib/config.sh
-config_init() {
-  CONFIG_FILE=${CONFIG_FILE:=config.ini}
-  [[ -f "$CONFIG_FILE" ]] || touch "$CONFIG_FILE"
+
+config_show() {
+  config_load
+  ini_show
 }
 
 config_get() {
-  local key=$1
-  local regex="^$key *= *(.+)$"
-  local value=""
+  local key="$1"
+  local default_value="$2"
 
-  config_init
-
-  while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $line =~ $regex ]]; then
-      value="${BASH_REMATCH[1]}"
-      break
-    fi
-  done <"$CONFIG_FILE"
-
-  echo "$value"
+  config_load
+  echo "${ini["$key"]:-$default_value}"
 }
 
 config_set() {
-  local key=$1
+  local key="$1"
   shift
   local value="$*"
 
-  config_init
-
-  local regex="^($key) *= *.+$"
-  local output=""
-  local found_key=""
-  local newline
-
-  while IFS= read -r line || [ -n "$line" ]; do
-    newline=$line
-    if [[ $line =~ $regex ]]; then
-      found_key="${BASH_REMATCH[1]}"
-      newline="$key = $value"
-      output="$output$newline\n"
-    elif [[ $line ]]; then
-      output="$output$line\n"
-    fi
-  done <"$CONFIG_FILE"
-
-  if [[ -z $found_key ]]; then
-    output="$output$key = $value\n"
-  fi
-
-  printf "%b\n" "$output" >"$CONFIG_FILE"
+  config_load
+  ini["$key"]="$value"
+  config_save
 }
 
 config_del() {
-  local key=$1
+  local key="$1"
 
-  local regex="^($key) *="
-  local output=""
-
-  config_init
-
-  while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $line ]] && [[ ! $line =~ $regex ]]; then
-      output="$output$line\n"
-    fi
-  done <"$CONFIG_FILE"
-
-  printf "%b\n" "$output" >"$CONFIG_FILE"
-}
-
-config_show() {
-  config_init
-  cat "$CONFIG_FILE"
+  config_load
+  unset "ini[$key]"
+  config_save
 }
 
 config_keys() {
-  local regex="^([a-zA-Z0-9_\-\/\.]+) *="
-
-  config_init
-
-  local keys=()
-  local key
-
-  while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $line =~ $regex ]]; then
-      key="${BASH_REMATCH[1]}"
-      keys+=("$key")
-    fi
-  done <"$CONFIG_FILE"
-  echo "${keys[@]}"
+  config_load
+  ini_keys
 }
 
 config_has_key() {
   [[ $(config_get "$1") ]]
+}
+
+config_reload() {
+  declare -g config_loaded=false
+  config_load
+}
+
+config_load() {
+  [[ "$config_loaded" == "true" ]] && return
+
+  declare -g CONFIG_FILE=${CONFIG_FILE:=config.ini}
+  declare -g config_loaded=true
+  [[ -f "$CONFIG_FILE" ]] || touch "$CONFIG_FILE"
+  ini_load "$CONFIG_FILE"
+}
+
+config_save() {
+  ini_save "$CONFIG_FILE"
+}
+
+# src/lib/ini.sh
+
+ini_load() {
+  declare -gA ini
+
+  local ini_file="$1"
+
+  local section=""
+  local key=""
+  local value=""
+  local section_regex="^\[(.+)\]"
+  local key_regex="^([^ =]+) *= *(.*) *$"
+  local comment_regex="^;"
+
+  while IFS= read -r line; do
+    if [[ $line =~ $comment_regex ]]; then
+      continue
+    elif [[ $line =~ $section_regex ]]; then
+      section="${BASH_REMATCH[1]}."
+    elif [[ $line =~ $key_regex ]]; then
+      key="${BASH_REMATCH[1]}"
+      value="${BASH_REMATCH[2]}"
+      ini["${section}${key}"]="$value"
+    fi
+  done <"$ini_file"
+}
+
+ini_save() {
+  declare -gA ini
+
+  local ini_file="$1"
+
+  local current_section=""
+  local has_free_keys=false
+
+  rm -f "$ini_file"
+
+  for key in $(ini_keys); do
+    [[ $key == *.* ]] && continue
+    has_free_keys=true
+    value="${ini[$key]}"
+    echo "$key = $value" >>"$ini_file"
+  done
+
+  [[ "${has_free_keys}" == "true" ]] && echo >>"$ini_file"
+
+  for key in $(ini_keys); do
+    [[ $key == *.* ]] || continue
+    value="${ini[$key]}"
+    IFS="." read -r section_name key_name <<<"$key"
+
+    if [[ "$current_section" != "$section_name" ]]; then
+      [[ $current_section ]] && echo >>"$ini_file"
+      echo "[$section_name]" >>"$ini_file"
+      current_section="$section_name"
+    fi
+
+    echo "$key_name = $value" >>"$ini_file"
+  done
+}
+
+ini_show() {
+  declare -gA ini
+
+  for key in $(ini_keys); do
+    echo "$key = ${ini[$key]}"
+  done
+}
+
+ini_keys() {
+  declare -gA ini
+
+  local keys=("${!ini[@]}")
+  for a in "${keys[@]}"; do echo "$a"; done | sort
 }
 
 # src/lib/is_busybox_grep.sh

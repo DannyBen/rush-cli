@@ -1,5 +1,3 @@
-[35mpush[0m        | [1mdefault: skipping (not a git repo)[0m
-[35mpush[0m        | [1msample: skipping (not a git repo)[0m
 [35mpush[0m        | [1mdannyben[0m
 [35mpush[0m        | [1mdannyben: adding files[0m
 [35mpush[0m        | [1mdannyben: committing[0m
@@ -7,3 +5,5 @@ On branch master
 Your branch is up to date with 'origin/master'.
 
 nothing to commit, working tree clean
+[35mpush[0m        | [1mdefault: skipping (not a git repo)[0m
+[35mpush[0m        | [1msample: skipping (not a git repo)[0m
