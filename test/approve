@@ -100,6 +100,7 @@ describe "pull"
 
 describe "push"
   approve "rush push" || return 0
+  approve "rush push dannyben --chmod" || return 0
   approve "rush push dannyben" || return 0
   approve "rush push --all" || return 0
   approve "rush push -h"
