@@ -3269,7 +3269,7 @@ rush_completions_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.7.10"
+  version="0.7.11"
   long_usage=''
   set -e
 
