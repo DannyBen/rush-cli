@@ -1,6 +1,13 @@
 Change Log
 ========================================
 
+v0.7.11 - 2023-08-11
+----------------------------------------
+
+- Update bashly config lib
+- Refactor push command to avoid chmod by default and add --chmod flag
+
+
 v0.7.10 - 2023-07-26
 ----------------------------------------
 
