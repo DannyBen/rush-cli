@@ -178,8 +178,8 @@ To create a repository manually, follow these steps:
    - `$USER_CWD` - the directory from which rush was executed
    - `$VERBOSE` - if the user passed `--verbose`
    - `$FORCE` - if the user passed `--force`
-5. Note that the `main` and `undo` scripts are executed in the same folder it
-   lives in, so you can copy files from the package's directory to wherever
+5. Note that the `main` and `undo` scripts are executed in the same folder they
+   live in, so you can copy files from the package's directory to wherever
    they need to be.
 6. If you need to read/write files in the user's current direcotory, use the
    `$USER_CWD` environment variable.
