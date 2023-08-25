@@ -1,6 +1,6 @@
 rush add
 
-  Register a local repository
+  Register a local repository.
   This command adds the specified path to the configuration file.
 
 Alias: a

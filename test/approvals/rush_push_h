@@ -1,4 +1,4 @@
-rush push - Git push one or all repositories
+rush push - Git push one or all repositories.
 
 Alias: upload
 
@@ -11,17 +11,17 @@ Alias: upload
     Push all repositories.
 
   --message, -m TEXT
-    Commit message
+    Commit message.
     Default: automatic commit
 
   --chmod, -x
     Apply the executable bit to all main and undo scripts in the git repository
-    index
+    index.
 
   --help, -h
     Show this help
 
 [1mArguments:[0m
   REPO
-    Repository name
+    Repository name.
     Default: default
