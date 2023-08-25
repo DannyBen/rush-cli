@@ -1,2 +1,3 @@
-rush-dev.ini
-repos
+/repos
+/rush-dev.ini
+/tmp

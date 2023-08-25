@@ -1,6 +1,6 @@
 rush snatch
 
-  Install a package from a remote repo
+  Install a package from a remote repo.
   This command is a shortcut to running clone followed by get.
   It will clone the repository to a temporary directory and run the main
   package script.
@@ -11,7 +11,7 @@ rush snatch
 
 [1mOptions:[0m
   --force, -f
-    Force installation
+    Force installation.
     This may mean different things in different packages.
 
   --verbose, -v
@@ -22,9 +22,9 @@ rush snatch
 
 [1mArguments:[0m
   GITHUB_USER
-    Github user
-    This user is expected to have a repository named 'rush-repo'.
-    If you need to use a different name, use the 'user/repo' syntax.
+    Github user.
+    This user is expected to have a repository named `rush-repo`.
+    If you need to use a different name, use the `user/repo` syntax.
 
   PACKAGE
     Package name.

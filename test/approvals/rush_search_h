@@ -1,4 +1,4 @@
-rush search - Search in package names and info files
+rush search - Search in package names and info files.
 
 Alias: s
 
@@ -12,4 +12,4 @@ Alias: s
 
 [1mArguments:[0m
   TEXT
-    Text to search for
+    Text to search for.
