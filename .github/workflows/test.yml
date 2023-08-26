@@ -60,16 +60,6 @@ jobs:
     - name: Install shfmt and opcode
       run: rush get shfmt && rush get opcode
 
-    # libyaml needed for Ruby's YAML library
-    - name: Install OS dependencies
-      run: sudo apt-get -y install libyaml-dev
-
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with: 
-        ruby-version: '3.1'
-        bundler-cache: true
-
     - name: Run shellcheck tests
       run: op shellcheck
 
