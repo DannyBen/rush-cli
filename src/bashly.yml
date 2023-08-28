@@ -3,10 +3,23 @@ help: Personal package manager.
 version: 0.7.11
 completions: [$(rush list -s -a)]
 
+x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
+
+x_mandoc_footer: |-
+  # SOURCE CODE
+
+  https://github.com/dannyben/rush-cli
+
+  # ISSUE TRACKER
+  
+  https://github.com/dannyben/rush-cli/issues
+
+
 environment_variables:
 - name: rush_config
   help: |-
     Location of the rush config file.
+
     Default: ~/rush.ini
 
 commands:
@@ -16,6 +29,7 @@ commands:
   completions: [<directory>]
   help: |-
     Register a local repository.
+
     This command adds the specified path to the configuration file.
 
   args:
@@ -35,6 +49,7 @@ commands:
   group: Repository
   help: |-
     Unregister a local repository.
+
     This command removes the specified path to the configuration file.
 
   args:
@@ -57,6 +72,7 @@ commands:
   completions: [<directory>]
   help: |-
     Clone a GitHub package repository.
+
     This command clones the repository and registers it in the configuration file.
 
   args:
@@ -64,12 +80,15 @@ commands:
     required: true
     help: &github_user_help |-
       Github user.
+
       This user is expected to have a repository named `rush-repo`.
+
       If you need to use a different name, use the `user/repo` syntax.
 
   - name: path
     help: |-
       Local path to clone the repository into.
+
       Default: ~/rush-repos/<github_user>/<github_repo>
 
   flags:
@@ -86,6 +105,7 @@ commands:
     arg: name
     help: |-
       Name to use in the config file.
+
       Default: GitHub user
 
   - long: --shallow
@@ -152,6 +172,7 @@ commands:
   group: Config
   help: |-
     Set a default repository.
+
     This command adds (or updates) a repository named `default` to the configuration file, and copies the path from the provided repo.
 
   args:
@@ -168,6 +189,7 @@ commands:
   completions: [$(rush list -s -a)]
   help: |-
     Install a package.
+
     This command runs the main script in the package directory.
     
     This is the default command, which means that running `rush package` is the same as running `rush get package`.
@@ -179,6 +201,7 @@ commands:
     required: true
     help: &package_help |-
       Package name.
+
       This can either be the package name without the repository name (in this case, the default repository will be used) or in the form of `repo:package`.
 
   flags:
@@ -186,12 +209,16 @@ commands:
     short: -c
     help: |-
       Clone the repository if it is not found locally.
+
       This flag will look for a GitHub user with the same name as the repository, and attempt to clone their rush-repo repository.
+
   - long: --force
     short: -f
     help: |-
       Force installation.
+
       This may mean different things in different packages.
+
   - long: --verbose
     short: -v
     help: Show additional details if possible.
@@ -207,6 +234,7 @@ commands:
   completions: [$(rush list -s -a)]
   help: |-
     Uninstall a package.
+
     This command runs the undo script in the package directory.
 
   args:
@@ -227,7 +255,9 @@ commands:
   group: Package
   help: |-
     Install a package from a remote repo.
+
     This command is a shortcut to running clone followed by get.
+
     It will clone the repository to a temporary directory and run the main package script.
 
   args:
@@ -244,7 +274,9 @@ commands:
     short: -f
     help: |-
       Force installation.
+
       This may mean different things in different packages.
+
   - long: --verbose
     short: -v
     help: Show additional details if possible.
@@ -263,12 +295,15 @@ commands:
     required: true
     help: |-
       Source package name.
+
       This can either be the package name without the repository name (in this case, the default repository will be used) or in the form of `repo:package`.
 
   - name: target_package
     help: |-
       Target package name.
+
       This can either be the package name without the repository name (in this case, the default repository will be used) or in the form of `repo:package`.
+
       If left empty, the package will be copied with the same name to the default repository.
 
   flags:
@@ -287,6 +322,7 @@ commands:
   completions: [$(rush list -s -a)]
   help: |-
     Show information about a package.
+
     This command shows the info file from the package directory.
 
   args:
@@ -307,8 +343,11 @@ commands:
   - name: repo_or_package
     help: |-
       Repository name or package name.
+
       Leave blank to show all packages in all repositories.
+
       Provide a repository name to show only packages in this repository.
+
       Provide a package name (may be in the form of `repo:package`) to show nested packages.
 
   flags:
