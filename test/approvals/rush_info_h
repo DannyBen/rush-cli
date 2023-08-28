@@ -1,6 +1,7 @@
 rush info
 
   Show information about a package.
+  
   This command shows the info file from the package directory.
 
 Alias: i
@@ -16,9 +17,9 @@ Alias: i
 [1mArguments:[0m
   PACKAGE
     Package name.
-    This can either be the package name without the repository name (in
-    this case, the default repository will be used) or in the form of
-    `repo:package`.
+    
+    This can either be the package name without the repository name (in this
+    case, the default repository will be used) or in the form of `repo:package`.
 
 [1mExamples:[0m
   rush info ruby

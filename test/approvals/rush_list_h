@@ -19,10 +19,13 @@ Alias: l
 [1mArguments:[0m
   REPO_OR_PACKAGE
     Repository name or package name.
+    
     Leave blank to show all packages in all repositories.
+    
     Provide a repository name to show only packages in this repository.
-    Provide a package name (may be in the form of `repo:package`) to
-    show nested packages.
+    
+    Provide a package name (may be in the form of `repo:package`) to show nested
+    packages.
 
 [1mExamples:[0m
   rush list

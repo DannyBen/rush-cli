@@ -42,4 +42,5 @@ rush - Personal package manager.
 [1mEnvironment Variables:[0m
   RUSH_CONFIG
     Location of the rush config file.
+    
     Default: ~/rush.ini

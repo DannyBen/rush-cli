@@ -1,6 +1,7 @@
 rush undo
 
   Uninstall a package.
+  
   This command runs the undo script in the package directory.
 
 Alias: u
@@ -19,9 +20,9 @@ Alias: u
 [1mArguments:[0m
   PACKAGE
     Package name.
-    This can either be the package name without the repository name (in
-    this case, the default repository will be used) or in the form of
-    `repo:package`.
+    
+    This can either be the package name without the repository name (in this
+    case, the default repository will be used) or in the form of `repo:package`.
 
 [1mExamples:[0m
   rush undo ruby
