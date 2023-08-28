@@ -216,6 +216,12 @@ jobs:
       run: rush get hello
 ```
 
+## Uninstalling
+
+```shell
+$ curl -Ls get.dannyb.co/rush/uninstall | bash
+```
+
 ## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
