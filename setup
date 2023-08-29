@@ -60,11 +60,11 @@ install_completions() {
 
   if [[ -n $compdir ]]; then
     printf "copying to %s\n" "$compdir"
-    echo "eval \"\$($cmd)\"" | $sudo tee "${compdir}/${dir}" >/dev/null
+    echo "$cmd" | $sudo tee "${compdir}/${dir}" >/dev/null
   else
     printf "%s %s\n" "$(red WARN)" "skipping completions installation, compdir not found"
     echo "     install it manually by adding this to your startup script:"
-    echo "     eval \"\$($cmd)\""
+    echo "     $cmd"
   fi
 }
 
@@ -117,7 +117,7 @@ copy_executable 'rush'
 copy_man 'doc'
 
 section "Installing bash completions"
-install_completions "rush_completions" "rush"
+install_completions "eval \"\$(rush completions)\"" "rush"
 
 section "Done"
 rush --version
