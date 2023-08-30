@@ -4,7 +4,6 @@ version: 0.7.11
 completions: [$(rush list -s -a)]
 
 x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
-
 x_mandoc_footer: |-
   # SOURCE CODE
 
@@ -13,7 +12,6 @@ x_mandoc_footer: |-
   # ISSUE TRACKER
   
   https://github.com/dannyben/rush-cli/issues
-
 
 environment_variables:
 - name: rush_config
@@ -335,7 +333,7 @@ commands:
   - rush info centos:ruby
 
 - name: list
-  alias: l
+  alias: [l, ls]
   group: Package
   help: Show packages in one or all repositories.
 

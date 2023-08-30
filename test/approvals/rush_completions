@@ -108,6 +108,10 @@ _rush_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --force --help --verbose -c -f -h -v")" -- "$cur" )
       ;;
 
+    'ls'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --simple -a -h -s")" -- "$cur" )
+      ;;
+
     'a'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "$(_rush_completions_filter "--help -h")" -- "$cur" )
       ;;
@@ -149,7 +153,7 @@ _rush_completions() {
       ;;
 
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list p pull push r remove s search show snatch u undo update upload")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list ls p pull push r remove s search show snatch u undo update upload")" -- "$cur" )
       ;;
 
   esac
