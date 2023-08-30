@@ -751,7 +751,7 @@ rush_list_usage() {
 
   fi
 
-  printf "Alias: l\n"
+  printf "Alias: l, ls\n"
   echo
 
   printf "%s\n" "$(bold "Usage:")"
@@ -1305,6 +1305,10 @@ send_completions() {
   echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --clone --force --help --verbose -c -f -h -v")" -- "$cur" )'
   echo $'      ;;'
   echo $''
+  echo $'    \'ls\'*)'
+  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--all --help --simple -a -h -s")" -- "$cur" )'
+  echo $'      ;;'
+  echo $''
   echo $'    \'a\'*)'
   echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A directory -W "$(_rush_completions_filter "--help -h")" -- "$cur" )'
   echo $'      ;;'
@@ -1346,7 +1350,7 @@ send_completions() {
   echo $'      ;;'
   echo $''
   echo $'    *)'
-  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list p pull push r remove s search show snatch u undo update upload")" -- "$cur" )'
+  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "$(rush list -s -a) --help --version -h -v a add c clone completions config copy default download e edit g get i info l list ls p pull push r remove s search show snatch u undo update upload")" -- "$cur" )'
   echo $'      ;;'
   echo $''
   echo $'  esac'
@@ -2089,7 +2093,7 @@ parse_requirements() {
       shift $#
       ;;
 
-    list | l)
+    list | l | ls)
       action="list"
       shift
       rush_list_parse_requirements "$@"

@@ -17,7 +17,7 @@ DESCRIPTION
 
 Show packages in one or all repositories.
 
-- Alias: **l**
+- Alias: **l, ls**
 
 ARGUMENTS
 ==================================================
