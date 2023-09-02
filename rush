@@ -683,7 +683,7 @@ rush_copy_usage() {
     # :command.usage_examples
     printf "%s\n" "$(bold "Examples:")"
     printf "  rush copy james:python\n"
-    printf "  rush copy james:python bobby\n"
+    printf "  rush copy james:python python3\n"
     printf "  rush copy james:python bobby:python3 --force\n"
     echo
 

@@ -1,6 +1,6 @@
 % rush-push(1) | Git push one or all repositories.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================

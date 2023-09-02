@@ -1,6 +1,6 @@
 % rush-snatch(1) | Install a package from a remote repo.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================

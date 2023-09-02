@@ -1,6 +1,6 @@
 % rush-undo(1) | Uninstall a package.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================

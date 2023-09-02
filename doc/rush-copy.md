@@ -1,6 +1,6 @@
 % rush-copy(1) | Copy a package between local repositories.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================
@@ -55,7 +55,7 @@ EXAMPLES
 ~~~
 rush copy james:python
 
-rush copy james:python bobby
+rush copy james:python python3
 
 rush copy james:python bobby:python3 --force
 

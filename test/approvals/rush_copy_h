@@ -29,5 +29,5 @@ rush copy - Copy a package between local repositories.
 
 [1mExamples:[0m
   rush copy james:python
-  rush copy james:python bobby
+  rush copy james:python python3
   rush copy james:python bobby:python3 --force
