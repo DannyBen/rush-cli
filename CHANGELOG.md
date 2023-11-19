@@ -1,6 +1,14 @@
 Change Log
 ========================================
 
+v0.7.12 - 2023-11-19
+----------------------------------------
+
+- Add man documentation
+- Add `rush ls` as an alias to `rush list`
+- Add `--undo` to the `rush snatch` command
+
+
 v0.7.11 - 2023-08-11
 ----------------------------------------
 
