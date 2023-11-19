@@ -1,6 +1,6 @@
 % rush-info(1) | Show information about a package.
 % 
-% September 2023
+% November 2023
 
 NAME
 ==================================================
@@ -47,6 +47,5 @@ SEE ALSO
 ==================================================
 
 **rush**(1)
-
 
 

@@ -1,6 +1,6 @@
 % rush-clone(1) | Clone a GitHub package repository.
 % 
-% September 2023
+% November 2023
 
 NAME
 ==================================================
@@ -102,6 +102,5 @@ SEE ALSO
 ==================================================
 
 **rush**(1)
-
 
 

@@ -1,6 +1,6 @@
 % rush-snatch(1) | Install a package from a remote repo.
 % 
-% September 2023
+% November 2023
 
 NAME
 ==================================================
@@ -60,11 +60,19 @@ This may mean different things in different packages.
 Show additional details if possible.
 
 
+--undo, -u
+--------------------------------------------------
+
+Run the undo script instead of the main script.
+
+
 EXAMPLES
 ==================================================
 
 ~~~
 rush snatch james python
+
+rush snatch james python --undo
 
 rush snatch james/other-rush-repo python
 
@@ -74,6 +82,5 @@ SEE ALSO
 ==================================================
 
 **rush**(1)
-
 
 

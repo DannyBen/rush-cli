@@ -59,7 +59,7 @@ send_completions() {
   echo $'      ;;'
   echo $''
   echo $'    \'snatch\'*)'
-  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--force --help --verbose -f -h -v")" -- "$cur" )'
+  echo $'      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--force --help --undo --verbose -f -h -u -v")" -- "$cur" )'
   echo $'      ;;'
   echo $''
   echo $'    \'search\'*)'

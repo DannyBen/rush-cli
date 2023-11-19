@@ -85,6 +85,7 @@ describe "snatch"
   approve "rush snatch" || return 0
   approve "rush snatch -h"
   approve "rush snatch dannyben hello"
+  approve "rush snatch dannyben hello --undo"
   approve "rush snatch dannyben hello --force --verbose"
   [[ -d $dir ]] && fail "Expected directory $dir to not exist"
 

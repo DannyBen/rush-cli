@@ -1,6 +1,6 @@
 % rush-search(1) | Search in package names and info files.
 % 
-% September 2023
+% November 2023
 
 NAME
 ==================================================
@@ -33,6 +33,5 @@ SEE ALSO
 ==================================================
 
 **rush**(1)
-
 
 

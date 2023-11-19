@@ -20,6 +20,9 @@ rush snatch
   --verbose, -v
     Show additional details if possible.
 
+  --undo, -u
+    Run the undo script instead of the main script.
+
   --help, -h
     Show this help
 
@@ -36,4 +39,5 @@ rush snatch
 
 [1mExamples:[0m
   rush snatch james python
+  rush snatch james python --undo
   rush snatch james/other-rush-repo python

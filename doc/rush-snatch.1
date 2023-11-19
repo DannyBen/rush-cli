@@ -14,7 +14,7 @@
 . ftr VB CB
 . ftr VBI CBI
 .\}
-.TH "rush-snatch" "1" "September 2023" "" "Install a package from a remote repo."
+.TH "rush-snatch" "1" "November 2023" "" "Install a package from a remote repo."
 .hy
 .SH NAME
 .PP
@@ -54,11 +54,16 @@ This may mean different things in different packages.
 .SS --verbose, -v
 .PP
 Show additional details if possible.
+.SS --undo, -u
+.PP
+Run the undo script instead of the main script.
 .SH EXAMPLES
 .IP
 .nf
 \f[C]
 rush snatch james python
+
+rush snatch james python --undo
 
 rush snatch james/other-rush-repo python
 \f[R]
