@@ -1,6 +1,7 @@
 # Collect variables
 repo_id=${args[github_user]}
 package=${args[package]}
+undo=${args[--undo]}
 path="$HOME/rush-repos/snatched"
 [[ -n "${args['--force']}" ]] && export FORCE=1
 [[ -n "${args['--verbose']}" ]] && export VERBOSE=1
@@ -14,4 +15,8 @@ say "snatch" "$repo_id $package"
 trap cleanup EXIT ERR INT TERM
 
 rush clone "$repo_id" "$path" --name snatched
-rush get "snatched:$package"
+if [[ $undo ]]; then
+  rush undo "snatched:$package"
+else
+  rush get "snatched:$package"
+fi

@@ -279,8 +279,13 @@ commands:
     short: -v
     help: Show additional details if possible.
 
+  - long: --undo
+    short: -u
+    help: Run the undo script instead of the main script.
+
   examples:
   - rush snatch james python
+  - rush snatch james python --undo
   - rush snatch james/other-rush-repo python
 
 - name: copy

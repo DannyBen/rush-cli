@@ -57,7 +57,7 @@ _rush_completions() {
       ;;
 
     'snatch'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--force --help --verbose -f -h -v")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_rush_completions_filter "--force --help --undo --verbose -f -h -u -v")" -- "$cur" )
       ;;
 
     'search'*)

@@ -1,6 +1,6 @@
 % rush-pull(1) | Git pull one or all repositories.
 % 
-% September 2023
+% November 2023
 
 NAME
 ==================================================
@@ -39,6 +39,5 @@ SEE ALSO
 ==================================================
 
 **rush**(1)
-
 
 
