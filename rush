@@ -1702,7 +1702,7 @@ rush_snatch_command() {
   repo_id=${args[github_user]}
   package=${args[package]}
   undo=${args[--undo]}
-  tmpdir="$(mktemp -d -t rush-snatch.XXXXX)"
+  tmpdir="$(mktemp -d -t rush-snatch.XXXXXX)"
   path="$tmpdir/snatched"
 
   [[ -n "${args['--force']}" ]] && export FORCE=1
@@ -3345,7 +3345,7 @@ initialize() {
   set -e
 
   # src/initialize.sh
-  CONFIG_FILE="${RUSH_CONFIG:-~/rush.ini}"
+  CONFIG_FILE="${RUSH_CONFIG:-$HOME/rush.ini}"
   RUSH_ROOT="${RUSH_ROOT:-$HOME/rush-repos}"
 }
 

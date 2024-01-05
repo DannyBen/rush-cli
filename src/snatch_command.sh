@@ -2,7 +2,7 @@
 repo_id=${args[github_user]}
 package=${args[package]}
 undo=${args[--undo]}
-tmpdir="$(mktemp -d -t rush-snatch.XXXXX)"
+tmpdir="$(mktemp -d -t rush-snatch.XXXXXX)"
 path="$tmpdir/snatched"
 
 [[ -n "${args['--force']}" ]] && export FORCE=1
