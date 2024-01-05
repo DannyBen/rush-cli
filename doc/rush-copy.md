@@ -1,6 +1,6 @@
 % rush-copy(1) | Copy a package between local repositories.
 % 
-% November 2023
+% January 2024
 
 NAME
 ==================================================

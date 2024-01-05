@@ -24,7 +24,7 @@ else
 fi
 
 # Set default path if not provided
-[[ $path ]] || path="$HOME/rush-repos/$repo_id"
+[[ $path ]] || path="$RUSH_ROOT/$repo_id"
 
 # Abort if target directory exists
 if [[ -d $path ]]; then
