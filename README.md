@@ -151,6 +151,11 @@ Environment Variables:
   RUSH_CONFIG
     Location of the rush config file
     Default: ~/rush.ini
+
+  RUSH_ROOT
+    Location of the default base directory for cloning repositories.
+
+    Default: ~/rush-repos
 ```
 
 
