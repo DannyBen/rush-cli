@@ -1,1 +1,2 @@
-CONFIG_FILE=${RUSH_CONFIG:-~/rush.ini}
+CONFIG_FILE="${RUSH_CONFIG:-$HOME/rush.ini}"
+RUSH_ROOT="${RUSH_ROOT:-$HOME/rush-repos}"

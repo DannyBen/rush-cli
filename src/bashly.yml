@@ -20,6 +20,12 @@ environment_variables:
 
     Default: ~/rush.ini
 
+- name: rush_root
+  help: |-
+    Location of the default base directory for cloning repositories.
+
+    Default: ~/rush-repos
+
 commands:
 - name: add
   alias: a

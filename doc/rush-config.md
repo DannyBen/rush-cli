@@ -1,6 +1,6 @@
 % rush-config(1) | Show or edit the configuration file.
 % 
-% November 2023
+% January 2024
 
 NAME
 ==================================================

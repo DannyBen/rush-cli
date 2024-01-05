@@ -1,6 +1,6 @@
-% rush(1) Version 0.7.11 | Personal package manager.
+% rush(1) Version 0.7.12 | Personal package manager.
 % Danny Ben Shitrit \<https://github.com/dannyben\>
-% November 2023
+% January 2024
 
 NAME
 ==================================================
@@ -132,6 +132,14 @@ RUSH_CONFIG
 Location of the rush config file.
 
 Default: ~/rush.ini
+
+
+RUSH_ROOT
+--------------------------------------------------
+
+Location of the default base directory for cloning repositories.
+
+Default: ~/rush-repos
 
 
 SEE ALSO
