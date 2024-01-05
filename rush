@@ -83,7 +83,7 @@ rush_usage() {
 
     # :environment_variable.usage
     printf "  %s\n" "RUSH_ROOT"
-    printf "    Locatino of the default base folder for cloning repositories.\n    \n    Default: ~/rush-repos\n"
+    printf "    Location of the default base directory for cloning repositories.\n    \n    Default: ~/rush-repos\n"
     echo
 
   fi

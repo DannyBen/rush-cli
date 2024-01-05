@@ -22,7 +22,7 @@ environment_variables:
 
 - name: rush_root
   help: |-
-    Locatino of the default base folder for cloning repositories.
+    Location of the default base directory for cloning repositories.
 
     Default: ~/rush-repos
 

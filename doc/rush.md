@@ -137,7 +137,7 @@ Default: ~/rush.ini
 RUSH_ROOT
 --------------------------------------------------
 
-Locatino of the default base folder for cloning repositories.
+Location of the default base directory for cloning repositories.
 
 Default: ~/rush-repos
 
