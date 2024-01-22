@@ -1,5 +1,3 @@
-<div align='center'>
-
 # Rush - Personal Package Manager
 
 ```
@@ -13,8 +11,6 @@ _  /     /_/    \__,_/ /____/ /_/ /_/
 
 ![Version](https://img.shields.io/badge/version-0.7.13-blue.svg)
 [![Build Status](https://github.com/DannyBen/rush-cli/workflows/Test/badge.svg)](https://github.com/DannyBen/rush-cli/actions?query=workflow%3ATest)
-
-</div>
 
 ---
 
