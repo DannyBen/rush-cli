@@ -152,6 +152,7 @@ v0.5.9 - 2020-10-10
 - Add titles to search output sections
 
 
+<!-- break v0.5.8 -->
 ## [v0.5.8](https://github.com/DannyBen/rush-cli/tree/v0.5.8) (2020-04-13)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.7...v0.5.8)
