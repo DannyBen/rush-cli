@@ -182,7 +182,7 @@ To create a repository manually, follow these steps:
 5. Note that the `main` and `undo` scripts are executed in the same folder they
    live in, so you can copy files from the package's directory to wherever
    they need to be.
-6. If you need to read/write files in the user's current direcotory, use the
+6. If you need to read/write files in the user's current directory, use the
    `$USER_CWD` environment variable.
 7. The `main` and `undo` scripts can be written in any language, as long as
    they have a shebang line.

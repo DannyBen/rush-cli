@@ -5,16 +5,16 @@ search_repo() {
 
   repo_path=$(config_get "$repo")
 
-  # Add "repo:" to the result unless it is the default
+  ## Add "repo:" to the result unless it is the default
   prefix=''
   [[ "$repo" != "default" ]] && prefix="$repo:"
 
-  # Search directories matching search text
+  ## Search directories matching search text
   blue "Matching packages:\n"
   find "$repo_path" -type d -not -path '*/\.*' | grep --color=always "$text" |
     sed "s#${repo_path}/#${prefix}#g" | sed 's#/info##'
 
-  # Search info files matching search text
+  ## Search info files matching search text
   blue "\nMatching info files:\n"
   grep --color=always --initial-tab --recursive --ignore-case --include "info" \
     "$text" "$repo_path" |

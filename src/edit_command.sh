@@ -1,4 +1,4 @@
-# Collect variables
+## Collect variables
 package=${args[package]}
 file=${args[file]:-main}
 repo="default"
@@ -13,10 +13,10 @@ repo_path=$(config_get "$repo")
 package_path="$repo_path/$package"
 file_path="$package_path/$file"
 
-# Verify we have everything we need
+## Verify we have everything we need
 [[ $repo_path ]] || abort "repo not found: $repo"
 [[ -d $package_path ]] || abort "package not found: $repo:$package"
 [[ -f $file_path ]] || abort "file not found: $file_path"
 
-# Edit the file
+## Edit the file
 "$edit" "$file_path"

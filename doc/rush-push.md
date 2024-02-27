@@ -1,6 +1,6 @@
 % rush-push(1) | Git push one or all repositories.
 % 
-% January 2024
+% February 2024
 
 NAME
 ==================================================

@@ -1,4 +1,4 @@
-# Collect variables
+## Collect variables
 repo_id=${args[github_user]}
 package=${args[package]}
 undo=${args[--undo]}

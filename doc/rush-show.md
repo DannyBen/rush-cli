@@ -1,6 +1,6 @@
 % rush-show(1) | Show package files.
 % 
-% January 2024
+% February 2024
 
 NAME
 ==================================================

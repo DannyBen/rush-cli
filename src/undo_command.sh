@@ -1,4 +1,4 @@
-# Collect variables
+## Collect variables
 package=${args[package]}
 repo="default"
 [[ -n "${args['--verbose']}" ]] && export VERBOSE=1
@@ -12,12 +12,12 @@ repo_path=$(config_get "$repo")
 package_path=$repo_path/$package
 script=$package_path/undo
 
-# Verify we have everything we need
+## Verify we have everything we need
 [[ $repo_path ]] || abort "repo not found: $repo"
 [[ -d $package_path ]] || abort "package not found: $repo:$package"
 [[ -f $script ]] || abort "script not found: $script"
 
-# Run the script (make it executable if it isnt first)
+## Run the script (make it executable if it isn't first)
 export REPO="$repo"
 export REPO_PATH="$repo_path"
 [[ -z "$USER_CWD" ]] && export USER_CWD="$PWD"

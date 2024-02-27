@@ -67,10 +67,11 @@ v0.7.3 - 2022-06-01
 - Regenerate with bashly 0.8.2
 
 
+<!-- break v0.7.2 -->
 v0.7.2 - 2022-05-12
 ----------------------------------------
 
-- Genearte with bashly 0.8.0
+- Generate with bashly 0.8.0
 
 
 v0.7.1 - 2022-01-28
@@ -152,7 +153,6 @@ v0.5.9 - 2020-10-10
 - Add titles to search output sections
 
 
-<!-- break v0.5.8 -->
 ## [v0.5.8](https://github.com/DannyBen/rush-cli/tree/v0.5.8) (2020-04-13)
 
 [Full Changelog](https://github.com/DannyBen/rush-cli/compare/v0.5.7...v0.5.8)

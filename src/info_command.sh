@@ -1,4 +1,4 @@
-# Collect variables
+## Collect variables
 package=${args[package]}
 repo="default"
 
@@ -11,7 +11,7 @@ repo_path=$(config_get "$repo")
 package_path="$repo_path/$package"
 infofile="$package_path/info"
 
-# Verify we have everything we need
+## Verify we have everything we need
 [[ $repo_path ]] || abort "repo not found: $repo"
 [[ -d $package_path ]] || abort "package not found: $repo:$package"
 [[ -f $infofile ]] || abort "infofile not found: $infofile"

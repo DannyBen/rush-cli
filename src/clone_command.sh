@@ -1,4 +1,4 @@
-# Collect variables
+## Collect variables
 path=${args[path]}
 repo_id=${args[github_user]}
 use_ssh=${args[--ssh]}
@@ -13,20 +13,20 @@ else
   repo_name=${args[--name]:-$default_repo_name}
 fi
 
-# Adjust repo_id - defaults to $user/rush-repo
+## Adjust repo_id - defaults to $user/rush-repo
 [[ $repo_id = */* ]] || repo_id="$repo_id/rush-repo"
 
-# Set clone URL - ssh or https?
+## Set clone URL - ssh or https?
 if [[ $use_ssh ]]; then
   repo_url=git@github.com:$repo_id.git
 else
   repo_url=https://github.com/$repo_id.git
 fi
 
-# Set default path if not provided
+## Set default path if not provided
 [[ $path ]] || path="$RUSH_ROOT/$repo_id"
 
-# Abort if target directory exists
+## Abort if target directory exists
 if [[ -d $path ]]; then
   if [[ $ignore ]]; then
     skip=1
@@ -35,7 +35,7 @@ if [[ -d $path ]]; then
   fi
 fi
 
-# Abort if a repository with this name already exists
+## Abort if a repository with this name already exists
 if config_has_key "$repo_name"; then
   if [[ $ignore ]]; then
     skip=1
@@ -48,7 +48,7 @@ if [[ $skip ]]; then
   say "clone" "skipping $repo_name (exists)"
 
 else
-  # Clone
+  ## Clone
   say "clone" "$repo_url"
 
   if [[ $shallow ]]; then
@@ -57,7 +57,7 @@ else
     git clone "$repo_url" "$path"
   fi
 
-  # Save config
+  ## Save config
   config_set "$repo_name" "$path"
 
 fi
