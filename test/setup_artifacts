@@ -14,6 +14,8 @@ get_comp_dir() {
     echo "/usr/share/bash-completion/completions"
   elif [[ -d "/usr/local/etc/bash_completion.d" ]]; then
     echo "/usr/local/etc/bash_completion.d"
+  elif command -v brew &> /dev/null && [[ -d "$(brew --prefix)/etc/bash_completion.d" ]]; then
+    echo "$(brew --prefix)/etc/bash_completion.d"
   else
     echo ''
   fi
