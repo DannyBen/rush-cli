@@ -1,5 +1,13 @@
-Change Log
+Changelog
 ========================================
+
+v0.7.14 - 2024-07-05
+----------------------------------------
+
+- Setup: Fix bash completions on mac [`b90001b`](https://github.com/DannyBen/rush-cli/commit/b90001b)
+- Regenerate with bashly 1.2.0 [`5bbb836`](https://github.com/DannyBen/rush-cli/commit/5bbb836)
+- Compare [`v0.7.13..v0.7.14`](https://github.com/dannyben/rush-cli/compare/v0.7.13..v0.7.14)
+
 
 v0.7.13 - 2024-01-05
 ----------------------------------------
