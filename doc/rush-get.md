@@ -1,6 +1,6 @@
 % rush-get(1) | Install a package.
 % 
-% February 2024
+% July 2024
 
 NAME
 ==================================================
@@ -10,7 +10,7 @@ NAME
 SYNOPSIS
 ==================================================
 
-**rush get** PACKAGE [OPTIONS]
+rush [get] PACKAGE [OPTIONS]
 
 DESCRIPTION
 ==================================================
