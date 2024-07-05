@@ -10,7 +10,7 @@ rush get
 Alias: g
 
 [1mUsage:[0m
-  rush get PACKAGE [OPTIONS]
+  rush [get] PACKAGE [OPTIONS]
   rush get --help | -h
 
 [1mOptions:[0m
