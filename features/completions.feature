@@ -13,3 +13,9 @@ Scenario: Generate the completions script
   Then the exit code should mean success
   And stdout should include '_rush_completions()'
   And stdout should include 'complete -F _rush_completions rush'
+
+Scenario: Generate the zsh completions script
+  Given rush is properly configured
+  When I run 'rush completions zsh'
+  Then the exit code should mean success
+  And stdout should include '#compdef rush'

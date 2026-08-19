@@ -1822,7 +1822,8 @@ rush_show_command() {
 rush_completions_command() {
 
   # src/commands/completions.sh
-  send_completions
+  send_completions "${args[shell]}"
+
 }
 
 # :command.parse_requirements

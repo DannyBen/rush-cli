@@ -1,1 +1,1 @@
-send_completions
+send_completions "${args[shell]}"
