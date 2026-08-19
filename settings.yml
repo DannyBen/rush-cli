@@ -6,6 +6,8 @@ enable_view_markers: always
 enable_env_var_names_array: never
 enable_deps_array: never
 
+completions: full
+
 usage_colors:
   caption: bold
   command: green

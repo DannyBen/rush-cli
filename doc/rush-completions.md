@@ -1,22 +1,33 @@
-% rush-completions(1) | Generate bash completions.
+% rush-completions(1) | Generate a shell completion script
 % 
-% July 2026
+% August 2026
 
 NAME
 ==================================================
 
-**rush completions** - Generate bash completions.
+**rush completions** - Generate a shell completion script
 
 SYNOPSIS
 ==================================================
 
-**rush completions**
+**rush completions** [SHELL]
 
 DESCRIPTION
 ==================================================
 
-Generate bash completions.
+Generate a shell completion script
 
+
+ARGUMENTS
+==================================================
+
+SHELL
+--------------------------------------------------
+
+Shell to generate completions for
+
+- Default Value: **bash**
+- Allowed Values: **bash, zsh**
 
 SEE ALSO
 ==================================================

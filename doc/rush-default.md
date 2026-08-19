@@ -1,6 +1,6 @@
 % rush-default(1) | Set a default repository.
 % 
-% July 2026
+% August 2026
 
 NAME
 ==================================================

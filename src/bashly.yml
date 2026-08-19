@@ -2,7 +2,6 @@ name: rush
 help: Personal package manager.
 version: 1.0.1
 help_header_override: print_logo
-completions: [$(rush list -s -a)]
 
 x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
 x_mandoc_footer: |-
@@ -44,7 +43,8 @@ commands:
   - name: path
     required: true
     help: Path to the repository.
-    completions: [<directory>]
+    completions:
+      options: [directories]
 
   examples:
   - rush add default ~/rush-repos/default
@@ -90,7 +90,8 @@ commands:
       If you need to use a different name, use the `user/repo` syntax.
 
   - name: path
-    completions: [<directory>]
+    completions:
+      options: [directories]
     help: |-
       Local path to clone the repository into.
 
@@ -199,7 +200,8 @@ commands:
   args:
   - name: package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: &package_help |-
       Package name.
 
@@ -240,7 +242,8 @@ commands:
   args:
   - name: package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: *package_help
 
   flags:
@@ -298,7 +301,8 @@ commands:
   args:
   - name: source_package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: |-
       Source package name.
 
@@ -333,7 +337,8 @@ commands:
   args:
   - name: package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: *package_help
 
   examples:
@@ -416,7 +421,8 @@ commands:
   args:
   - name: package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: *package_help
 
   - name: file
@@ -430,7 +436,8 @@ commands:
   args:
   - name: package
     required: true
-    completions: [$(rush list -s -a)]
+    completions:
+      dynamic: [rush list -s -a]
     help: *package_help
 
   - name: file
@@ -442,4 +449,9 @@ commands:
 
 - name: completions
   group: Internal
-  help: Generate bash completions.
+  help: Generate a shell completion script
+  args:
+  - name: shell
+    help: Shell to generate completions for
+    allowed: [bash, zsh]
+    default: bash
