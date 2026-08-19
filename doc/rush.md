@@ -1,6 +1,6 @@
 % rush(1) Version 1.0.1 | Personal package manager.
 % Danny Ben Shitrit \<https://github.com/dannyben\>
-% July 2026
+% August 2026
 
 NAME
 ==================================================
@@ -125,7 +125,7 @@ INTERNAL COMMANDS
 rush completions
 --------------------------------------------------
 
-Generate bash completions.
+Generate a shell completion script
 
 
 ENVIRONMENT VARIABLES

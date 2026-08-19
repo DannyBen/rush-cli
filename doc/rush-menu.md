@@ -1,6 +1,6 @@
 % rush-menu(1) | Select a package from an interactive menu.
 % 
-% July 2026
+% August 2026
 
 NAME
 ==================================================
