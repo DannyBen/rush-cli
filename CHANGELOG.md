@@ -1,6 +1,13 @@
 Changelog
 ========================================
 
+v1.0.2 - 2026-08-21
+----------------------------------------
+
+- Regenerate with bashly 2.0 [`89c8460`](https://github.com/DannyBen/rush/commit/89c8460)
+- Compare [`v1.0.1..v1.0.2`](https://github.com/dannyben/rush/compare/v1.0.1..v1.0.2)
+
+
 v1.0.1 - 2026-07-05
 ----------------------------------------
 
