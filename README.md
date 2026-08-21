@@ -48,6 +48,13 @@ $ curl -Ls get.dannyb.co/rush/setup | bash
 Feel free to inspect the [setup script](setup) before running.
 
 
+### Installing with Homebrew
+
+```shell
+$ brew install dannyben/tap/rush
+```
+
+
 ### Installing manually
 
 Download the [rush](rush) script to `/usr/local/bin/` or anywhere in your
