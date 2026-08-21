@@ -4427,7 +4427,7 @@ rush_completions_completion() {
 
 # :command.initialize
 initialize() {
-  declare -g version="1.0.1"
+  declare -g version="1.0.2"
   set -eo pipefail
 
   # src/initialize.sh

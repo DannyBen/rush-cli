@@ -1,6 +1,6 @@
 name: rush
 help: Personal package manager.
-version: 1.0.1
+version: 1.0.2
 help_header_override: print_logo
 
 x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
